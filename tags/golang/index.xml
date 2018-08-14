@@ -1,34 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>阿比安吉</title>
-    <link>https://abianji.com/</link>
-    <description>Recent content on 阿比安吉</description>
+    <title>Golang on 阿比安吉</title>
+    <link>https://abianji.com/tags/golang/</link>
+    <description>Recent content in Golang on 阿比安吉</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Wed, 08 Aug 2018 15:36:10 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 14 Aug 2018 15:42:42 +0800</lastBuildDate>
     
-	<atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://abianji.com/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>友链</title>
-      <link>https://abianji.com/links/</link>
-      <pubDate>Wed, 08 Aug 2018 15:36:10 +0800</pubDate>
-      
-      <guid>https://abianji.com/links/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>关于</title>
-      <link>https://abianji.com/about/</link>
-      <pubDate>Wed, 08 Aug 2018 15:29:22 +0800</pubDate>
-      
-      <guid>https://abianji.com/about/</guid>
-      <description>我就是我,是不一样的烟火</description>
-    </item>
     
     <item>
       <title>《Go语言实战》(01) Go介绍</title>
@@ -45,15 +27,6 @@ Go语言于2009年11月正式宣布推出，成为开放源代码项目，并在
 类型系统 Go 语言提供了灵活的、无继承的类型系统，无需降低运行性能就能最大程度上复用代码。
  类型简单 Go 接口对一组行为建模  内存管理 不当的内存管理会导致程序崩溃或者内存泄漏，甚至让整个操作系统崩溃。Go 语言拥有现 代化的垃圾回收机制，能帮你解决这个难题。在其他系统语言(如 C 或者 C++)中，使用内存 前要先分配这段内存，而且使用完毕后要将其释放掉。哪怕只做错了一件事，都可能导致程序崩 溃或者内存泄漏。可惜，追踪内存是否还被使用本身就是十分艰难的事情，而要想支持多线程和 高并发，更是让这件事难上加难。虽然 Go 语言的垃圾回收会有一些额外的开销，但是编程时， 能显著降低开发难度。Go 语言把无趣的内存管理交给专业的编译器去做，而让程序员专注于更 有趣的事情
 你好Go package main import &amp;#34;fmt&amp;#34; func main(){ fmt.Printf(&amp;#34;Hello World!你好世界!&amp;#34;); }</description>
-    </item>
-    
-    <item>
-      <title>Hello World</title>
-      <link>https://abianji.com/post/hello-world/</link>
-      <pubDate>Wed, 08 Aug 2018 13:23:43 +0800</pubDate>
-      
-      <guid>https://abianji.com/post/hello-world/</guid>
-      <description>Hello Hugo &amp;amp;&amp;amp; keep study</description>
     </item>
     
   </channel>
