@@ -5,10 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Posts
-   | 阿比安吉
-</title>
+  <title>Go学习笔记 (02) Go基础环境搭建</title>
 
   
   
@@ -18,24 +15,30 @@
 
 
   
-  <meta name="author" content="Ritchie Zhu" />
-  <meta name="description" content="" />
+  <meta name="author" content="liseen" />
+  <meta name="description" content="Go 基础环境安装,开发工具,插件配置,以及基础命令使用.
+
+" />
 
   
   
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="Posts" />
-    <meta name="twitter:description" content="" />
-    <meta name="twitter:image" content="https://abianji.com/img/avatar.jpg" />
+    <meta name="twitter:title" content="Go学习笔记 (02) Go基础环境搭建" />
+    <meta name="twitter:description" content="Go 基础环境安装,开发工具,插件配置,以及基础命令使用.
+
+" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1534252040/golang.jpg" />
   
 
   
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Posts" />
-  <meta property="og:description" content="" />
-  <meta property="og:url" content="https://abianji.com/post/" />
-  <meta property="og:image" content="https://abianji.com/img/avatar.jpg" />
+  <meta property="og:title" content="Go学习笔记 (02) Go基础环境搭建" />
+  <meta property="og:description" content="Go 基础环境安装,开发工具,插件配置,以及基础命令使用.
+
+" />
+  <meta property="og:url" content="https://abianji.com/post/2018-08-14-go-base-env/" />
+  <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1534252040/golang.jpg" />
 
 
 
@@ -43,7 +46,7 @@
 <meta name="generator" content="Hugo 0.46" />
 
 
-<link rel="canonical" href="https://abianji.com/post/" />
+<link rel="canonical" href="https://abianji.com/post/2018-08-14-go-base-env/" />
 <link rel="alternative" href="https://abianji.com/index.xml" title="阿比安吉" type="application/atom+xml" />
 
 
@@ -105,6 +108,10 @@
     
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
       
     </div>
     
@@ -218,63 +225,92 @@
   </nav>
 </header>
 
-  <section class="main post-list">
-    <header class="list-header offscreen">
-      <h2 class="list-label">Posts List</h2>
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Go学习笔记 (02) Go基础环境搭建</h1>
+      <p class="post-meta">@liseen · Aug 14, 2018 · 1 min read</p>
     </header>
+    <article class="post-content"><p>Go 基础环境安装,开发工具,插件配置,以及基础命令使用.</p>
+
+<p></p>
+
+<h4 id="go-开发环境的安装以及配置">Go 开发环境的安装以及配置</h4>
+
+<ul>
+<li>操作系统 macos</li>
+<li>编辑器vim &amp;&amp; vscode</li>
+</ul>
+
+<h5 id="mac下可以直接使用brew-安装-go">mac下可以直接使用brew 安装 go</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ brew install go
+$ go version
+go version go1.10.3 darwin/amd64</code></pre></div>
+<h5 id="vscode下载">vscode下载</h5>
+
+<p><em>vscode</em>: <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p>
+
+<ol>
+<li>插件选择安装go</li>
+<li>安装vpn或者使用shadowsocks开启http代理下载go插件内的各种依赖包</li>
+</ol>
+
+<h5 id="配置环境变量gopath-gobin">配置环境变量GOPATH GOBIN</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ go env
+
+vim ~/.zshrc
+
+export GOPATH<span style="color:#f92672">=</span>/Users/xxxxx/golang-study
+export GOBIN<span style="color:#f92672">=</span>$GOPATH/bin
+export PATH<span style="color:#f92672">=</span>$PATH:$GOBIN</code></pre></div>
+<p>当环境变量配置完后我们就可以在指定的目录下创建工作目录了.当前我使用的golang-study作为工作空间,在此目录内go约定使用三个目标文件夹分别是</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── bin  <span style="color:#75715e">#存放编译后的可执行文件
+</span><span style="color:#75715e"></span>├── pkg  <span style="color:#75715e">#存放包文件.a
+</span><span style="color:#75715e"></span>└── src  #源代码</code></pre></div>
+<h5 id="基础命令使用">基础命令使用</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">build       compile packages and dependencies
+clean       remove object files and cached files
+doc         show documentation <span style="color:#66d9ef">for</span> package or symbol
+fmt         gofmt <span style="color:#f92672">(</span>reformat<span style="color:#f92672">)</span> package sources
+get         download and install packages and dependencies
+install     compile and install packages and dependencies
+run         compile and run Go program
+test        test packages
+version     print Go version</code></pre></div>
+<p>其中常用的命令是go run ,go build ,go get ,go install ,go test.</p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://abianji.com/tags/golang"><span class="tag">Golang</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
     
     
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://abianji.com/post/2018-08-14-go-base-env/" class="post-link">Go学习笔记 (02) Go基础环境搭建</a></h3>
-    <p class="post-meta">@liseen · Aug 14, 2018 · 1 min read</p>
-  </header>
-  
-    <img class="post-cover" src="https://res.cloudinary.com/dnakxpzhj/image/upload/v1534252040/golang.jpg" alt="Go学习笔记 (02) Go基础环境搭建">
-  
-  <p class="post-summary">Go 基础环境安装,开发工具,插件配置,以及基础命令使用.
-
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://abianji.com/post/2018-08-14-go-base-env/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://abianji.com/post/2018-08-14-go-base-intro/" class="post-link">Go学习笔记 (01) Go介绍</a></h3>
-    <p class="post-meta">@liseen · Aug 14, 2018 · 1 min read</p>
-  </header>
-  
-    <img class="post-cover" src="https://res.cloudinary.com/dnakxpzhj/image/upload/v1534252040/golang.jpg" alt="Go学习笔记 (01) Go介绍">
-  
-  <p class="post-summary">Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言
-
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://abianji.com/post/2018-08-14-go-base-intro/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://abianji.com/post/2018-08-08-hello-world/" class="post-link">Hello World</a></h3>
-    <p class="post-meta">@Liseen · Aug 8, 2018 · 1 min read</p>
-  </header>
-  
-    <img class="post-cover" src="https://res.cloudinary.com/dnakxpzhj/image/upload/v1533732076/hello.jpg" alt="Hello World">
-  
-  <p class="post-summary">Hello Hugo &amp;&amp; keep study</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://abianji.com/post/2018-08-08-hello-world/">Read More →</a>
-  </footer>
-</article>
-
-      
     
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "abianji" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     
   </section>
   <footer class="site-footer">

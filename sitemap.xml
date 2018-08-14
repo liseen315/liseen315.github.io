@@ -13,12 +13,17 @@
   </url>
   
   <url>
-    <loc>https://abianji.com/post/golang-struct-tag/</loc>
+    <loc>https://abianji.com/post/2018-08-14-go-base-env/</loc>
+    <lastmod>2018-08-14T22:02:12+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/post/2018-08-14-go-base-intro/</loc>
     <lastmod>2018-08-14T15:42:42+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://abianji.com/post/hello-world/</loc>
+    <loc>https://abianji.com/post/2018-08-08-hello-world/</loc>
     <lastmod>2018-08-08T13:23:43+08:00</lastmod>
   </url>
   
@@ -29,19 +34,19 @@
   
   <url>
     <loc>https://abianji.com/tags/golang/</loc>
-    <lastmod>2018-08-14T15:42:42+08:00</lastmod>
+    <lastmod>2018-08-14T22:02:12+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://abianji.com/post/</loc>
-    <lastmod>2018-08-14T15:42:42+08:00</lastmod>
+    <lastmod>2018-08-14T22:02:12+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://abianji.com/tags/</loc>
-    <lastmod>2018-08-14T15:42:42+08:00</lastmod>
+    <lastmod>2018-08-14T22:02:12+08:00</lastmod>
     <priority>0</priority>
   </url>
   
