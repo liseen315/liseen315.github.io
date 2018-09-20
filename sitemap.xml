@@ -13,6 +13,11 @@
   </url>
   
   <url>
+    <loc>https://abianji.com/post/2018-09-20-blockchain-eos/</loc>
+    <lastmod>2018-09-20T11:17:45+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://abianji.com/post/2018-08-14-go-base-env/</loc>
     <lastmod>2018-08-14T22:02:12+08:00</lastmod>
   </url>
@@ -28,7 +33,19 @@
   </url>
   
   <url>
+    <loc>https://abianji.com/tags/blockchain/</loc>
+    <lastmod>2018-09-20T11:17:45+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://abianji.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/tags/eos/</loc>
+    <lastmod>2018-09-20T11:17:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -40,13 +57,13 @@
   
   <url>
     <loc>https://abianji.com/post/</loc>
-    <lastmod>2018-08-14T22:02:12+08:00</lastmod>
+    <lastmod>2018-09-20T11:17:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://abianji.com/tags/</loc>
-    <lastmod>2018-08-14T22:02:12+08:00</lastmod>
+    <lastmod>2018-09-20T11:17:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
