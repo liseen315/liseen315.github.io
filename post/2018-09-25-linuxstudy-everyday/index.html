@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tags | 阿比安吉
-</title>
+  <title>2018 09 25 Linuxstudy Everyday</title>
 
   
   
@@ -17,22 +15,30 @@
 
 
   
-  <meta name="author" content="Ritchie Zhu" />
-  <meta name="description" content="note for life and study" />
+  <meta name="author" content="liseen" />
+  <meta name="description" content="oh-my-zsh提高shell的逼格
+
+" />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@gohugoio" />
-  <meta name="twitter:title" content="阿比安吉" />
-  <meta name="twitter:description" content="note for life and study" />
-  <meta name="twitter:image" content="https://abianji.com/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="2018 09 25 Linuxstudy Everyday" />
+    <meta name="twitter:description" content="oh-my-zsh提高shell的逼格
+
+" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1537856707/linux.jpg" />
+  
 
   
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="阿比安吉" />
-  <meta property="og:description" content="note for life and study" />
-  <meta property="og:url" content="https://abianji.com/tags/" />
-  <meta property="og:image" content="https://abianji.com/img/avatar.jpg" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="2018 09 25 Linuxstudy Everyday" />
+  <meta property="og:description" content="oh-my-zsh提高shell的逼格
+
+" />
+  <meta property="og:url" content="https://abianji.com/post/2018-09-25-linuxstudy-everyday/" />
+  <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1537856707/linux.jpg" />
 
 
 
@@ -40,7 +46,7 @@
 <meta name="generator" content="Hugo 0.48" />
 
 
-<link rel="canonical" href="https://abianji.com/tags/" />
+<link rel="canonical" href="https://abianji.com/post/2018-09-25-linuxstudy-everyday/" />
 <link rel="alternative" href="https://abianji.com/index.xml" title="阿比安吉" type="application/atom+xml" />
 
 
@@ -103,6 +109,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -124,13 +134,13 @@
         <li class="menu-item
             
             
+            
+              is-active
             ">
             <a href="https://abianji.com/">首页</a>
           </li>
       
         <li class="menu-item
-            
-              is-active
             
             
             ">
@@ -215,26 +225,80 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
+  <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+      <h1 class="post-title">2018 09 25 Linuxstudy Everyday</h1>
+      <p class="post-meta">@liseen · Sep 25, 2018 · 1 min read</p>
     </header>
-    <div class="tags-cloud">
+    <article class="post-content"><p>oh-my-zsh提高shell的逼格</p>
+
+<p></p>
+
+<h4 id="以mac-为例-我们看下系统内置了几种shell">以mac 为例,我们看下系统内置了几种shell</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /etc/shells
+
+<span style="color:#75715e"># List of acceptable shells for chpass(1).
+</span><span style="color:#75715e"># Ftpd will not allow users to connect who are not using
+</span><span style="color:#75715e"># one of these shells.
+</span><span style="color:#75715e"></span>
+/bin/bash
+/bin/csh
+/bin/ksh
+/bin/sh
+/bin/tcsh
+/bin/zsh</code></pre></div>
+<h4 id="安装zsh">安装zsh</h4>
+
+<p>如果是linux 系统,首先你需要安装 zsh</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum install zsh
+或者
+sudo apt-get install zsh</code></pre></div>
+<p>mac下不用安装zsh</p>
+
+<h4 id="安装oh-my-zsh">安装oh-my-zsh</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sh -c <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span></code></pre></div>
+<h4 id="配置">配置</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vim ~/.zshrc
+
+//插件配置我选择了
+zsh-autosuggestions
+// 主题使用的是
+ZSH_THEME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ys&#34;</span></code></pre></div></article>
+    <footer class="post-footer">
       
-      
+      <ul class="post-tags">
         
-        <a href="https://abianji.com/tags/golang/" class="tag-m">golang</a>
-      
+          <li><a href="https://abianji.com/tags/linux"><span class="tag">Linux</span></a></li>
         
-        <a href="https://abianji.com/tags/blockchain/" class="tag-s">blockchain</a>
+      </ul>
       
-        
-        <a href="https://abianji.com/tags/eos/" class="tag-s">eos</a>
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "abianji" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
-        
-        <a href="https://abianji.com/tags/linux/" class="tag-s">linux</a>
-      
-    </div>
+    
   </section>
   <footer class="site-footer">
   <p>© 2017-2018 阿比安吉</p>
