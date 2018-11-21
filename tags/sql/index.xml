@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sql on 阿比安吉</title>
+    <link>https://abianji.com/tags/sql/</link>
+    <description>Recent content in Sql on 阿比安吉</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Wed, 21 Nov 2018 17:47:21 +0800</lastBuildDate>
+    
+	<atom:link href="https://abianji.com/tags/sql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SQL 基础</title>
+      <link>https://abianji.com/post/2018-11-21-sql/</link>
+      <pubDate>Wed, 21 Nov 2018 17:47:21 +0800</pubDate>
+      
+      <guid>https://abianji.com/post/2018-11-21-sql/</guid>
+      <description>&lt;p&gt;《sql必知必会》基础学习&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
