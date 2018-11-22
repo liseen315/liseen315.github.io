@@ -233,53 +233,53 @@
     <article class="post-content"><p>《sql必知必会》基础学习</p>
 
 <p></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">去重</span>
-<span style="color:#75715e">-- SELECT DISTINCT vend_id FROM Products;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">排序</span>
-<span style="color:#75715e">-- SELECT prod_name FROM Products ORDER BY prod_name;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">降序排列</span>
-<span style="color:#75715e">-- SELECT prod_id, prod_price, prod_name FROM Products ORDER BY prod_price DESC,prod_name;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">根据价格过滤</span>
-<span style="color:#75715e">-- SELECT DISTINCT vend_id, prod_price FROM Products WHERE prod_price = 3.49;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">根据</span>vend_id过滤
-<span style="color:#75715e">-- SELECT vend_id, prod_name FROM Products WHERE vend_id!=&#39;DLL01&#39;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">范围检查</span>
-<span style="color:#75715e">-- SELECT prod_name, prod_price FROM Products WHERE prod_price BETWEEN 5 AND 10;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">空值检查</span>
-<span style="color:#75715e">-- SELECT cust_name FROM Customers WHERE cust_email IS NULL;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">组合</span> <span style="color:#66d9ef">WHERE</span> <span style="color:#960050;background-color:#1e0010">子句</span>
-<span style="color:#75715e">-- SELECT prod_id, prod_price,prod_name FROM Products WHERE vend_id = &#39;DLL01&#39; And
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-mysql" data-lang="mysql"><span style="color:#75715e"># 去重
+</span><span style="color:#75715e">-- SELECT DISTINCT vend_id FROM Products;
+</span><span style="color:#75715e"># 排序
+</span><span style="color:#75715e">-- SELECT prod_name FROM Products ORDER BY prod_name;
+</span><span style="color:#75715e"># 降序排列
+</span><span style="color:#75715e">-- SELECT prod_id, prod_price, prod_name FROM Products ORDER BY prod_price DESC,prod_name;
+</span><span style="color:#75715e"># 根据价格过滤
+</span><span style="color:#75715e">-- SELECT DISTINCT vend_id, prod_price FROM Products WHERE prod_price = 3.49;
+</span><span style="color:#75715e"># 根据vend_id过滤
+</span><span style="color:#75715e">-- SELECT vend_id, prod_name FROM Products WHERE vend_id!=&#39;DLL01&#39;
+</span><span style="color:#75715e"># 范围检查
+</span><span style="color:#75715e">-- SELECT prod_name, prod_price FROM Products WHERE prod_price BETWEEN 5 AND 10;
+</span><span style="color:#75715e"># 空值检查
+</span><span style="color:#75715e">-- SELECT cust_name FROM Customers WHERE cust_email IS NULL;
+</span><span style="color:#75715e"># 组合 WHERE 子句
+</span><span style="color:#75715e">-- SELECT prod_id, prod_price,prod_name FROM Products WHERE vend_id = &#39;DLL01&#39; And
 </span><span style="color:#75715e">-- prod_price &lt;= 4;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#66d9ef">OR</span> <span style="color:#960050;background-color:#1e0010">操作符</span>
-<span style="color:#75715e">-- SELECT prod_name, prod_price FROM Products WHERE vend_id = &#39;DLL01&#39; OR vend_id = &#39;BRS01&#39;;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#66d9ef">IN</span> <span style="color:#960050;background-color:#1e0010">操作符</span>
-<span style="color:#75715e">-- SELECT prod_name, prod_price FROM Products WHERE vend_id IN(&#39;DLL01&#39;,&#39;BRS01&#39;) ORDER BY prod_name;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#66d9ef">NOT</span> <span style="color:#960050;background-color:#1e0010">操作符</span>
-<span style="color:#75715e">-- SELECT prod_name FROM Products WHERE NOT vend_id = &#39;DLL01&#39; ORDER BY prod_name;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">百分号</span>(<span style="color:#f92672">%</span>)<span style="color:#960050;background-color:#1e0010">通配符</span>
-<span style="color:#75715e">-- SELECT prod_id, prod_name FROM Products WHERE prod_name LIKE &#39;Fish%&#39;;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">下划线</span>(_)<span style="color:#960050;background-color:#1e0010">通配符</span>
-<span style="color:#75715e">-- SELECT prod_id, prod_name FROM Products WHERE prod_name LIKE &#39;____ doll&#39;;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">方括号</span>([ ])<span style="color:#960050;background-color:#1e0010">通配符</span> <span style="color:#960050;background-color:#1e0010">需要用正则</span>
-<span style="color:#75715e">-- SELECT cust_contact FROM Customers WHERE cust_contact REGEXP &#39;[JM]&#39; ORDER BY cust_contact;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">拼接字段</span> <span style="color:#960050;background-color:#1e0010">别名</span>
-<span style="color:#75715e">-- SELECT CONCAT(RTRIM(vend_name),&#39;(&#39;, RTRIM(vend_country),&#39;)&#39;) AS vend_title FROM Vendors ORDER BY vend_name;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">执行算术计算</span>
-<span style="color:#75715e">-- SELECT prod_id,quantity,item_price, quantity*item_price AS expanded_price FROM OrderItems WHERE order_num = 20008;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">文本处理函数</span>
-<span style="color:#75715e">-- SELECT vend_name, UPPER(vend_name) AS vend_name_upper FROM Vendors ORDER BY vend_name;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#66d9ef">AVG</span> <span style="color:#960050;background-color:#1e0010">函数</span>
-<span style="color:#75715e">-- SELECT AVG(prod_price) as avg_price FROM Products WHERE vend_id = &#39;DLL01&#39;;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">创建分组</span>
-<span style="color:#75715e">-- SELECT vend_id, COUNT(*) AS num_prods FROM Products GROUP BY vend_id;
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">子查询</span>
-<span style="color:#75715e">-- SELECT order_num FROM OrderItems WHERE prod_id = &#39;RGAN01&#39;;
+</span><span style="color:#75715e"># OR 操作符
+</span><span style="color:#75715e">-- SELECT prod_name, prod_price FROM Products WHERE vend_id = &#39;DLL01&#39; OR vend_id = &#39;BRS01&#39;;
+</span><span style="color:#75715e"># IN 操作符
+</span><span style="color:#75715e">-- SELECT prod_name, prod_price FROM Products WHERE vend_id IN(&#39;DLL01&#39;,&#39;BRS01&#39;) ORDER BY prod_name;
+</span><span style="color:#75715e"># NOT 操作符
+</span><span style="color:#75715e">-- SELECT prod_name FROM Products WHERE NOT vend_id = &#39;DLL01&#39; ORDER BY prod_name;
+</span><span style="color:#75715e"># 百分号(%)通配符
+</span><span style="color:#75715e">-- SELECT prod_id, prod_name FROM Products WHERE prod_name LIKE &#39;Fish%&#39;;
+</span><span style="color:#75715e"># 下划线(_)通配符
+</span><span style="color:#75715e">-- SELECT prod_id, prod_name FROM Products WHERE prod_name LIKE &#39;____ doll&#39;;
+</span><span style="color:#75715e"># 方括号([ ])通配符 需要用正则
+</span><span style="color:#75715e">-- SELECT cust_contact FROM Customers WHERE cust_contact REGEXP &#39;[JM]&#39; ORDER BY cust_contact;
+</span><span style="color:#75715e"># 拼接字段 别名
+</span><span style="color:#75715e">-- SELECT CONCAT(RTRIM(vend_name),&#39;(&#39;, RTRIM(vend_country),&#39;)&#39;) AS vend_title FROM Vendors ORDER BY vend_name;
+</span><span style="color:#75715e"># 执行算术计算
+</span><span style="color:#75715e">-- SELECT prod_id,quantity,item_price, quantity*item_price AS expanded_price FROM OrderItems WHERE order_num = 20008;
+</span><span style="color:#75715e"># 文本处理函数
+</span><span style="color:#75715e">-- SELECT vend_name, UPPER(vend_name) AS vend_name_upper FROM Vendors ORDER BY vend_name;
+</span><span style="color:#75715e"># AVG 函数
+</span><span style="color:#75715e">-- SELECT AVG(prod_price) as avg_price FROM Products WHERE vend_id = &#39;DLL01&#39;;
+</span><span style="color:#75715e"># 创建分组
+</span><span style="color:#75715e">-- SELECT vend_id, COUNT(*) AS num_prods FROM Products GROUP BY vend_id;
+</span><span style="color:#75715e"># 子查询
+</span><span style="color:#75715e">-- SELECT order_num FROM OrderItems WHERE prod_id = &#39;RGAN01&#39;;
 </span><span style="color:#75715e">-- SELECT cust_id FROM Orders WHERE order_num IN(20007,20008);
 </span><span style="color:#75715e">-- SELECT cust_id FROM Orders WHERE order_num IN(
 </span><span style="color:#75715e">-- 	SELECT order_num FROM OrderItems WHERE prod_id = &#39;RGAN01&#39;
 </span><span style="color:#75715e">-- );
-</span><span style="color:#75715e"></span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">创建关联</span>
-<span style="color:#75715e">-- SELECT vend_name,prod_name,prod_price FROM Vendors,Products WHERE Vendors.vend_id = Products.vend_id;
+</span><span style="color:#75715e"># 创建关联
+</span><span style="color:#75715e">-- SELECT vend_name,prod_name,prod_price FROM Vendors,Products WHERE Vendors.vend_id = Products.vend_id;
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">-- SELECT pro_id FROM Pro_tagmap WHERE tag_id = 1;
 </span><span style="color:#75715e">-- SELECT prod_name FROM Products WHERE prod_id IN (&#39;BNBG03&#39;,&#39;BR01&#39;);</span></code></pre></div></article>
