@@ -5,11 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tag → flask
-  
-   | 阿比安吉
-</title>
+  <title>Flask Study 02</title>
 
   
   
@@ -19,22 +15,30 @@
 
 
   
-  <meta name="author" content="Ritchie Zhu" />
-  <meta name="description" content="note for life and study" />
+  <meta name="author" content="Liseen" />
+  <meta name="description" content="人生苦短,我学Python&amp;hellip; Flask路由之重定向
+
+" />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@gohugoio" />
-  <meta name="twitter:title" content="阿比安吉" />
-  <meta name="twitter:description" content="note for life and study" />
-  <meta name="twitter:image" content="https://abianji.com/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Flask Study 02" />
+    <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip; Flask路由之重定向
+
+" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" />
+  
 
   
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="阿比安吉" />
-  <meta property="og:description" content="note for life and study" />
-  <meta property="og:url" content="https://abianji.com/tags/flask/" />
-  <meta property="og:image" content="https://abianji.com/img/avatar.jpg" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Flask Study 02" />
+  <meta property="og:description" content="人生苦短,我学Python&amp;hellip; Flask路由之重定向
+
+" />
+  <meta property="og:url" content="https://abianji.com/post/2018-11-23-flask-study-02/" />
+  <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" />
 
 
 
@@ -42,7 +46,7 @@
 <meta name="generator" content="Hugo 0.48" />
 
 
-<link rel="canonical" href="https://abianji.com/tags/flask/" />
+<link rel="canonical" href="https://abianji.com/post/2018-11-23-flask-study-02/" />
 <link rel="alternative" href="https://abianji.com/index.xml" title="阿比安吉" type="application/atom+xml" />
 
 
@@ -105,6 +109,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -126,6 +134,8 @@
         <li class="menu-item
             
             
+            
+              is-active
             ">
             <a href="https://abianji.com/">首页</a>
           </li>
@@ -215,46 +225,64 @@
   </nav>
 </header>
 
-  <section class="main post-list">
-    <header class="list-header offscreen">
-      <h2 class="list-label">Posts List</h2>
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Flask Study 02</h1>
+      <p class="post-meta">@Liseen · Nov 23, 2018 · 1 min read</p>
     </header>
+    <article class="post-content"><p>人生苦短,我学Python&hellip; Flask路由之重定向</p>
+
+<p></p>
+
+<p>很多情况下站点都需要登录,没登录情况下跳转到登录页面,登录后进到指定页面,这时候就应用到了重定向功能</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/login/&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">login</span>():
+    <span style="color:#66d9ef">return</span>  <span style="color:#e6db74">&#39;这是登录界面&#39;</span>
+
+<span style="color:#75715e"># 页面重定向这里暂时用参数进行模拟,如果参数=1就进到指定页面,如果不是,就跳转到登录页面</span>
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/question/&lt;islogin&gt;&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">question</span>(islogin):
+    <span style="color:#66d9ef">if</span> islogin <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;这是发布问答页面&#39;</span>
+    <span style="color:#66d9ef">else</span>:
+        redirect_url <span style="color:#f92672">=</span> url_for(<span style="color:#e6db74">&#39;login&#39;</span>)
+        <span style="color:#66d9ef">return</span>  redirect(redirect_url)</code></pre></div></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://abianji.com/tags/flask"><span class="tag">Flask</span></a></li>
+        
+          <li><a href="https://abianji.com/tags/python"><span class="tag">Python</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
     
     
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://abianji.com/post/2018-11-23-flask-study-02/" class="post-link">Flask Study 02</a></h3>
-    <p class="post-meta">@Liseen · Nov 23, 2018 · 1 min read</p>
-  </header>
-  
-    <img class="post-cover" src="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" alt="Flask Study 02">
-  
-  <p class="post-summary">人生苦短,我学Python… Flask路由之重定向
-
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://abianji.com/post/2018-11-23-flask-study-02/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://abianji.com/post/2018-11-22-flask-study-01/" class="post-link">Flask Study 01 入口文件分析</a></h3>
-    <p class="post-meta">@Liseen · Nov 22, 2018 · 1 min read</p>
-  </header>
-  
-    <img class="post-cover" src="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" alt="Flask Study 01 入口文件分析">
-  
-  <p class="post-summary">人生苦短,我学Python… Flask入门 </p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://abianji.com/post/2018-11-22-flask-study-01/">Read More →</a>
-  </footer>
-</article>
-
-      
     
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "abianji" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     
   </section>
   <footer class="site-footer">
