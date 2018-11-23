@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Fri, 23 Nov 2018 10:33:19 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 23 Nov 2018 10:59:21 +0800</lastBuildDate>
     
 	<atom:link href="https://abianji.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Flask Study 03 引用模板</title>
+      <link>https://abianji.com/post/2018-11-23-flask-study-03/</link>
+      <pubDate>Fri, 23 Nov 2018 10:59:21 +0800</pubDate>
+      
+      <guid>https://abianji.com/post/2018-11-23-flask-study-03/</guid>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask引用模板&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Flask Study 02 重定向</title>

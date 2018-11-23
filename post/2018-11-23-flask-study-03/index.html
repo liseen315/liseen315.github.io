@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tags | 阿比安吉
-</title>
+  <title>Flask Study 03 引用模板</title>
 
   
   
@@ -17,22 +15,30 @@
 
 
   
-  <meta name="author" content="Ritchie Zhu" />
-  <meta name="description" content="note for life and study" />
+  <meta name="author" content="Liseen" />
+  <meta name="description" content="人生苦短,我学Python&amp;hellip; Flask引用模板
+
+" />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@gohugoio" />
-  <meta name="twitter:title" content="阿比安吉" />
-  <meta name="twitter:description" content="note for life and study" />
-  <meta name="twitter:image" content="https://abianji.com/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Flask Study 03 引用模板" />
+    <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip; Flask引用模板
+
+" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" />
+  
 
   
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="阿比安吉" />
-  <meta property="og:description" content="note for life and study" />
-  <meta property="og:url" content="https://abianji.com/tags/" />
-  <meta property="og:image" content="https://abianji.com/img/avatar.jpg" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Flask Study 03 引用模板" />
+  <meta property="og:description" content="人生苦短,我学Python&amp;hellip; Flask引用模板
+
+" />
+  <meta property="og:url" content="https://abianji.com/post/2018-11-23-flask-study-03/" />
+  <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" />
 
 
 
@@ -40,7 +46,7 @@
 <meta name="generator" content="Hugo 0.48" />
 
 
-<link rel="canonical" href="https://abianji.com/tags/" />
+<link rel="canonical" href="https://abianji.com/post/2018-11-23-flask-study-03/" />
 <link rel="alternative" href="https://abianji.com/index.xml" title="阿比安吉" type="application/atom+xml" />
 
 
@@ -103,6 +109,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -124,13 +134,13 @@
         <li class="menu-item
             
             
+            
+              is-active
             ">
             <a href="https://abianji.com/">首页</a>
           </li>
       
         <li class="menu-item
-            
-              is-active
             
             
             ">
@@ -215,38 +225,81 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
+  <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+      <h1 class="post-title">Flask Study 03 引用模板</h1>
+      <p class="post-meta">@Liseen · Nov 23, 2018 · 1 min read</p>
     </header>
-    <div class="tags-cloud">
+    <article class="post-content"><p>人生苦短,我学Python&hellip; Flask引用模板</p>
+
+<p></p>
+
+<p>首先看一下项目目录结构</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── config.py
+├── flask-study.py
+├── static
+└── templates
+    └── test.html   # 新建了test.html模板文件</code></pre></div>
+<p>Python文件内容如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> render_template
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_flask</span>():
+    <span style="color:#75715e"># 创建字典并传参给 render_template 函数.</span>
+    context <span style="color:#f92672">=</span> {
+        <span style="color:#e6db74">&#39;username&#39;</span>: <span style="color:#e6db74">&#39;liseen&#39;</span>,
+        <span style="color:#e6db74">&#39;age&#39;</span>: <span style="color:#ae81ff">20</span>,
+    }
+    <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;test.html&#39;</span>,<span style="color:#f92672">**</span>context)</code></pre></div>
+<p>html 模板内容如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+&lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;测试模板&lt;/<span style="color:#f92672">title</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+&lt;<span style="color:#f92672">p</span>&gt;Hello {{ username }},欢迎来到Flask的世界!&lt;/<span style="color:#f92672">p</span>&gt;
+&lt;<span style="color:#f92672">p</span>&gt;您的年龄是: {{ age }}&lt;/<span style="color:#f92672">p</span>&gt;
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;</code></pre></div>
+<p>需要说明的是给render_template传递的参数是字典.参数前面+了两个**。这两个星星是Python给函数传递字典时候会默认方式,其中还有单个*的情况,这时候传的是个Python元组.至于元组跟List的区别是元素内元素不能修改,使用{}包含数据,List可以修改并使用[]包含数据.</p></article>
+    <footer class="post-footer">
       
-      
+      <ul class="post-tags">
         
-        <a href="https://abianji.com/tags/python/" class="tag-xxl">python</a>
-      
+          <li><a href="https://abianji.com/tags/python"><span class="tag">Python</span></a></li>
         
-        <a href="https://abianji.com/tags/flask/" class="tag-xxl">flask</a>
-      
+          <li><a href="https://abianji.com/tags/flask"><span class="tag">Flask</span></a></li>
         
-        <a href="https://abianji.com/tags/golang/" class="tag-m">golang</a>
+      </ul>
       
-        
-        <a href="https://abianji.com/tags/sqlalchemy/" class="tag-m">sqlalchemy</a>
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "abianji" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
-        
-        <a href="https://abianji.com/tags/blockchain/" class="tag-s">blockchain</a>
-      
-        
-        <a href="https://abianji.com/tags/eos/" class="tag-s">eos</a>
-      
-        
-        <a href="https://abianji.com/tags/linux/" class="tag-s">linux</a>
-      
-        
-        <a href="https://abianji.com/tags/sql/" class="tag-s">sql</a>
-      
-    </div>
+    
   </section>
   <footer class="site-footer">
   <p>© 2017-2018 阿比安吉</p>
