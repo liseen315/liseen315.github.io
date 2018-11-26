@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>Go学习笔记 (01) Go介绍</title>
+  <title>Flask Study 04 通过SQLAlchemy链接mysql</title>
 
   
   
@@ -15,8 +15,8 @@
 
 
   
-  <meta name="author" content="liseen" />
-  <meta name="description" content="Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言
+  <meta name="author" content="Liseen" />
+  <meta name="description" content="人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 链接mysql
 
 " />
 
@@ -24,21 +24,21 @@
   
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="Go学习笔记 (01) Go介绍" />
-    <meta name="twitter:description" content="Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言
+    <meta name="twitter:title" content="Flask Study 04 通过SQLAlchemy链接mysql" />
+    <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 链接mysql
 
 " />
-    <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1534252040/golang.jpg" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" />
   
 
   
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Go学习笔记 (01) Go介绍" />
-  <meta property="og:description" content="Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言
+  <meta property="og:title" content="Flask Study 04 通过SQLAlchemy链接mysql" />
+  <meta property="og:description" content="人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 链接mysql
 
 " />
-  <meta property="og:url" content="https://abianji.com/post/2018-08-14-go-base-intro/" />
-  <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1534252040/golang.jpg" />
+  <meta property="og:url" content="https://abianji.com/post/2018-11-26-flask-study-04/" />
+  <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" />
 
 
 
@@ -46,7 +46,7 @@
 <meta name="generator" content="Hugo 0.48" />
 
 
-<link rel="canonical" href="https://abianji.com/post/2018-08-14-go-base-intro/" />
+<link rel="canonical" href="https://abianji.com/post/2018-11-26-flask-study-04/" />
 <link rel="alternative" href="https://abianji.com/index.xml" title="阿比安吉" type="application/atom+xml" />
 
 
@@ -227,67 +227,101 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Go学习笔记 (01) Go介绍</h1>
-      <p class="post-meta">@liseen · Aug 14, 2018 · 1 min read</p>
+      <h1 class="post-title">Flask Study 04 通过SQLAlchemy链接mysql</h1>
+      <p class="post-meta">@Liseen · Nov 26, 2018 · 1 min read</p>
     </header>
-    <article class="post-content"><p>Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言</p>
+    <article class="post-content"><p>人生苦短,我学Python&hellip; Flask通过orm(SQLAlchemy) 链接mysql</p>
 
 <p></p>
 
-<h3 id="介绍">介绍</h3>
+<p>要链接mysql当然要先安装mysql(废话),然后需要链接驱动.由于使用的是py-3所以驱动我们需要安装PyMySQL,同时我们一并安装Flask-SQLAlchemy</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Package          Version
+<span style="color:#f92672">----------------</span> <span style="color:#f92672">-------</span>
+asn1crypto       <span style="color:#ae81ff">0.24</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0</span>
+cffi             <span style="color:#ae81ff">1.11</span><span style="color:#f92672">.</span><span style="color:#ae81ff">5</span>
+Click            <span style="color:#ae81ff">7.0</span>
+cryptography     <span style="color:#ae81ff">2.4</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2</span>
+Flask            <span style="color:#ae81ff">1.0</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2</span>
+Flask<span style="color:#f92672">-</span>SQLAlchemy <span style="color:#ae81ff">2.3</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2</span>
+idna             <span style="color:#ae81ff">2.7</span>
+itsdangerous     <span style="color:#ae81ff">1.1</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0</span>
+Jinja2           <span style="color:#ae81ff">2.10</span>
+MarkupSafe       <span style="color:#ae81ff">1.1</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0</span>
+pip              <span style="color:#ae81ff">18.1</span>
+pycparser        <span style="color:#ae81ff">2.19</span>
+PyMySQL          <span style="color:#ae81ff">0.9</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2</span>
+setuptools       <span style="color:#ae81ff">39.0</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1</span>
+six              <span style="color:#ae81ff">1.11</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0</span>
+SQLAlchemy       <span style="color:#ae81ff">1.2</span><span style="color:#f92672">.</span><span style="color:#ae81ff">14</span>
+Werkzeug         <span style="color:#ae81ff">0.14</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1</span></code></pre></div>
+<p>建立config.py 文件用于数据库链接</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 设置flask的debug参数</span>
+DEBUG <span style="color:#f92672">=</span> True
 
-<p>Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言。为了方便搜索和识别，有时会将其称为Golang。</p>
+<span style="color:#75715e"># dialect+driver://username:password@host:port/database</span>
 
-<p>Go语言于2009年11月正式宣布推出，成为开放源代码项目，并在Linux及Mac OS X平台上进行了实现，后来追加了Windows系统下的实现。</p>
+DIALECT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql&#39;</span>
+DRIVER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;pymysql&#39;</span>
+USERNAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;root&#39;</span>
+PASSWORD <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;liseen&#39;</span>
+HOST <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;127.0.0.1&#39;</span>
+PORT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;3306&#39;</span>
+DATABASE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;linktodapp&#39;</span>
 
-<p>2012年，Go语言的创造者们发布了它的1.0版本。Go语言的创造者们包括Unix操作系统和B语言（C语言的前身）的创造者、UTF-8编码的发明者Ken Thompson，Unix项目的参与者、UTF-8编码的联合创始人和Limbo编程语言（Go语言的前身）的创造者Rob Pike，以及著名的Javascript引擎V8的创造者Robert Griesemer。</p>
+SQLALCHEMY_DATABASE_URI <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;{}+{}://{}:{}@{}:{}/{}?charset=utf8&#34;</span><span style="color:#f92672">.</span>format(DIALECT,DRIVER,USERNAME,PASSWORD,HOST,PORT,DATABASE)
 
-<h3 id="用go解决现代编程难题">用Go解决现代编程难题</h3>
+SQLALCHEMY_TRACK_MODIFICATIONS <span style="color:#f92672">=</span> True</code></pre></div>
+<p>入口文件写入如下代码:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-pyton" data-lang="pyton">from flask_sqlalchemy import SQLAlchemy
+import config
+app = Flask(__name__)
 
-<p>Go 在开发效率与性能之间做出了应有的权衡,Go的编译器速度非常快,类型系统简单且高效,Go拥有指针,但同时自带垃圾回收,不需要用户自己去管理内存。如下是Go的一
-些关键特性</p>
+# 从配置文件内导入配置
+app.config.from_object(config)
 
-<h4 id="开发速度">开发速度</h4>
+db = SQLAlchemy(app)
 
-<p>编译大型的C或者C++项目及其的耗时,但是Go使用了更加智能的编译器,并简化了解决依赖库的算法,最终提供了更快的编译速度。在现代硬件上Go编译整个项目大概只消耗20秒</p>
+# 创建映射
+class Article(db.Model):
+    # 给表一个名字
+    __tablename__ = &#39;article&#39;
 
-<h4 id="并发">并发</h4>
+    id = db.Column(db.Integer,primary_key=True,autoincrement=True)
+    title = db.Column(db.String(100),nullable=False)
+    content = db.Column(db.Text,nullable=False)
 
-<p>Go天生支持并发.goroutine,通道数据结构.</p>
+db.create_all()</code></pre></div>
+<p>然后我们进入到mysql内查看表是否正确创建</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">show tables;
++----------------------+
+| Tables_in_linktodapp |
++----------------------+
+| article              |
++----------------------+
+<span style="color:#ae81ff">1</span> row in set
+Time: <span style="color:#ae81ff">0</span>.056s
 
-<h4 id="类型系统">类型系统</h4>
-
-<p>Go 语言提供了灵活的、无继承的类型系统，无需降低运行性能就能最大程度上复用代码。</p>
-
-<ul>
-<li>类型简单</li>
-<li>Go 接口对一组行为建模</li>
-</ul>
-
-<h4 id="内存管理">内存管理</h4>
-
-<p>不当的内存管理会导致程序崩溃或者内存泄漏，甚至让整个操作系统崩溃。Go 语言拥有现 代化的垃圾回收机制，能帮你解决这个难题。在其他系统语言(如 C 或者 C++)中，使用内存 前要先分配这段内存，而且使用完毕后要将其释放掉。哪怕只做错了一件事，都可能导致程序崩 溃或者内存泄漏。可惜，追踪内存是否还被使用本身就是十分艰难的事情，而要想支持多线程和 高并发，更是让这件事难上加难。虽然 Go 语言的垃圾回收会有一些额外的开销，但是编程时， 能显著降低开发难度。Go 语言把无趣的内存管理交给专业的编译器去做，而让程序员专注于更 有趣的事情</p>
-
-<h4 id="你好go">你好Go</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-
-<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>(){
-
-    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Hello World!你好世界!&#34;</span>);
-
-}</code></pre></div></article>
+<span style="color:#66d9ef">select</span> * from article;
++----+-------+---------+
+| id | title | content |
++----+-------+---------+
+<span style="color:#ae81ff">0</span> rows in set
+Time: <span style="color:#ae81ff">0</span>.014s</code></pre></div>
+<p>至此我们的表被正式创建成功了.</p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
         
-          <li><a href="https://abianji.com/tags/golang"><span class="tag">Golang</span></a></li>
+          <li><a href="https://abianji.com/tags/sqlalchemy"><span class="tag">SQLAlchemy</span></a></li>
+        
+          <li><a href="https://abianji.com/tags/python"><span class="tag">Python</span></a></li>
+        
+          <li><a href="https://abianji.com/tags/flask"><span class="tag">Flask</span></a></li>
         
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>103</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
       </p>
     </footer>
     
