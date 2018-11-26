@@ -32,6 +32,17 @@
     </item>
     
     <item>
+      <title>Flask Study 05 利用ORM增删改查</title>
+      <link>https://abianji.com/post/2018-11-26-flask-study-05/</link>
+      <pubDate>Mon, 26 Nov 2018 13:43:19 +0800</pubDate>
+      
+      <guid>https://abianji.com/post/2018-11-26-flask-study-05/</guid>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 进行数据的增删改查&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Flask Study 04 通过SQLAlchemy链接mysql</title>
       <link>https://abianji.com/post/2018-11-26-flask-study-04/</link>
       <pubDate>Mon, 26 Nov 2018 11:10:15 +0800</pubDate>

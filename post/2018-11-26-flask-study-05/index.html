@@ -5,11 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tag → blockchain
-  
-   | 阿比安吉
-</title>
+  <title>Flask Study 05 利用ORM增删改查</title>
 
   
   
@@ -19,22 +15,30 @@
 
 
   
-  <meta name="author" content="Ritchie Zhu" />
-  <meta name="description" content="note for life and study" />
+  <meta name="author" content="Liseen" />
+  <meta name="description" content="人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 进行数据的增删改查
+
+" />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@gohugoio" />
-  <meta name="twitter:title" content="阿比安吉" />
-  <meta name="twitter:description" content="note for life and study" />
-  <meta name="twitter:image" content="https://abianji.com/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Flask Study 05 利用ORM增删改查" />
+    <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 进行数据的增删改查
+
+" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" />
+  
 
   
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="阿比安吉" />
-  <meta property="og:description" content="note for life and study" />
-  <meta property="og:url" content="https://abianji.com/tags/blockchain/" />
-  <meta property="og:image" content="https://abianji.com/img/avatar.jpg" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Flask Study 05 利用ORM增删改查" />
+  <meta property="og:description" content="人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 进行数据的增删改查
+
+" />
+  <meta property="og:url" content="https://abianji.com/post/2018-11-26-flask-study-05/" />
+  <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" />
 
 
 
@@ -42,7 +46,7 @@
 <meta name="generator" content="Hugo 0.48" />
 
 
-<link rel="canonical" href="https://abianji.com/tags/blockchain/" />
+<link rel="canonical" href="https://abianji.com/post/2018-11-26-flask-study-05/" />
 <link rel="alternative" href="https://abianji.com/index.xml" title="阿比安吉" type="application/atom+xml" />
 
 
@@ -105,6 +109,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -126,6 +134,8 @@
         <li class="menu-item
             
             
+            
+              is-active
             ">
             <a href="https://abianji.com/">首页</a>
           </li>
@@ -215,31 +225,74 @@
   </nav>
 </header>
 
-  <section class="main post-list">
-    <header class="list-header offscreen">
-      <h2 class="list-label">Posts List</h2>
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Flask Study 05 利用ORM增删改查</h1>
+      <p class="post-meta">@Liseen · Nov 26, 2018 · 1 min read</p>
     </header>
-    
-    
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://abianji.com/post/2018-09-20-blockchain-eos/" class="post-link">EOS 介绍</a></h3>
-    <p class="post-meta">@liseen · Sep 20, 2018 · 3 min read</p>
-  </header>
-  
-    <img class="post-cover" src="https://res.cloudinary.com/dnakxpzhj/image/upload/v1537413870/eos.jpg" alt="EOS 介绍">
-  
-  <p class="post-summary">EOS.IO软件引入了一种新的区块链架构，旨在实现分布式应用的垂直和水平扩展…
+    <article class="post-content"><p>人生苦短,我学Python&hellip; Flask通过orm(SQLAlchemy) 进行数据的增删改查</p>
 
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://abianji.com/post/2018-09-20-blockchain-eos/">Read More →</a>
-  </footer>
-</article>
+<p></p>
 
+<p>除了数据库的设计外,在业务中我们的主要操作主要集中在增删改查.下面看看咋操作的.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 增加一条数据</span>
+article1 <span style="color:#f92672">=</span> Article()
+article1<span style="color:#f92672">.</span>title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;liseen&#39;</span>
+article1<span style="color:#f92672">.</span>content <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;i have a dream&#39;</span>
+db<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>add(article1)
+db<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>commit()
+
+<span style="color:#75715e"># 查找数据</span>
+targetA <span style="color:#f92672">=</span> Article<span style="color:#f92672">.</span>query<span style="color:#f92672">.</span>filter_by(id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>first()
+<span style="color:#66d9ef">print</span>(targetA<span style="color:#f92672">.</span>content)
+
+<span style="color:#75715e"># 改某条数据</span>
+targetA <span style="color:#f92672">=</span> Article<span style="color:#f92672">.</span>query<span style="color:#f92672">.</span>filter_by(id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>first()
+targetA<span style="color:#f92672">.</span>content <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;i was changed&#39;</span>
+db<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>commit()
+
+<span style="color:#75715e"># 删除数据</span>
+targetA <span style="color:#f92672">=</span> Article<span style="color:#f92672">.</span>query<span style="color:#f92672">.</span>filter_by(content<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;i have a dream&#39;</span>)<span style="color:#f92672">.</span>first()
+db<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>delete(targetA)
+db<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>commit()</code></pre></div></article>
+    <footer class="post-footer">
       
+      <ul class="post-tags">
+        
+          <li><a href="https://abianji.com/tags/sqlalchemy"><span class="tag">SQLAlchemy</span></a></li>
+        
+          <li><a href="https://abianji.com/tags/python"><span class="tag">Python</span></a></li>
+        
+          <li><a href="https://abianji.com/tags/flask"><span class="tag">Flask</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
     
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "abianji" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     
   </section>
   <footer class="site-footer">
