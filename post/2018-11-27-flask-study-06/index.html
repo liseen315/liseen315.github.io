@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Flask Study 06 ORM的数据迁移</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="Liseen" />
+  <meta name="description" content="人生苦短,我学Python&amp;hellip; Flask使用SQLAlchemy时因为需求变更导致数据库字段有增删的操作时,如果不使用迁移会导致需要drop对应的表,这时候使用数据库迁移会解决这个问题
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Flask Study 06 ORM的数据迁移" />
+    <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip; Flask使用SQLAlchemy时因为需求变更导致数据库字段有增删的操作时,如果不使用迁移会导致需要drop对应的表,这时候使用数据库迁移会解决这个问题
+
+" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Flask Study 06 ORM的数据迁移" />
+  <meta property="og:description" content="人生苦短,我学Python&amp;hellip; Flask使用SQLAlchemy时因为需求变更导致数据库字段有增删的操作时,如果不使用迁移会导致需要drop对应的表,这时候使用数据库迁移会解决这个问题
+
+" />
+  <meta property="og:url" content="https://abianji.com/post/2018-11-27-flask-study-06/" />
+  <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.48" />
+
+
+<link rel="canonical" href="https://abianji.com/post/2018-11-27-flask-study-06/" />
+<link rel="alternative" href="https://abianji.com/index.xml" title="阿比安吉" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc" />
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587" />
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="阿比安吉" />
+<meta name="msapplication-tooltip" content="阿比安吉" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://abianji.com/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://abianji.com/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://abianji.com/img/favicon-32x32.png" />
+
+<link rel="mask-icon" href="https://abianji.com/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://abianji.com/css/bundle.4ad863b211.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://abianji.com/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">阿比安吉</h2>
+  
+  <p class="subtitle">生活本来就是一点一滴</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://abianji.com/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://abianji.com/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://abianji.com/links/">友链</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://abianji.com/about/">关于</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:liusong850315@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/liseen315" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//codepen.io/liseen" title="Codepen"><span class="icon icon-codepen"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://abianji.com/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Flask Study 06 ORM的数据迁移</h1>
+      <p class="post-meta">@Liseen · Nov 27, 2018 · 1 min read</p>
+    </header>
+    <article class="post-content"><p>人生苦短,我学Python&hellip; Flask使用SQLAlchemy时因为需求变更导致数据库字段有增删的操作时,如果不使用迁移会导致需要drop对应的表,这时候使用数据库迁移会解决这个问题</p>
+
+<p></p>
+
+<p>使用迁移需要安装Flask-Migrate这个包,同时为了方便我们采用了Flask-Script用于在命令行内执行对应的command</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── config.py         <span style="color:#75715e"># 数据库配置
+</span><span style="color:#75715e"></span>├── exts.py
+├── flask_study.py    <span style="color:#75715e"># 入口文件
+</span><span style="color:#75715e"></span>├── flaskvenv
+├── manage.py         <span style="color:#75715e"># flask-script脚本入口
+</span><span style="color:#75715e"></span>├── migrations        <span style="color:#75715e"># 数据库迁移生成后的文件
+</span><span style="color:#75715e"></span>├── models.py         <span style="color:#75715e"># ORM的各个model
+</span><span style="color:#75715e"></span>├── static
+└── templates</code></pre></div>
+<p>接着看看具体的这几个文件</p>
+
+<p>flask_study.py 内容如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask
+<span style="color:#f92672">import</span> config
+<span style="color:#f92672">from</span> exts <span style="color:#f92672">import</span> db
+
+app <span style="color:#f92672">=</span> Flask(__name__)
+
+<span style="color:#75715e"># 从配置文件内导入配置</span>
+app<span style="color:#f92672">.</span>config<span style="color:#f92672">.</span>from_object(config)
+db<span style="color:#f92672">.</span>init_app(app)
+
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_flask</span>():
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Hello World!&#39;</span>
+
+<span style="color:#75715e"># __name__ == __main__ 作为程序入口执行</span>
+<span style="color:#75715e"># app.run(debug=True) 开启debug 模式并运行web服务</span>
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    app<span style="color:#f92672">.</span>run()</code></pre></div>
+<p>config.py</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 设置flask的debug参数</span>
+DEBUG <span style="color:#f92672">=</span> True
+
+<span style="color:#75715e"># dialect+driver://username:password@host:port/database</span>
+
+DIALECT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql&#39;</span>
+DRIVER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;pymysql&#39;</span>
+USERNAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;root&#39;</span>
+PASSWORD <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;liseen&#39;</span>
+HOST <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;127.0.0.1&#39;</span>
+PORT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;3306&#39;</span>
+DATABASE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;linktodapp&#39;</span>
+
+SQLALCHEMY_DATABASE_URI <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;{}+{}://{}:{}@{}:{}/{}?charset=utf8&#34;</span><span style="color:#f92672">.</span>format(DIALECT,DRIVER,USERNAME,PASSWORD,HOST,PORT,DATABASE)
+
+SQLALCHEMY_TRACK_MODIFICATIONS <span style="color:#f92672">=</span> True</code></pre></div>
+<p>exts.py</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 解决app导入包导致的循环引用</span>
+<span style="color:#f92672">from</span> flask_sqlalchemy <span style="color:#f92672">import</span> SQLAlchemy
+
+db <span style="color:#f92672">=</span> SQLAlchemy()</code></pre></div>
+<p>manage.py 脚本命令文件注册迁移到db命令</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask_script <span style="color:#f92672">import</span> Manager
+<span style="color:#f92672">from</span> flask_study <span style="color:#f92672">import</span> app
+<span style="color:#f92672">from</span> flask_migrate <span style="color:#f92672">import</span> Migrate,MigrateCommand
+<span style="color:#f92672">from</span> exts <span style="color:#f92672">import</span> db
+<span style="color:#f92672">from</span> models <span style="color:#f92672">import</span> Article
+
+manage <span style="color:#f92672">=</span> Manager(app)
+migrate <span style="color:#f92672">=</span> Migrate(app<span style="color:#f92672">=</span>app,db<span style="color:#f92672">=</span>db)
+
+manage<span style="color:#f92672">.</span>add_command(<span style="color:#e6db74">&#39;db&#39;</span>,MigrateCommand)
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+  manage<span style="color:#f92672">.</span>run()</code></pre></div>
+<p>models.py 数据模型文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> exts <span style="color:#f92672">import</span> db
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Article</span>(db<span style="color:#f92672">.</span>Model):
+  __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;article&#39;</span>
+  id <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>Integer,primary_key<span style="color:#f92672">=</span>True,autoincrement<span style="color:#f92672">=</span>True)
+  title <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>String(<span style="color:#ae81ff">100</span>),nullable<span style="color:#f92672">=</span>False)
+  content <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>Text,nullable<span style="color:#f92672">=</span>False)
+  tags <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>String(<span style="color:#ae81ff">100</span>),nullable<span style="color:#f92672">=</span>False)</code></pre></div>
+<p>当我们建立好了这些文件后，我们可以在虚拟环境切换到我们的工作目录中.执行如下命令</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py db init <span style="color:#75715e"># 初始化迁移
+</span><span style="color:#75715e"></span>python manage.py db migrate <span style="color:#75715e"># 生成迁移版本
+</span><span style="color:#75715e"></span>python manage.py db upgrade # 执行迁移</code></pre></div>
+<p>至此我们的数据库就可以通过Migrate进行字段的增删了.</p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://abianji.com/tags/sqlalchemy"><span class="tag">SQLAlchemy</span></a></li>
+        
+          <li><a href="https://abianji.com/tags/python"><span class="tag">Python</span></a></li>
+        
+          <li><a href="https://abianji.com/tags/flask"><span class="tag">Flask</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "abianji" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 阿比安吉</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> base theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://abianji.com/js/bundle.60f3431060.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-123564234-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-123564234-1');
+</script>
+
+  </body>
+</html>

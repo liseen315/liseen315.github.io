@@ -32,6 +32,17 @@
     </item>
     
     <item>
+      <title>Flask Study 06 ORM的数据迁移</title>
+      <link>https://abianji.com/post/2018-11-27-flask-study-06/</link>
+      <pubDate>Tue, 27 Nov 2018 11:17:37 +0800</pubDate>
+      
+      <guid>https://abianji.com/post/2018-11-27-flask-study-06/</guid>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask使用SQLAlchemy时因为需求变更导致数据库字段有增删的操作时,如果不使用迁移会导致需要drop对应的表,这时候使用数据库迁移会解决这个问题&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Flask Study 05 利用ORM增删改查</title>
       <link>https://abianji.com/post/2018-11-26-flask-study-05/</link>
       <pubDate>Mon, 26 Nov 2018 13:43:19 +0800</pubDate>
