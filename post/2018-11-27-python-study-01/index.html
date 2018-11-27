@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>Hello World</title>
+  <title>Python Study 创建虚拟环境</title>
 
   
   
@@ -16,23 +16,29 @@
 
   
   <meta name="author" content="Liseen" />
-  <meta name="description" content="Hello Hugo &amp;amp;&amp;amp; keep study" />
+  <meta name="description" content="人生苦短,我学Python&amp;hellip;使用pipenv创建虚拟环境
+
+" />
 
   
   
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="Hello World" />
-    <meta name="twitter:description" content="Hello Hugo &amp;amp;&amp;amp; keep study" />
-    <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1533732076/hello.jpg" />
+    <meta name="twitter:title" content="Python Study 创建虚拟环境" />
+    <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip;使用pipenv创建虚拟环境
+
+" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1543297269/pythonlogo.jpg" />
   
 
   
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Hello World" />
-  <meta property="og:description" content="Hello Hugo &amp;amp;&amp;amp; keep study" />
-  <meta property="og:url" content="https://abianji.com/post/2018-08-08-hello-world/" />
-  <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1533732076/hello.jpg" />
+  <meta property="og:title" content="Python Study 创建虚拟环境" />
+  <meta property="og:description" content="人生苦短,我学Python&amp;hellip;使用pipenv创建虚拟环境
+
+" />
+  <meta property="og:url" content="https://abianji.com/post/2018-11-27-python-study-01/" />
+  <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1543297269/pythonlogo.jpg" />
 
 
 
@@ -40,7 +46,7 @@
 <meta name="generator" content="Hugo 0.48" />
 
 
-<link rel="canonical" href="https://abianji.com/post/2018-08-08-hello-world/" />
+<link rel="canonical" href="https://abianji.com/post/2018-11-27-python-study-01/" />
 <link rel="alternative" href="https://abianji.com/index.xml" title="阿比安吉" type="application/atom+xml" />
 
 
@@ -221,19 +227,70 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Hello World</h1>
-      <p class="post-meta">@Liseen · Aug 8, 2018 · 1 min read</p>
+      <h1 class="post-title">Python Study 创建虚拟环境</h1>
+      <p class="post-meta">@Liseen · Nov 27, 2018 · 1 min read</p>
     </header>
-    <article class="post-content"><p>Hello Hugo &amp;&amp; keep study</p>
-</article>
+    <article class="post-content"><p>人生苦短,我学Python&hellip;使用pipenv创建虚拟环境</p>
+
+<p></p>
+
+<p>很久很久以前,使用virtualenvs安装虚拟环境,后来出Python3.4以后可以使用类似如下命令创建</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python3 -m venv xxx</code></pre></div>
+<p>但是&hellip;今天读书发现火箭已经到了火星了,而我在井底..当前只需要用pip去安装一个叫pipenv的包就可以全家桶搞定,类似node的npm</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip3 install pipenv
+pipenv --version
+pipenv, version <span style="color:#ae81ff">2018</span>.11.26</code></pre></div>
+<p>然后cd到我们的工作目录下直接运行如下命令</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pipenv install
+Creating a virtualenv <span style="color:#66d9ef">for</span> this project…
+Pipfile: /Users/admin/liseen/python-study/helloflask/Pipfile
+Using /usr/local/opt/python/bin/python3.7 <span style="color:#f92672">(</span><span style="color:#ae81ff">3</span>.7.0<span style="color:#f92672">)</span> to create virtualenv…
+⠇ Creating virtual environment...Already using interpreter /usr/local/opt/python/bin/python3.7
+Using base prefix <span style="color:#e6db74">&#39;/usr/local/Cellar/python/3.7.0/Frameworks/Python.framework/Versions/3.7&#39;</span>
+New python executable in /Users/admin/.local/share/virtualenvs/helloflask-7D2RnkZA/bin/python3.7
+Also creating executable in /Users/admin/.local/share/virtualenvs/helloflask-7D2RnkZA/bin/python
+Installing setuptools, pip, wheel...
+<span style="color:#66d9ef">done</span>.
+
+✔ Successfully created virtual environment!
+Virtualenv location: /Users/admin/.local/share/virtualenvs/helloflask-7D2RnkZA
+Creating a Pipfile <span style="color:#66d9ef">for</span> this project…
+Pipfile.lock not found, creating…
+Locking <span style="color:#f92672">[</span>dev-packages<span style="color:#f92672">]</span> dependencies…
+Locking <span style="color:#f92672">[</span>packages<span style="color:#f92672">]</span> dependencies…
+Updated Pipfile.lock <span style="color:#f92672">(</span>a65489<span style="color:#f92672">)</span>!
+Installing dependencies from Pipfile.lock <span style="color:#f92672">(</span>a65489<span style="color:#f92672">)</span>…
+  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ <span style="color:#ae81ff">0</span>/0 — <span style="color:#ae81ff">00</span>:00:00
+To activate this project<span style="color:#960050;background-color:#1e0010">&#39;</span>s virtualenv, run pipenv shell.
+Alternatively, run a command inside the virtualenv with pipenv run.</code></pre></div>
+<p>狂拽酷炫吊炸天的创建好了虚拟环境.使用如下命令激活与退出</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pipenv shell <span style="color:#75715e"># 激活虚拟环境
+</span><span style="color:#75715e"></span>exit  # 退出虚拟环境</code></pre></div>
+<p>更帅的是可以不用激活的情况下直接以虚拟环境俩运行代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pipenv run python hello.py</code></pre></div>
+<p>环境安装好后,就可以安装依赖了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pipenv install flask
+Installing flask…
+Adding flask to Pipfile<span style="color:#960050;background-color:#1e0010">&#39;</span>s <span style="color:#f92672">[</span>packages<span style="color:#f92672">]</span>…
+✔ Installation Succeeded
+Pipfile.lock <span style="color:#f92672">(</span><span style="color:#ae81ff">662286</span><span style="color:#f92672">)</span> out of date, updating to <span style="color:#f92672">(</span>a65489<span style="color:#f92672">)</span>…
+Locking <span style="color:#f92672">[</span>dev-packages<span style="color:#f92672">]</span> dependencies…
+Locking <span style="color:#f92672">[</span>packages<span style="color:#f92672">]</span> dependencies…
+✔ Success!
+Updated Pipfile.lock <span style="color:#f92672">(</span><span style="color:#ae81ff">662286</span><span style="color:#f92672">)</span>!
+Installing dependencies from Pipfile.lock <span style="color:#f92672">(</span><span style="color:#ae81ff">662286</span><span style="color:#f92672">)</span>…
+  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ <span style="color:#ae81ff">6</span>/6 — <span style="color:#ae81ff">00</span>:00:01
+<span style="color:#f92672">(</span>helloflask<span style="color:#f92672">)</span></code></pre></div></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
         
+          <li><a href="https://abianji.com/tags/python"><span class="tag">Python</span></a></li>
+        
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>111</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
       </p>
     </footer>
     
