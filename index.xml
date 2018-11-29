@@ -32,6 +32,17 @@
     </item>
     
     <item>
+      <title>Flask Study 09 上传图片基础</title>
+      <link>https://abianji.com/post/2018-11-29-flask-study-09/</link>
+      <pubDate>Thu, 29 Nov 2018 15:15:00 +0800</pubDate>
+      
+      <guid>https://abianji.com/post/2018-11-29-flask-study-09/</guid>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip;上传图片在web应用中十分的常见,上传个身份证审核什么的.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Flask Study 08 Form表单基础</title>
       <link>https://abianji.com/post/2018-11-29-flask-study-08/</link>
       <pubDate>Thu, 29 Nov 2018 14:28:43 +0800</pubDate>
