@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Flask Study 08 jinja模板基础使用</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="Liseen" />
+  <meta name="description" content="人生苦短,我学Python&amp;hellip; Flask默认的模板引擎是Jinja2类似php内的smarty甚是好用
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Flask Study 08 jinja模板基础使用" />
+    <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip; Flask默认的模板引擎是Jinja2类似php内的smarty甚是好用
+
+" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Flask Study 08 jinja模板基础使用" />
+  <meta property="og:description" content="人生苦短,我学Python&amp;hellip; Flask默认的模板引擎是Jinja2类似php内的smarty甚是好用
+
+" />
+  <meta property="og:url" content="https://abianji.com/post/2018-11-29-flask-study-07/" />
+  <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1542900681/python-flask-web-development-essential-training_1.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.48" />
+
+
+<link rel="canonical" href="https://abianji.com/post/2018-11-29-flask-study-07/" />
+<link rel="alternative" href="https://abianji.com/index.xml" title="阿比安吉" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc" />
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587" />
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="阿比安吉" />
+<meta name="msapplication-tooltip" content="阿比安吉" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://abianji.com/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://abianji.com/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://abianji.com/img/favicon-32x32.png" />
+
+<link rel="mask-icon" href="https://abianji.com/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://abianji.com/css/bundle.4ad863b211.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://abianji.com/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">阿比安吉</h2>
+  
+  <p class="subtitle">生活本来就是一点一滴</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://abianji.com/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://abianji.com/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://abianji.com/links/">友链</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://abianji.com/about/">关于</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:liusong850315@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/liseen315" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//codepen.io/liseen" title="Codepen"><span class="icon icon-codepen"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://abianji.com/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Flask Study 08 jinja模板基础使用</h1>
+      <p class="post-meta">@Liseen · Nov 29, 2018 · 2 min read</p>
+    </header>
+    <article class="post-content"><p>人生苦短,我学Python&hellip; Flask默认的模板引擎是Jinja2类似php内的smarty甚是好用</p>
+
+<p></p>
+
+<p>文件目录结构如下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── app.py  <span style="color:#75715e"># 入口
+</span><span style="color:#75715e"></span>├── static  <span style="color:#75715e"># 静态资源
+</span><span style="color:#75715e"></span>│   ├── avatar.jpg
+│   ├── css
+│   ├── favicon.ico
+│   ├── js
+│   └── style.css
+└── templates   <span style="color:#75715e"># 模板文件夹
+</span><span style="color:#75715e"></span>    ├── base.html
+    ├── errors
+    ├── index.html
+    ├── macros.html
+    └── watchlist.html</code></pre></div>
+<p>app.py内定义了视图函数对应的渲染逻辑</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, render_template,flash,redirect,url_for
+app <span style="color:#f92672">=</span> Flask(__name__)
+app<span style="color:#f92672">.</span>secret_key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dev&#39;</span>
+
+user <span style="color:#f92672">=</span> {
+    <span style="color:#e6db74">&#39;username&#39;</span>: <span style="color:#e6db74">&#39;Grey Li&#39;</span>,
+    <span style="color:#e6db74">&#39;bio&#39;</span>: <span style="color:#e6db74">&#39;A boy who loves movies and music.&#39;</span>,
+}
+
+movies <span style="color:#f92672">=</span> [
+    {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;My Neighbor Totoro&#39;</span>, <span style="color:#e6db74">&#39;year&#39;</span>: <span style="color:#e6db74">&#39;1988&#39;</span>},
+    {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;Three Colours trilogy&#39;</span>, <span style="color:#e6db74">&#39;year&#39;</span>: <span style="color:#e6db74">&#39;1993&#39;</span>},
+    {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;Forrest Gump&#39;</span>, <span style="color:#e6db74">&#39;year&#39;</span>: <span style="color:#e6db74">&#39;1994&#39;</span>},
+    {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;Perfect Blue&#39;</span>, <span style="color:#e6db74">&#39;year&#39;</span>: <span style="color:#e6db74">&#39;1997&#39;</span>},
+    {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;The Matrix&#39;</span>, <span style="color:#e6db74">&#39;year&#39;</span>: <span style="color:#e6db74">&#39;1999&#39;</span>},
+    {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;Memento&#39;</span>, <span style="color:#e6db74">&#39;year&#39;</span>: <span style="color:#e6db74">&#39;2000&#39;</span>},
+    {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;The Bucket list&#39;</span>, <span style="color:#e6db74">&#39;year&#39;</span>: <span style="color:#e6db74">&#39;2007&#39;</span>},
+    {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;Black Swan&#39;</span>, <span style="color:#e6db74">&#39;year&#39;</span>: <span style="color:#e6db74">&#39;2010&#39;</span>},
+    {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;Gone Girl&#39;</span>, <span style="color:#e6db74">&#39;year&#39;</span>: <span style="color:#e6db74">&#39;2014&#39;</span>},
+    {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;CoCo&#39;</span>, <span style="color:#e6db74">&#39;year&#39;</span>: <span style="color:#e6db74">&#39;2017&#39;</span>},
+]
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/watchlist&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">watchlist</span>():
+    <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;watchlist.html&#39;</span>,user<span style="color:#f92672">=</span>user,movies<span style="color:#f92672">=</span>movies)
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+    <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;index.html&#39;</span>)
+
+<span style="color:#a6e22e">@app.context_processor</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inject_info</span>():
+    foo <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;I am foo.&#39;</span>
+    <span style="color:#66d9ef">return</span> dict(foo<span style="color:#f92672">=</span>foo)
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/flash&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">just_flash</span>():
+    flash(<span style="color:#e6db74">&#39;你好,我是闪电!&#39;</span>)
+    <span style="color:#66d9ef">return</span> redirect(url_for(<span style="color:#e6db74">&#39;index&#39;</span>))
+
+<span style="color:#a6e22e">@app.errorhandler</span>(<span style="color:#ae81ff">404</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">page_not_found</span>(e):
+    <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;errors/404.html&#39;</span>), <span style="color:#ae81ff">404</span></code></pre></div>
+<p>带集成的模板引擎自然少不了复用功能
+base.html</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+&lt;<span style="color:#f92672">head</span>&gt;
+    {% block head %}
+     &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+     &lt;<span style="color:#f92672">title</span>&gt;{% block title %}Template - HelloFlask {% endblock %}&lt;/<span style="color:#f92672">title</span>&gt;
+    {% endblock %}
+    {% block styles %}
+        &lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ url_for(&#39;static&#39;,filename=&#39;style.css&#39;) }}&#34;</span>&gt;
+    {% endblock %}
+&lt;/<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+&lt;<span style="color:#f92672">na</span>&gt;
+    &lt;<span style="color:#f92672">ul</span>&gt;
+        &lt;<span style="color:#f92672">li</span>&gt;
+            &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ url_for(&#39;index&#39;) }}&#34;</span>&gt;Home&lt;/<span style="color:#f92672">a</span>&gt;
+        &lt;/<span style="color:#f92672">li</span>&gt;
+    &lt;/<span style="color:#f92672">ul</span>&gt;
+&lt;/<span style="color:#f92672">na</span>&gt;
+&lt;<span style="color:#f92672">main</span>&gt;
+    {% for message in get_flashed_messages() %}
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;alert&#34;</span>&gt;{{ message }}&lt;/<span style="color:#f92672">div</span>&gt;
+    {% endfor %}
+
+    {% block content %}{% endblock %}
+&lt;/<span style="color:#f92672">main</span>&gt;
+&lt;<span style="color:#f92672">footer</span>&gt;
+    {% block footer %}
+        &lt;<span style="color:#f92672">div</span>&gt;This a Footer&lt;/<span style="color:#f92672">div</span>&gt;
+    {% endblock %}
+&lt;/<span style="color:#f92672">footer</span>&gt;
+{% block scripts %}
+
+{% endblock %}
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;</code></pre></div>
+<p>index.html 集成了base.html</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{% extends &#39;base.html&#39; %}
+{% from &#39;macros.html&#39; import qux %}
+{% block content %}
+    {% set iterated = true %}
+    &lt;<span style="color:#f92672">h1</span>&gt;Template&lt;/<span style="color:#f92672">h1</span>&gt;
+    &lt;<span style="color:#f92672">ul</span>&gt;
+    &lt;<span style="color:#f92672">li</span>&gt;
+        &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ url_for(&#39;watchlist&#39;) }}&#34;</span>&gt;WatchList&lt;/<span style="color:#f92672">a</span>&gt;
+    &lt;/<span style="color:#f92672">li</span>&gt;
+    &lt;<span style="color:#f92672">li</span>&gt;{{ foo }}&lt;/<span style="color:#f92672">li</span>&gt;
+    &lt;<span style="color:#f92672">li</span>&gt;Macro: {{ qux(amount=2) }}&lt;/<span style="color:#f92672">li</span>&gt;
+    {% if iterated %}
+        &lt;<span style="color:#f92672">li</span>&gt;iterated is True&lt;/<span style="color:#f92672">li</span>&gt;
+    {% endif %}
+    &lt;/<span style="color:#f92672">ul</span>&gt;
+{% endblock %}</code></pre></div>
+<p>watchlist.html</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+&lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;{{ user.username }} &#39;s watchList&lt;/<span style="color:#f92672">title</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ url_for(&#39;index&#39;)}}&#34;</span>&gt; &amp;larr; Return&lt;/<span style="color:#f92672">a</span>&gt;
+&lt;<span style="color:#f92672">h2</span>&gt;{{user.username}}&lt;/<span style="color:#f92672">h2</span>&gt;
+{% if user.bio %}
+&lt;<span style="color:#f92672">i</span>&gt;{{user.bio}}&lt;/<span style="color:#f92672">i</span>&gt;
+{% else %}
+&lt;<span style="color:#f92672">i</span>&gt;This user has not provided a bio.&lt;/<span style="color:#f92672">i</span>&gt;
+{% endif %}
+{# Below is the movie list (this is comment) #}
+&lt;<span style="color:#f92672">h5</span>&gt;{{user.username}} &#39;s WatchList ({{movies|length}}):&lt;/<span style="color:#f92672">h5</span>&gt;
+&lt;<span style="color:#f92672">ul</span>&gt;
+    {% for movieitem in movies %}
+    &lt;<span style="color:#f92672">li</span>&gt;{{movieitem.name}}-{{movieitem.year}}&lt;/<span style="color:#f92672">li</span>&gt;
+    {% endfor %}
+&lt;/<span style="color:#f92672">ul</span>&gt;
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;</code></pre></div>
+<p>有些情况下我们需要复用一些常用的模块比如说弹窗啊什么的,这时候就用到了宏这个特性.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{% macro qux(amount=1)%}
+   {% if amount == 1 %}
+       I am qux
+   {% elif amount &gt; 1 %}
+       We are quxs
+   {% endif %}
+{% endmacro %}</code></pre></div>
+<p>调用方式如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{% from &#39;macros.html&#39; import qux %}
+&lt;<span style="color:#f92672">li</span>&gt;Macro: {{ qux(amount=2) }}&lt;/<span style="color:#f92672">li</span>&gt;</code></pre></div></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://abianji.com/tags/flask"><span class="tag">Flask</span></a></li>
+        
+          <li><a href="https://abianji.com/tags/jinja2"><span class="tag">Jinja2</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "abianji" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 阿比安吉</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> base theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://abianji.com/js/bundle.60f3431060.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-123564234-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-123564234-1');
+</script>
+
+  </body>
+</html>

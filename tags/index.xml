@@ -33,7 +33,7 @@
     <item>
       <title>Flask</title>
       <link>https://abianji.com/tags/flask/</link>
-      <pubDate>Tue, 27 Nov 2018 11:17:37 +0800</pubDate>
+      <pubDate>Thu, 29 Nov 2018 11:04:30 +0800</pubDate>
       
       <guid>https://abianji.com/tags/flask/</guid>
       <description></description>
@@ -45,6 +45,15 @@
       <pubDate>Tue, 14 Aug 2018 22:02:12 +0800</pubDate>
       
       <guid>https://abianji.com/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jinja2</title>
+      <link>https://abianji.com/tags/jinja2/</link>
+      <pubDate>Thu, 29 Nov 2018 11:04:30 +0800</pubDate>
+      
+      <guid>https://abianji.com/tags/jinja2/</guid>
       <description></description>
     </item>
     

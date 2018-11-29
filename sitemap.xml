@@ -13,6 +13,11 @@
   </url>
   
   <url>
+    <loc>https://abianji.com/post/2018-11-29-flask-study-07/</loc>
+    <lastmod>2018-11-29T11:04:30+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://abianji.com/post/2018-11-27-python-study-01/</loc>
     <lastmod>2018-11-27T13:37:39+08:00</lastmod>
   </url>
@@ -106,13 +111,19 @@
   
   <url>
     <loc>https://abianji.com/tags/flask/</loc>
-    <lastmod>2018-11-27T11:17:37+08:00</lastmod>
+    <lastmod>2018-11-29T11:04:30+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://abianji.com/tags/golang/</loc>
     <lastmod>2018-08-14T22:02:12+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/tags/jinja2/</loc>
+    <lastmod>2018-11-29T11:04:30+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -124,7 +135,7 @@
   
   <url>
     <loc>https://abianji.com/post/</loc>
-    <lastmod>2018-11-27T13:37:39+08:00</lastmod>
+    <lastmod>2018-11-29T11:04:30+08:00</lastmod>
     <priority>0</priority>
   </url>
   
