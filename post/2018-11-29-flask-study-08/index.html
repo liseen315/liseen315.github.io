@@ -17,7 +17,6 @@
   
   <meta name="author" content="Liseen" />
   <meta name="description" content="人生苦短,我学Python&amp;hellip;Form表单用于提交资源信息,比如用户登录上传等操作,Flask提供了强大的表单创建配合Jinja模板引擎会大大加快应用的开发速度.
-
 " />
 
   
@@ -26,7 +25,6 @@
     <meta name="twitter:site" content="@gohugoio" />
     <meta name="twitter:title" content="Flask Study 08 Form表单基础" />
     <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip;Form表单用于提交资源信息,比如用户登录上传等操作,Flask提供了强大的表单创建配合Jinja模板引擎会大大加快应用的开发速度.
-
 " />
     <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550633334/blog/python.jpg" />
   
@@ -35,7 +33,6 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Flask Study 08 Form表单基础" />
   <meta property="og:description" content="人生苦短,我学Python&amp;hellip;Form表单用于提交资源信息,比如用户登录上传等操作,Flask提供了强大的表单创建配合Jinja模板引擎会大大加快应用的开发速度.
-
 " />
   <meta property="og:url" content="https://abianji.com/post/2018-11-29-flask-study-08/" />
   <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550633334/blog/python.jpg" />
@@ -43,7 +40,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.54.0" />
 
 
 <link rel="canonical" href="https://abianji.com/post/2018-11-29-flask-study-08/" />
@@ -232,18 +229,16 @@
     </header>
     <article class="post-content"><p>人生苦短,我学Python&hellip;Form表单用于提交资源信息,比如用户登录上传等操作,Flask提供了强大的表单创建配合Jinja模板引擎会大大加快应用的开发速度.</p>
 
-<p></p>
-
 <p>文件目录结构如下:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── app.py    <span style="color:#75715e"># 入口
-</span><span style="color:#75715e"></span>├── forms.py  <span style="color:#75715e"># Form表单
-</span><span style="color:#75715e"></span>├── static    <span style="color:#75715e"># 静态资源目录
-</span><span style="color:#75715e"></span>│   ├── css
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── app.py    <span style="color:#75715e"># 入口</span>
+├── forms.py  <span style="color:#75715e"># Form表单</span>
+├── static    <span style="color:#75715e"># 静态资源目录</span>
+│   ├── css
 │   ├── favicon.ico
 │   ├── js
 │   └── style.css
-└── templates   <span style="color:#75715e"># Jinja模板
-</span><span style="color:#75715e"></span>    ├── base.html
+└── templates   <span style="color:#75715e"># Jinja模板</span>
+    ├── base.html
     ├── bootstrap.html
     └── index.html</code></pre></div>
 <p>app.py</p>

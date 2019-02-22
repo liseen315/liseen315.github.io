@@ -17,7 +17,6 @@
   
   <meta name="author" content="Liseen" />
   <meta name="description" content="人生苦短,我学Python&amp;hellip; Flask使用SQLAlchemy时因为需求变更导致数据库字段有增删的操作时,如果不使用迁移会导致需要drop对应的表,这时候使用数据库迁移会解决这个问题
-
 " />
 
   
@@ -26,7 +25,6 @@
     <meta name="twitter:site" content="@gohugoio" />
     <meta name="twitter:title" content="Flask Study 06 ORM的数据迁移" />
     <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip; Flask使用SQLAlchemy时因为需求变更导致数据库字段有增删的操作时,如果不使用迁移会导致需要drop对应的表,这时候使用数据库迁移会解决这个问题
-
 " />
     <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550633334/blog/python.jpg" />
   
@@ -35,7 +33,6 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Flask Study 06 ORM的数据迁移" />
   <meta property="og:description" content="人生苦短,我学Python&amp;hellip; Flask使用SQLAlchemy时因为需求变更导致数据库字段有增删的操作时,如果不使用迁移会导致需要drop对应的表,这时候使用数据库迁移会解决这个问题
-
 " />
   <meta property="og:url" content="https://abianji.com/post/2018-11-27-flask-study-06/" />
   <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550633334/blog/python.jpg" />
@@ -43,7 +40,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.54.0" />
 
 
 <link rel="canonical" href="https://abianji.com/post/2018-11-27-flask-study-06/" />
@@ -232,17 +229,15 @@
     </header>
     <article class="post-content"><p>人生苦短,我学Python&hellip; Flask使用SQLAlchemy时因为需求变更导致数据库字段有增删的操作时,如果不使用迁移会导致需要drop对应的表,这时候使用数据库迁移会解决这个问题</p>
 
-<p></p>
-
 <p>使用迁移需要安装Flask-Migrate这个包,同时为了方便我们采用了Flask-Script用于在命令行内执行对应的command</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── config.py         <span style="color:#75715e"># 数据库配置
-</span><span style="color:#75715e"></span>├── exts.py
-├── flask_study.py    <span style="color:#75715e"># 入口文件
-</span><span style="color:#75715e"></span>├── flaskvenv
-├── manage.py         <span style="color:#75715e"># flask-script脚本入口
-</span><span style="color:#75715e"></span>├── migrations        <span style="color:#75715e"># 数据库迁移生成后的文件
-</span><span style="color:#75715e"></span>├── models.py         <span style="color:#75715e"># ORM的各个model
-</span><span style="color:#75715e"></span>├── static
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── config.py         <span style="color:#75715e"># 数据库配置</span>
+├── exts.py
+├── flask_study.py    <span style="color:#75715e"># 入口文件</span>
+├── flaskvenv
+├── manage.py         <span style="color:#75715e"># flask-script脚本入口</span>
+├── migrations        <span style="color:#75715e"># 数据库迁移生成后的文件</span>
+├── models.py         <span style="color:#75715e"># ORM的各个model</span>
+├── static
 └── templates</code></pre></div>
 <p>接着看看具体的这几个文件</p>
 
@@ -312,9 +307,9 @@ manage<span style="color:#f92672">.</span>add_command(<span style="color:#e6db74
   content <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>Text,nullable<span style="color:#f92672">=</span>False)
   tags <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>String(<span style="color:#ae81ff">100</span>),nullable<span style="color:#f92672">=</span>False)</code></pre></div>
 <p>当我们建立好了这些文件后，我们可以在虚拟环境切换到我们的工作目录中.执行如下命令</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py db init <span style="color:#75715e"># 初始化迁移
-</span><span style="color:#75715e"></span>python manage.py db migrate <span style="color:#75715e"># 生成迁移版本
-</span><span style="color:#75715e"></span>python manage.py db upgrade # 执行迁移</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py db init <span style="color:#75715e"># 初始化迁移</span>
+python manage.py db migrate <span style="color:#75715e"># 生成迁移版本</span>
+python manage.py db upgrade <span style="color:#75715e"># 执行迁移</span></code></pre></div>
 <p>至此我们的数据库就可以通过Migrate进行字段的增删了.</p></article>
     <footer class="post-footer">
       

@@ -18,9 +18,7 @@
       <pubDate>Tue, 27 Nov 2018 11:17:37 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-27-flask-study-06/</guid>
-      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask使用SQLAlchemy时因为需求变更导致数据库字段有增删的操作时,如果不使用迁移会导致需要drop对应的表,这时候使用数据库迁移会解决这个问题&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask使用SQLAlchemy时因为需求变更导致数据库字段有增删的操作时,如果不使用迁移会导致需要drop对应的表,这时候使用数据库迁移会解决这个问题&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -29,9 +27,7 @@
       <pubDate>Mon, 26 Nov 2018 13:43:19 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-26-flask-study-05/</guid>
-      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 进行数据的增删改查&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 进行数据的增删改查&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -40,9 +36,7 @@
       <pubDate>Mon, 26 Nov 2018 11:10:15 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-26-flask-study-04/</guid>
-      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 链接mysql&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 链接mysql&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -51,9 +45,7 @@
       <pubDate>Thu, 22 Nov 2018 16:26:01 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-22-python-sqlalchemy02/</guid>
-      <description>&lt;p&gt;Python sqlalchemy orm SQL表达式语言学习-插入并简单查询&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Python sqlalchemy orm SQL表达式语言学习-插入并简单查询&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -62,9 +54,7 @@
       <pubDate>Thu, 22 Nov 2018 14:52:53 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-22-python-sqlalchemy/</guid>
-      <description>&lt;p&gt;Python sqlalchemy orm SQL表达式语言学习-链接并创建表&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Python sqlalchemy orm SQL表达式语言学习-链接并创建表&lt;/p&gt;</description>
     </item>
     
   </channel>

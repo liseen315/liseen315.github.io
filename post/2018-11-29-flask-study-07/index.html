@@ -17,7 +17,6 @@
   
   <meta name="author" content="Liseen" />
   <meta name="description" content="人生苦短,我学Python&amp;hellip; Flask默认的模板引擎是Jinja2类似php内的smarty甚是好用
-
 " />
 
   
@@ -26,7 +25,6 @@
     <meta name="twitter:site" content="@gohugoio" />
     <meta name="twitter:title" content="Flask Study 07 jinja模板基础使用" />
     <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip; Flask默认的模板引擎是Jinja2类似php内的smarty甚是好用
-
 " />
     <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550633334/blog/python.jpg" />
   
@@ -35,7 +33,6 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Flask Study 07 jinja模板基础使用" />
   <meta property="og:description" content="人生苦短,我学Python&amp;hellip; Flask默认的模板引擎是Jinja2类似php内的smarty甚是好用
-
 " />
   <meta property="og:url" content="https://abianji.com/post/2018-11-29-flask-study-07/" />
   <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550633334/blog/python.jpg" />
@@ -43,7 +40,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.54.0" />
 
 
 <link rel="canonical" href="https://abianji.com/post/2018-11-29-flask-study-07/" />
@@ -232,18 +229,16 @@
     </header>
     <article class="post-content"><p>人生苦短,我学Python&hellip; Flask默认的模板引擎是Jinja2类似php内的smarty甚是好用</p>
 
-<p></p>
-
 <p>文件目录结构如下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── app.py  <span style="color:#75715e"># 入口
-</span><span style="color:#75715e"></span>├── static  <span style="color:#75715e"># 静态资源
-</span><span style="color:#75715e"></span>│   ├── avatar.jpg
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── app.py  <span style="color:#75715e"># 入口</span>
+├── static  <span style="color:#75715e"># 静态资源</span>
+│   ├── avatar.jpg
 │   ├── css
 │   ├── favicon.ico
 │   ├── js
 │   └── style.css
-└── templates   <span style="color:#75715e"># 模板文件夹
-</span><span style="color:#75715e"></span>    ├── base.html
+└── templates   <span style="color:#75715e"># 模板文件夹</span>
+    ├── base.html
     ├── errors
     ├── index.html
     ├── macros.html

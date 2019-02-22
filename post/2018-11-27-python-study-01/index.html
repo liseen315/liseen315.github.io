@@ -17,7 +17,6 @@
   
   <meta name="author" content="Liseen" />
   <meta name="description" content="人生苦短,我学Python&amp;hellip;使用pipenv创建虚拟环境
-
 " />
 
   
@@ -26,7 +25,6 @@
     <meta name="twitter:site" content="@gohugoio" />
     <meta name="twitter:title" content="Python Study 创建虚拟环境" />
     <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip;使用pipenv创建虚拟环境
-
 " />
     <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550633334/blog/python.jpg" />
   
@@ -35,7 +33,6 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Python Study 创建虚拟环境" />
   <meta property="og:description" content="人生苦短,我学Python&amp;hellip;使用pipenv创建虚拟环境
-
 " />
   <meta property="og:url" content="https://abianji.com/post/2018-11-27-python-study-01/" />
   <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550633334/blog/python.jpg" />
@@ -43,7 +40,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.54.0" />
 
 
 <link rel="canonical" href="https://abianji.com/post/2018-11-27-python-study-01/" />
@@ -232,8 +229,6 @@
     </header>
     <article class="post-content"><p>人生苦短,我学Python&hellip;使用pipenv创建虚拟环境</p>
 
-<p></p>
-
 <p>很久很久以前,使用virtualenvs安装虚拟环境,后来出Python3.4以后可以使用类似如下命令创建</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python3 -m venv xxx</code></pre></div>
 <p>但是&hellip;今天读书发现火箭已经到了火星了,而我在井底..当前只需要用pip去安装一个叫pipenv的包就可以全家桶搞定,类似node的npm</p>
@@ -264,8 +259,8 @@ Installing dependencies from Pipfile.lock <span style="color:#f92672">(</span>a6
 To activate this project<span style="color:#960050;background-color:#1e0010">&#39;</span>s virtualenv, run pipenv shell.
 Alternatively, run a command inside the virtualenv with pipenv run.</code></pre></div>
 <p>狂拽酷炫吊炸天的创建好了虚拟环境.使用如下命令激活与退出</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pipenv shell <span style="color:#75715e"># 激活虚拟环境
-</span><span style="color:#75715e"></span>exit  # 退出虚拟环境</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pipenv shell <span style="color:#75715e"># 激活虚拟环境</span>
+exit  <span style="color:#75715e"># 退出虚拟环境</span></code></pre></div>
 <p>更帅的是可以不用激活的情况下直接以虚拟环境俩运行代码</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pipenv run python hello.py</code></pre></div>
 <p>环境安装好后,就可以安装依赖了</p>
@@ -280,7 +275,14 @@ Locking <span style="color:#f92672">[</span>packages<span style="color:#f92672">
 Updated Pipfile.lock <span style="color:#f92672">(</span><span style="color:#ae81ff">662286</span><span style="color:#f92672">)</span>!
 Installing dependencies from Pipfile.lock <span style="color:#f92672">(</span><span style="color:#ae81ff">662286</span><span style="color:#f92672">)</span>…
   🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ <span style="color:#ae81ff">6</span>/6 — <span style="color:#ae81ff">00</span>:00:01
-<span style="color:#f92672">(</span>helloflask<span style="color:#f92672">)</span></code></pre></div></article>
+<span style="color:#f92672">(</span>helloflask<span style="color:#f92672">)</span></code></pre></div>
+<p>自定义虚拟环境文件夹路径</p>
+
+<p>默认情况下，Pipenv会自动为你选择虚拟环境的存储位置，在Windows下通常为C:\Users\Administrator.virtualenvs\，而Linux或macOS则为~/.local/share/virtualenvs/。如果你想将虚拟环境文件夹在项目目录内创建，可以设置环境变量PIPENV_VENV_IN_PROJECT，这时名为.venv的虚拟环境文件夹将在项目根目录被创建。另外你也可以通过WORKON_HOME环境变量来自定义存储路径。</p>
+
+<p>官方文档地址</p>
+
+<p><a href="https://pipenv.readthedocs.io/en/latest/">https://pipenv.readthedocs.io/en/latest/</a></p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">

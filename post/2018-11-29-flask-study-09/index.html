@@ -17,7 +17,6 @@
   
   <meta name="author" content="Liseen" />
   <meta name="description" content="人生苦短,我学Python&amp;hellip;上传图片在web应用中十分的常见,上传个身份证审核什么的.
-
 " />
 
   
@@ -26,7 +25,6 @@
     <meta name="twitter:site" content="@gohugoio" />
     <meta name="twitter:title" content="Flask Study 09 上传图片基础" />
     <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip;上传图片在web应用中十分的常见,上传个身份证审核什么的.
-
 " />
     <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550633334/blog/python.jpg" />
   
@@ -35,7 +33,6 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Flask Study 09 上传图片基础" />
   <meta property="og:description" content="人生苦短,我学Python&amp;hellip;上传图片在web应用中十分的常见,上传个身份证审核什么的.
-
 " />
   <meta property="og:url" content="https://abianji.com/post/2018-11-29-flask-study-09/" />
   <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550633334/blog/python.jpg" />
@@ -43,7 +40,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.54.0" />
 
 
 <link rel="canonical" href="https://abianji.com/post/2018-11-29-flask-study-09/" />
@@ -232,25 +229,23 @@
     </header>
     <article class="post-content"><p>人生苦短,我学Python&hellip;上传图片在web应用中十分的常见,上传个身份证审核什么的.</p>
 
-<p></p>
-
 <p>文件夹结构如下:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── app.py    <span style="color:#75715e"># 入口
-</span><span style="color:#75715e"></span>├── forms.py  <span style="color:#75715e"># Form表单
-</span><span style="color:#75715e"></span>├── static    <span style="color:#75715e"># 静态资源
-</span><span style="color:#75715e"></span>│   ├── css
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── app.py    <span style="color:#75715e"># 入口</span>
+├── forms.py  <span style="color:#75715e"># Form表单</span>
+├── static    <span style="color:#75715e"># 静态资源</span>
+│   ├── css
 │   ├── favicon.ico
 │   ├── js
 │   └── style.css
-├── templates   <span style="color:#75715e"># 模板文件夹
-</span><span style="color:#75715e"></span>│   ├── base.html
+├── templates   <span style="color:#75715e"># 模板文件夹</span>
+│   ├── base.html
 │   ├── bootstrap.html
 │   ├── index.html
 │   ├── macros.html
 │   ├── showimages.html
 │   └── upload.html
-└── uploads   <span style="color:#75715e"># 服务器文件存储目录
-</span><span style="color:#75715e"></span>    ├── 03b82ee6f55d415b857cdf9ddfa2502f.png
+└── uploads   <span style="color:#75715e"># 服务器文件存储目录</span>
+    ├── 03b82ee6f55d415b857cdf9ddfa2502f.png
     ├── 3ddc8b53df0c49bb9f647bf65ce3a144.jpg
     └── 54067622c7cb4ac9b4ab4aee5788cc47.png</code></pre></div>
 <p>app.python</p>

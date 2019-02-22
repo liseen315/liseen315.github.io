@@ -16,28 +16,31 @@
 
   
   <meta name="author" content="Liseen" />
-  <meta name="description" content="人生苦短,我学Python&amp;hellip; Flask入门 " />
+  <meta name="description" content="人生苦短,我学Python&amp;hellip; Flask入门
+" />
 
   
   
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@gohugoio" />
     <meta name="twitter:title" content="Flask Study 01 入口文件分析" />
-    <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip; Flask入门 " />
+    <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip; Flask入门
+" />
     <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550633334/blog/python.jpg" />
   
 
   
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Flask Study 01 入口文件分析" />
-  <meta property="og:description" content="人生苦短,我学Python&amp;hellip; Flask入门 " />
+  <meta property="og:description" content="人生苦短,我学Python&amp;hellip; Flask入门
+" />
   <meta property="og:url" content="https://abianji.com/post/2018-11-22-flask-study-01/" />
   <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550633334/blog/python.jpg" />
 
 
 
 
-<meta name="generator" content="Hugo 0.48" />
+<meta name="generator" content="Hugo 0.54.0" />
 
 
 <link rel="canonical" href="https://abianji.com/post/2018-11-22-flask-study-01/" />
@@ -224,8 +227,7 @@
       <h1 class="post-title">Flask Study 01 入口文件分析</h1>
       <p class="post-meta">@Liseen · Nov 22, 2018 · 1 min read</p>
     </header>
-    <article class="post-content"><p>人生苦短,我学Python&hellip; Flask入门
-</p>
+    <article class="post-content"><p>人生苦短,我学Python&hellip; Flask入门</p>
 
 <h2 id="flask-入口文件以及代码解析">Flask 入口文件以及代码解析</h2>
 
@@ -233,10 +235,10 @@
 
 <p>文件目录结构</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">.
-├── config.py   <span style="color:#75715e"># 配置文件用于存放debug或者是数据库配置等
-</span><span style="color:#75715e"></span>├── flask-study.py    <span style="color:#75715e"># 入口文件
-</span><span style="color:#75715e"></span>├── static    <span style="color:#75715e"># 静态目录
-</span><span style="color:#75715e"></span>└── templates   # 模板目录</code></pre></div>
+├── config.py   <span style="color:#75715e"># 配置文件用于存放debug或者是数据库配置等</span>
+├── flask-study.py    <span style="color:#75715e"># 入口文件</span>
+├── static    <span style="color:#75715e"># 静态目录</span>
+└── templates   <span style="color:#75715e"># 模板目录</span></code></pre></div>
 <p>入口文件分析</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, url_for
 <span style="color:#f92672">import</span> config

@@ -18,9 +18,7 @@
       <pubDate>Thu, 29 Nov 2018 15:15:00 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-29-flask-study-09/</guid>
-      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip;上传图片在web应用中十分的常见,上传个身份证审核什么的.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip;上传图片在web应用中十分的常见,上传个身份证审核什么的.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -29,9 +27,7 @@
       <pubDate>Thu, 29 Nov 2018 14:28:43 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-29-flask-study-08/</guid>
-      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip;Form表单用于提交资源信息,比如用户登录上传等操作,Flask提供了强大的表单创建配合Jinja模板引擎会大大加快应用的开发速度.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip;Form表单用于提交资源信息,比如用户登录上传等操作,Flask提供了强大的表单创建配合Jinja模板引擎会大大加快应用的开发速度.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -40,9 +36,7 @@
       <pubDate>Thu, 29 Nov 2018 11:04:30 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-29-flask-study-07/</guid>
-      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask默认的模板引擎是Jinja2类似php内的smarty甚是好用&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask默认的模板引擎是Jinja2类似php内的smarty甚是好用&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -51,9 +45,7 @@
       <pubDate>Tue, 27 Nov 2018 13:37:39 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-27-python-study-01/</guid>
-      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip;使用pipenv创建虚拟环境&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip;使用pipenv创建虚拟环境&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -62,9 +54,7 @@
       <pubDate>Tue, 27 Nov 2018 11:17:37 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-27-flask-study-06/</guid>
-      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask使用SQLAlchemy时因为需求变更导致数据库字段有增删的操作时,如果不使用迁移会导致需要drop对应的表,这时候使用数据库迁移会解决这个问题&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask使用SQLAlchemy时因为需求变更导致数据库字段有增删的操作时,如果不使用迁移会导致需要drop对应的表,这时候使用数据库迁移会解决这个问题&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -73,9 +63,7 @@
       <pubDate>Mon, 26 Nov 2018 13:43:19 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-26-flask-study-05/</guid>
-      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 进行数据的增删改查&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 进行数据的增删改查&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -84,9 +72,7 @@
       <pubDate>Mon, 26 Nov 2018 11:10:15 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-26-flask-study-04/</guid>
-      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 链接mysql&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask通过orm(SQLAlchemy) 链接mysql&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -95,9 +81,7 @@
       <pubDate>Fri, 23 Nov 2018 10:59:21 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-23-flask-study-03/</guid>
-      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask引用模板&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask引用模板&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -106,9 +90,7 @@
       <pubDate>Fri, 23 Nov 2018 10:33:19 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-23-flask-study-02/</guid>
-      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask路由之重定向&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask路由之重定向&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -117,8 +99,7 @@
       <pubDate>Thu, 22 Nov 2018 23:21:22 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-22-flask-study-01/</guid>
-      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask入门
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;人生苦短,我学Python&amp;hellip; Flask入门&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -127,9 +108,7 @@
       <pubDate>Thu, 22 Nov 2018 16:26:01 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-22-python-sqlalchemy02/</guid>
-      <description>&lt;p&gt;Python sqlalchemy orm SQL表达式语言学习-插入并简单查询&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Python sqlalchemy orm SQL表达式语言学习-插入并简单查询&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -138,9 +117,7 @@
       <pubDate>Thu, 22 Nov 2018 14:52:53 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-22-python-sqlalchemy/</guid>
-      <description>&lt;p&gt;Python sqlalchemy orm SQL表达式语言学习-链接并创建表&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Python sqlalchemy orm SQL表达式语言学习-链接并创建表&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -149,9 +126,7 @@
       <pubDate>Wed, 21 Nov 2018 17:47:21 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-11-21-sql/</guid>
-      <description>&lt;p&gt;《sql必知必会》基础学习&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;《sql必知必会》基础学习&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -160,9 +135,7 @@
       <pubDate>Tue, 25 Sep 2018 14:20:38 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-09-25-linuxstudy-everyday/</guid>
-      <description>&lt;p&gt;oh-my-zsh提高shell的逼格&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;oh-my-zsh提高shell的逼格&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -171,9 +144,7 @@
       <pubDate>Tue, 14 Aug 2018 22:02:12 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-08-14-go-base-env/</guid>
-      <description>&lt;p&gt;Go 基础环境安装,开发工具,插件配置,以及基础命令使用.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Go 基础环境安装,开发工具,插件配置,以及基础命令使用.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -182,9 +153,7 @@
       <pubDate>Tue, 14 Aug 2018 15:42:42 +0800</pubDate>
       
       <guid>https://abianji.com/post/2018-08-14-go-base-intro/</guid>
-      <description>&lt;p&gt;Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言&lt;/p&gt;</description>
     </item>
     
     <item>
