@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://abianji.com/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://abianji.com/de/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://abianji.com/"
+                />
+  </url>
+  
+  <url>
     <loc>https://abianji.com/author/</loc>
     <priority>0</priority>
     <xhtml:link
@@ -44,21 +59,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://abianji.com/tags/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://abianji.com/</loc>
-    <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://abianji.com/de/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://abianji.com/"
                 />
   </url>
   
