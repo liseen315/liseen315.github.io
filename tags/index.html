@@ -28,7 +28,7 @@
         
         
         
-        <link rel="stylesheet" href="/sass/combined.min.be7e1b71a912325f38d3492a97c8726d9d6769cf2551043a503f56d0f0bbb4db.css">
+        <link rel="stylesheet" href="/sass/combined.min.bead9e9e50f7691ee4ee7d66970672bee9f06dba8dcb32b74fb4cebe41d0db6b.css">
 
         
 
@@ -46,11 +46,6 @@
         </ul>
 
         
-            <div id="search-box" class="search">
-                <i class="fa fa-search"></i>
-                <input id="search" type="text" placeholder="Search ...">
-            </div>
-        
     </div>
 </nav>
 
@@ -60,7 +55,7 @@
         <div class="logo">
             <a href="/" class="logo">
                 
-                    <img src="/img/avatar.jpg" alt="">
+                    <img src="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550815271/blog/roleicon.jpg" alt="">
                 
 
                 <span class="overlay"><i class="fa fa-home"></i></span>
@@ -95,6 +90,48 @@
         </div>
 
         
+<footer>
+    <div class="container">
+
+        
+        <div class="recent-posts">
+            <strong>Latest posts</strong>
+                <ul>
+                
+                </ul>
+        </div>
+        
+
+        
+
+        <div class="right">
+            
+            <div class="external-profiles">
+                <strong>Social media</strong>
+
+                
+                
+                    <a href="https://twitter.com/TheRealLednerb" target="_blank"><i class="fa fa-twitter-adblock-proof"></i></a>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    <a href="https://github.com/liseen315" target="_blank"><i class="fa fa-github"></i></a>
+                
+                
+            </div>
+            
+
+            
+        </div>
+    </div>
+</footer>
+
 
 <div class="credits">
     <div class="container">
@@ -154,48 +191,6 @@ if (!doNotTrack) {
         
             
         
-
-        
-            <script>
-    var client = algoliasearch("Y2C4RWMPXW", "50ea7f8c41c0ad233926e0be2b769ed1");
-    var index = client.initIndex("default-content");
-
-    $('#search').autocomplete({ hint: false, autoselect: true, debug: false },
-      [
-        {
-          
-            source: $.fn.autocomplete.sources.hits(index, { hitsPerPage: 5, filters: 'language: en' }),
-          
-          displayKey: function(suggestion) {
-            return suggestion.title || suggestion.author
-          },
-          templates: {
-            suggestion: function(suggestion) {
-                return "<span class='entry " + suggestion.type + "'>"
-                      + "<span class='title'>" + suggestion.title + "</span>"
-                      + "<span class='fa fa-fw " + suggestion.iconClass + "'></span>"
-                  + "</span>"
-                ;
-            },
-            empty: function() {
-              return "<span class='empty'>Nothing found.</span>"
-            },
-            footer: function() {
-              return '<div class="branding">Powered by <img src="https:\/\/abianji.com\/dist\/algolia-logo-light.svg" /></div>'
-            }
-
-          },
-        }
-      ])
-      .on('autocomplete:selected', function(event, suggestion, dataset) {
-        window.location = (suggestion.url);
-      })
-      .keypress(function (event, suggestion) {
-        if (event.which == 13) {
-          window.location = (suggestion.url);
-        }
-      });
-</script>
 
         
 
