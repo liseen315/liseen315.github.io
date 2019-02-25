@@ -1,233 +1,120 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Ritchie Zhu">
+        <meta name="description" content="note for life and study">
+        <meta name="keywords" content="">
+        <meta name="generator" content="Hugo 0.54.0" />
+        <title> Flask Study 03 引用模板 | 阿比安吉</title>
+        <meta name="description" content="Flask Study 03 引用模板 - note for life and study">
+        <meta itemprop="name" content="Flask Study 03 引用模板">
+        <meta itemprop="description" content="Flask Study 03 引用模板 - note for life and study">
+        <meta property="og:title" content="Flask Study 03 引用模板">
+        <meta property="og:description" content="Flask Study 03 引用模板 - note for life and study">
+        <meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?size=200">
+        <meta property="og:url" content="https://abianji.com/post/2018-11-23-flask-study-03/">
+        <meta property="og:site_name" content="阿比安吉">
+        <meta property="og:type" content="article">
+        <link rel="icon" type="image/png" href="https://abianji.com/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="https://abianji.com/favicon-16x16.png" sizes="16x16">
 
-  <meta charset="utf-8" />
+	
 
-  
-  <title>Flask Study 03 引用模板</title>
-
-  
-  
-
-
-
-
-
-  
-  <meta name="author" content="Liseen" />
-  <meta name="description" content="人生苦短,我学Python&amp;hellip; Flask引用模板
-" />
-
-  
-  
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gohugoio" />
-    <meta name="twitter:title" content="Flask Study 03 引用模板" />
-    <meta name="twitter:description" content="人生苦短,我学Python&amp;hellip; Flask引用模板
-" />
-    <meta name="twitter:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550829810/blog/flask.jpg" />
-  
-
-  
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="Flask Study 03 引用模板" />
-  <meta property="og:description" content="人生苦短,我学Python&amp;hellip; Flask引用模板
-" />
-  <meta property="og:url" content="https://abianji.com/post/2018-11-23-flask-study-03/" />
-  <meta property="og:image" content="https://res.cloudinary.com/dnakxpzhj/image/upload/v1550829810/blog/flask.jpg" />
-
-
-
-
-<meta name="generator" content="Hugo 0.54.0" />
-
-
-<link rel="canonical" href="https://abianji.com/post/2018-11-23-flask-study-03/" />
-<link rel="alternative" href="https://abianji.com/index.xml" title="阿比安吉" type="application/atom+xml" />
-
-
-<meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="format-detection" content="telephone=no,email=no,adress=no" />
-<meta http-equiv="Cache-Control" content="no-transform" />
-
-
-<meta name="robots" content="index,follow" />
-<meta name="referrer" content="origin-when-cross-origin" />
-<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc" />
-<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587" />
-
-
-
-
-
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="阿比安吉" />
-<meta name="msapplication-tooltip" content="阿比安吉" />
-<meta name='msapplication-navbutton-color' content="#5fbf5e" />
-<meta name="msapplication-TileColor" content="#5fbf5e" />
-<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
-<link rel="icon" href="https://abianji.com/img/favicon.ico" />
-<link rel="icon" type="image/png" sizes="16x16" href="https://abianji.com/img/favicon-16x16.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="https://abianji.com/img/favicon-32x32.png" />
-
-<link rel="mask-icon" href="https://abianji.com/img/safari-pinned-tab.svg" color="#5fbf5e" />
-
-
-
-<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
-
-<link rel="stylesheet" href="https://abianji.com/css/bundle.4ad863b211.css" />
-
-
-  
-  <!--[if lt IE 9]>
-    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
-  <![endif]-->
-
-<!--[if lte IE 11]>
-    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
-  <![endif]-->
-
-
-<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
-
-
-<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
-
-
-</head>
-  <body>
-    
-    <div class="suspension">
-      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
-      
         
-        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
         
-      
+        
+        
+        <link rel="stylesheet" href="https://abianji.com/sass/combined.min.be7e1b71a912325f38d3492a97c8726d9d6769cf2551043a503f56d0f0bbb4db.css">
+
+        
+
+        
+    </head>
+    <body class="bilberry-hugo-theme">
+        
+<nav>
+
+    <div class="container">
+        <ul class="topnav">
+            
+                
+                    <li><a href="https://abianji.com/links/">友链</a></li>
+                
+            
+                
+                    <li><a href="https://abianji.com/about/">关于</a></li>
+                
+            
+        </ul>
+
+        
     </div>
+</nav>
+
+
+        <header>
+    <div class="container">
+        <div class="logo">
+            <a href="https://abianji.com/" class="logo">
+                
+                    <img src="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?d=mm&size=200" alt="">
+                
+
+                <span class="overlay"><i class="fa fa-home"></i></span>
+            </a>
+        </div>
+        <div class="titles">
+            <h3 class="title"><a href="https://abianji.com/">阿比安吉</a></h3>
+            
+                <span class="subtitle">生活本来就是一点一滴</span>
+            
+        </div>
+
     
-    
-  <header class="site-header">
-  <img class="avatar" src="https://abianji.com/img/avatar.jpg" alt="Avatar">
-  
-  <h2 class="title">阿比安吉</h2>
-  
-  <p class="subtitle">生活本来就是一点一滴</p>
-  <button class="menu-toggle" type="button">
-    <span class="icon icon-menu"></span>
-  </button>
-  <nav class="site-menu collapsed">
-    <ul class="menu-list">
-      
-      
-      
-      
-        <li class="menu-item
-            
-            
-            
-              is-active
-            ">
-            <a href="https://abianji.com/">首页</a>
-          </li>
-      
-        <li class="menu-item
-            
-            
-            ">
-            <a href="https://abianji.com/tags/">标签</a>
-          </li>
-      
-        <li class="menu-item
-            
-            
-            ">
-            <a href="https://abianji.com/links/">友链</a>
-          </li>
-      
-        <li class="menu-item
-            
-            
-            ">
-            <a href="https://abianji.com/about/">关于</a>
-          </li>
-      
-    </ul>
-  </nav>
-  <nav class="social-menu collapsed">
-    <h2 class="offscreen">Social Networks</h2>
-    <ul class="social-list">
 
-      
-      <li class="social-item">
-        <a href="mailto:liusong850315@gmail.com" title="Email"><span class="icon icon-email"></span></a>
-      </li>
-
-      
-      <li class="social-item">
-        <a href="//github.com/liseen315" title="GitHub"><span class="icon icon-github"></span></a>
-      </li>
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      <li class="social-item">
-        <a href="//codepen.io/liseen" title="Codepen"><span class="icon icon-codepen"></span></a>
-      </li>
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      <li class="social-item">
-        <a href="https://abianji.com/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
-      </li>
-
-    </ul>
-  </nav>
+        
+        <div class="toggler">
+        
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </div>
+    </div>
 </header>
 
-  <section class="main post-detail">
-    <header class="post-header">
-      <h1 class="post-title">Flask Study 03 引用模板</h1>
-      <p class="post-meta">@Liseen · Nov 23, 2018 · 1 min read</p>
-    </header>
-    <article class="post-content"><p>人生苦短,我学Python&hellip; Flask引用模板</p>
+
+        <div class="main container">
+            
+     
+    <div class="article-wrapper u-cf single">
+        
+            <a class="bubble" href="https://abianji.com/post/2018-11-23-flask-study-03/">
+    <i class="fa fa-fw fa-pencil"></i>
+</a>
+
+<article class="default article">
+    
+
+    <div class="content">
+    <h3><a href="https://abianji.com/post/2018-11-23-flask-study-03/">Flask Study 03 引用模板</a></h3>
+    <div class="meta">
+        
+            
+                <span class="date moment">2018-11-23</span>
+            
+        
+
+        
+
+        
+
+        
+            <span class="author"><a href="https://abianji.com/author/liseen">Liseen</a></span>
+        
+    </div>
+
+    
+        <p>人生苦短,我学Python&hellip; Flask引用模板</p>
 
 <p>首先看一下项目目录结构</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">├── config.py
@@ -257,23 +144,37 @@
 &lt;<span style="color:#f92672">p</span>&gt;您的年龄是: {{ age }}&lt;/<span style="color:#f92672">p</span>&gt;
 &lt;/<span style="color:#f92672">body</span>&gt;
 &lt;/<span style="color:#f92672">html</span>&gt;</code></pre></div>
-<p>需要说明的是给render_template传递的参数是字典.参数前面+了两个**。这两个星星是Python给函数传递字典时候会默认方式,其中还有单个*的情况,这时候传的是个Python元组.至于元组跟List的区别是元素内元素不能修改,使用{}包含数据,List可以修改并使用[]包含数据.</p></article>
-    <footer class="post-footer">
-      
-      <ul class="post-tags">
-        
-          <li><a href="https://abianji.com/tags/python"><span class="tag">Python</span></a></li>
-        
-          <li><a href="https://abianji.com/tags/flask"><span class="tag">Flask</span></a></li>
-        
-      </ul>
-      
-      <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
-      </p>
-    </footer>
+<p>需要说明的是给render_template传递的参数是字典.参数前面+了两个**。这两个星星是Python给函数传递字典时候会默认方式,其中还有单个*的情况,这时候传的是个Python元组.至于元组跟List的区别是元素内元素不能修改,使用{}包含数据,List可以修改并使用[]包含数据.</p>
     
-      <div id="disqus_thread"></div>
+</div>
+
+    
+<div class="footer">
+
+
+    
+        <div class="tags">
+            <i class="fa fa-tags"></i>
+            <div class="links">
+                
+                    <a href="https://abianji.com/tags/python">Python</a>
+                
+                    <a href="https://abianji.com/tags/flask">Flask</a>
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+</article>
+
+        
+    </div>
+
+    
+        <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
     
@@ -293,52 +194,129 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-      
     
-  </section>
-  <footer class="site-footer">
-  <p>© 2017-2019 阿比安吉</p>
-  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> base theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
-  
+
+     
+
+        </div>
+
+        
+<footer>
+    <div class="container">
+
+        
+        <div class="recent-posts">
+            <strong>Latest posts</strong>
+                <ul>
+                
+                    <li>
+                        <a href="https://abianji.com/post/2018-11-29-flask-study-09/">Flask Study 09 上传图片基础</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://abianji.com/post/2018-11-29-flask-study-08/">Flask Study 08 Form表单基础</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://abianji.com/post/2018-11-29-flask-study-07/">Flask Study 07 jinja模板基础使用</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://abianji.com/post/2018-11-27-python-study-01/">Python Study 创建虚拟环境</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://abianji.com/post/2018-11-27-flask-study-06/">Flask Study 06 ORM的数据迁移</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://abianji.com/post/2018-11-26-flask-study-05/">Flask Study 05 利用ORM增删改查</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://abianji.com/post/2018-11-26-flask-study-04/">Flask Study 04 通过SQLAlchemy链接mysql</a>
+                    </li>
+                
+                </ul>
+        </div>
+        
+
+        
+
+        <div class="right">
+            
+            <div class="external-profiles">
+                <strong>Social media</strong>
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    <a href="liseen315" target="_blank"><i class="fa fa-github"></i></a>
+                
+                
+            </div>
+            
+
+            
+        </div>
+    </div>
 </footer>
 
 
-
-<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
-<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$','$'], ['\\(','\\)']],
-      displayMath: [['$$','$$'], ['\\[','\\]']],
-      processEscapes: true,
-      processEnvironments: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-      TeX: { equationNumbers: { autoNumber: "AMS" },
-      extensions: ["AMSmath.js", "AMSsymbols.js"] }
-    }
-  });
-</script>
-<script type="text/x-mathjax-config">
-  // Fix <code> tags after MathJax finishes running. This is a
-  // hack to overcome a shortcoming of Markdown. Discussion at
-  // https://github.com/mojombo/jekyll/issues/199
-  MathJax.Hub.Queue(() => {
-    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
-  });
-</script>
-
-<script src="https://abianji.com/js/bundle.60f3431060.js"></script>
+<div class="credits">
+    <div class="container">
+        <div class="copyright">
+            <a href="https://github.com/Lednerb" target="_blank">
+                &copy;
+                
+                    2018
+                
+                by Lednerb
+            </a>
+	    
+        </div>
+        <div class="author">
+            <a href="https://github.com/Lednerb/bilberry-hugo-theme" target="_blank">Bilberry Hugo Theme</a>
+        </div>
+    </div>
+</div>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-123564234-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        
 
-  gtag('config', 'UA-123564234-1');
-</script>
+        
 
-  </body>
+        
+        
+        <script type="text/javascript" src="https://abianji.com/js/externalDependencies.39c47e10e241eae2947b3fe21809c572.js" integrity="md5-OcR&#43;EOJB6uKUez/iGAnFcg=="></script>
+
+        
+        
+        <script type="text/javascript" src="https://abianji.com/js/theme.ff50ae6dc1bfc220b23bf69dbb41b54e.js" integrity="md5-/1CubcG/wiCyO/adu0G1Tg=="></script>
+
+        <script>
+            $(".moment").each(function() {
+                $(this).text(
+                    moment( $(this).text() )
+                        .locale( "en" )
+                        .format('LL')
+                );
+            });
+
+            $(".footnote-return sup").html("");
+        </script>
+
+        
+
+        
+
+
+    </body>
 </html>

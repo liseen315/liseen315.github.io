@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://abianji.com/de/author/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://abianji.com/author/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://abianji.com/de/author/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/de/categories/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://abianji.com/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://abianji.com/de/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/de/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://abianji.com/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://abianji.com/de/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/de/tags/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://abianji.com/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://abianji.com/de/tags/"
+                />
+  </url>
+  
+</urlset>
