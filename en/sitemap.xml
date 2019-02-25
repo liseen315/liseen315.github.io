@@ -3,18 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://abianji.com/</loc>
-    <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://abianji.com/de/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://abianji.com/"
-                />
+    <loc>https://abianji.com/code/2019-02-25/go-base-intro/</loc>
+    <lastmod>2019-02-25T14:40:31+08:00</lastmod>
   </url>
   
   <url>
@@ -48,7 +38,32 @@
   </url>
   
   <url>
+    <loc>https://abianji.com/categories/code/</loc>
+    <lastmod>2019-02-25T14:40:31+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/code/</loc>
+    <lastmod>2019-02-25T14:40:31+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/tags/golang/</loc>
+    <lastmod>2019-02-25T14:40:31+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/author/liseen/</loc>
+    <lastmod>2019-02-25T14:40:31+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://abianji.com/tags/</loc>
+    <lastmod>2019-02-25T14:40:31+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -59,6 +74,28 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://abianji.com/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/categories/tutorials/</loc>
+    <lastmod>2019-02-25T14:40:31+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/</loc>
+    <lastmod>2019-02-25T14:40:31+08:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://abianji.com/de/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://abianji.com/"
                 />
   </url>
   
