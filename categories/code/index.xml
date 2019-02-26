@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Code on 阿比安吉</title>
+    <link>https://abianji.com/categories/code/</link>
+    <description>Recent content in Code on 阿比安吉</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 26 Feb 2019 09:37:58 +0800</lastBuildDate>
+    
+	<atom:link href="https://abianji.com/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go Base Env</title>
+      <link>https://abianji.com/code/2019-02-26/go-base-env/</link>
+      <pubDate>Tue, 26 Feb 2019 09:37:58 +0800</pubDate>
+      
+      <guid>https://abianji.com/code/2019-02-26/go-base-env/</guid>
+      <description>&lt;p&gt;Go 基础环境安装,开发工具,插件配置,以及基础命令使用.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go Base Intro</title>
+      <link>https://abianji.com/code/2019-02-25/go-base-intro/</link>
+      <pubDate>Mon, 25 Feb 2019 14:40:31 +0800</pubDate>
+      
+      <guid>https://abianji.com/code/2019-02-25/go-base-intro/</guid>
+      <description>&lt;p&gt;Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

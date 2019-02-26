@@ -1,0 +1,325 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Liseen">
+        <meta name="description" content="abianji|阿比安吉">
+        <meta name="keywords" content="blog,personal,responsive,search,font awesome,pages,posts,multilingual,highlight.js,syntax highlighting,premium,shortcuts">
+        <meta name="generator" content="Hugo 0.54.0" />
+        <title> Go Base Env | 阿比安吉</title>
+        <meta name="description" content="Go Base Env - abianji|阿比安吉">
+        <meta itemprop="name" content="Go Base Env">
+        <meta itemprop="description" content="Go Base Env - abianji|阿比安吉">
+        <meta property="og:title" content="Go Base Env">
+        <meta property="og:description" content="Go Base Env - abianji|阿比安吉">
+        <meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?size=200">
+        <meta property="og:url" content="https://abianji.com/code/2019-02-26/go-base-env/">
+        <meta property="og:site_name" content="阿比安吉">
+        <meta property="og:type" content="article">
+        <link rel="icon" type="image/png" href="https://abianji.com/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="https://abianji.com/favicon-16x16.png" sizes="16x16">
+
+	
+
+        
+        
+        
+        
+        <link rel="stylesheet" href="/sass/combined.min.bead9e9e50f7691ee4ee7d66970672bee9f06dba8dcb32b74fb4cebe41d0db6b.css">
+
+        
+
+        
+            
+        
+    </head>
+    <body class="bilberry-hugo-theme">
+        
+<nav>
+
+    <div class="container">
+        <ul class="topnav">
+            
+                
+                    <li><a href="/page/about/">About</a></li>
+                
+            
+        </ul>
+
+        
+    </div>
+</nav>
+
+
+        <header>
+    <div class="container">
+        <div class="logo">
+            <a href="/" class="logo">
+                
+                    <img src="/avatar.jpg" alt="">
+                
+
+                <span class="overlay"><i class="fa fa-home"></i></span>
+            </a>
+        </div>
+        <div class="titles">
+            <h3 class="title"><a href="/">阿比安吉</a></h3>
+            
+                <span class="subtitle">If you can dream you should do it</span>
+            
+        </div>
+
+    
+
+        
+        <div class="toggler">
+        
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </div>
+    </div>
+</header>
+
+
+        <div class="main container">
+            
+     
+    <div class="article-wrapper u-cf single">
+        
+            <a class="bubble" href="/code/2019-02-26/go-base-env/">
+    <i class="fa fa-fw fa-code"></i>
+</a>
+
+<article class="default article">
+    
+
+    <div class="content">
+    <h3><a href="/code/2019-02-26/go-base-env/">Go Base Env</a></h3>
+    <div class="meta">
+        
+            
+                <span class="date moment">2019-02-26</span>
+            
+        
+
+        
+
+        
+            <span class="categories">
+                
+                    <a href="/categories/code">Code</a>
+                
+                    <a href="/categories/tutorials">Tutorials</a>
+                
+            </span>
+        
+
+        
+            <span class="author"><a href="/author/liseen">liseen</a></span>
+        
+    </div>
+
+    
+        <p>Go 基础环境安装,开发工具,插件配置,以及基础命令使用.</p>
+
+<h4 id="go-开发环境的安装以及配置">Go 开发环境的安装以及配置</h4>
+
+<ul>
+<li>操作系统 macos</li>
+<li>编辑器vim &amp;&amp; vscode</li>
+</ul>
+
+<h5 id="mac下可以直接使用brew-安装-go">mac下可以直接使用brew 安装 go</h5>
+
+<pre><code>$ brew install go
+$ go version
+go version go1.10.3 darwin/amd64
+</code></pre>
+
+<h5 id="vscode下载">vscode下载</h5>
+
+<p><em>vscode</em>: <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p>
+
+<ol>
+<li>插件选择安装go</li>
+<li>安装vpn或者使用shadowsocks开启http代理下载go插件内的各种依赖包</li>
+</ol>
+
+<h5 id="配置环境变量gopath-gobin">配置环境变量GOPATH GOBIN</h5>
+
+<pre><code>$ go env
+
+vim ~/.zshrc
+
+export GOPATH=/Users/xxxxx/golang-study
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+</code></pre>
+
+<p>当环境变量配置完后我们就可以在指定的目录下创建工作目录了.当前我使用的golang-study作为工作空间,在此目录内go约定使用三个目标文件夹分别是</p>
+
+<pre><code>├── bin  #存放编译后的可执行文件
+├── pkg  #存放包文件.a
+└── src  #源代码
+</code></pre>
+
+<h5 id="基础命令使用">基础命令使用</h5>
+
+<pre><code>build       compile packages and dependencies
+clean       remove object files and cached files
+doc         show documentation for package or symbol
+fmt         gofmt (reformat) package sources
+get         download and install packages and dependencies
+install     compile and install packages and dependencies
+run         compile and run Go program
+test        test packages
+version     print Go version
+</code></pre>
+
+<p>其中常用的命令是go run ,go build ,go get ,go install ,go test.</p>
+    
+</div>
+
+    
+<div class="footer">
+
+
+    
+        <div class="tags">
+            <i class="fa fa-tags"></i>
+            <div class="links">
+                
+                    <a href="/tags/golang">golang</a>
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+</article>
+
+        
+    </div>
+
+    
+        
+    
+
+     
+
+        </div>
+
+        
+<footer>
+    <div class="container">
+
+        
+        <div class="recent-posts">
+            <strong>Latest posts</strong>
+                <ul>
+                
+                    <li>
+                        <a href="/code/2019-02-26/go-base-env/">Go Base Env</a>
+                    </li>
+                
+                    <li>
+                        <a href="/code/2019-02-25/go-base-intro/">Go Base Intro</a>
+                    </li>
+                
+                </ul>
+        </div>
+        
+
+        
+        <div class="categories">
+            <a href="/categories/"><strong>Categories</strong></a>
+                <ul>
+                
+                    <li>
+                        <a href="/categories/code">Code (2)</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/tutorials">Tutorials (2)</a>
+                    </li>
+                
+            </ul>
+        </div>
+        
+
+        <div class="right">
+            
+            <div class="external-profiles">
+                <strong>Social media</strong>
+
+                
+                
+                
+                
+                
+                
+                    <a href="https://www.instagram.com/liusong850315/" target="_blank"><i class="fa fa-instagram"></i></a>
+                
+                
+                
+                
+                
+                    <a href="https://github.com/liseen315" target="_blank"><i class="fa fa-github"></i></a>
+                
+                
+            </div>
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+
+
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123564234-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+        
+
+        
+        
+        <script type="text/javascript" src="/js/externalDependencies.39c47e10e241eae2947b3fe21809c572.js"></script>
+
+        
+        
+        <script type="text/javascript" src="/js/theme.ff50ae6dc1bfc220b23bf69dbb41b54e.js"></script>
+
+        <script>
+            $(".moment").each(function() {
+                $(this).text(
+                    moment( $(this).text() )
+                        .locale( "en" )
+                        .format('LL')
+                );
+            });
+
+            $(".footnote-return sup").html("");
+        </script>
+
+        
+            
+        
+
+        
+
+
+    </body>
+</html>

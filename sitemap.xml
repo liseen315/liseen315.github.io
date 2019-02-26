@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://abianji.com/code/2019-02-26/go-base-env/</loc>
+    <lastmod>2019-02-26T09:37:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/page/about/</loc>
+    <lastmod>2019-02-26T09:28:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/code/2019-02-25/go-base-intro/</loc>
+    <lastmod>2019-02-25T14:40:31+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/author/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/categories/code/</loc>
+    <lastmod>2019-02-26T09:37:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/code/</loc>
+    <lastmod>2019-02-26T09:37:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/tags/golang/</loc>
+    <lastmod>2019-02-26T09:37:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/author/liseen/</loc>
+    <lastmod>2019-02-26T09:37:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/page/</loc>
+    <lastmod>2019-02-26T09:28:05+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/tags/</loc>
+    <lastmod>2019-02-26T09:37:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/categories/tutorials/</loc>
+    <lastmod>2019-02-26T09:37:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/</loc>
+    <lastmod>2019-02-26T09:37:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
