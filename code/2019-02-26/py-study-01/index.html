@@ -7,21 +7,19 @@
         <meta name="description" content="abianji|阿比安吉">
         <meta name="keywords" content="blog,personal,responsive,search,font awesome,pages,posts,multilingual,highlight.js,syntax highlighting,premium,shortcuts">
         <meta name="generator" content="Hugo 0.54.0" />
-        <title> Codes | 阿比安吉</title>
-        <meta name="description" content="Codes - abianji|阿比安吉">
-        <meta itemprop="name" content="Codes">
-        <meta itemprop="description" content="Codes - abianji|阿比安吉">
-        <meta property="og:title" content="Codes">
-        <meta property="og:description" content="Codes - abianji|阿比安吉">
+        <title> Pipenv:新一代Python项目环境与依赖管理工具 | 阿比安吉</title>
+        <meta name="description" content="Pipenv:新一代Python项目环境与依赖管理工具 - abianji|阿比安吉">
+        <meta itemprop="name" content="Pipenv:新一代Python项目环境与依赖管理工具">
+        <meta itemprop="description" content="Pipenv:新一代Python项目环境与依赖管理工具 - abianji|阿比安吉">
+        <meta property="og:title" content="Pipenv:新一代Python项目环境与依赖管理工具">
+        <meta property="og:description" content="Pipenv:新一代Python项目环境与依赖管理工具 - abianji|阿比安吉">
         <meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?size=200">
-        <meta property="og:url" content="https://abianji.com/code/">
-        <meta property="og:site_name" content="阿比安吉"><meta property="og:type" content="website">
+        <meta property="og:url" content="https://abianji.com/code/2019-02-26/py-study-01/">
+        <meta property="og:site_name" content="阿比安吉">
+        <meta property="og:type" content="article">
         <link rel="icon" type="image/png" href="https://abianji.com/favicon-32x32.png" sizes="32x32">
         <link rel="icon" type="image/png" href="https://abianji.com/favicon-16x16.png" sizes="16x16">
 
-	
-	  <link href="https://abianji.com/code/index.xml" rel="alternate" type="application/rss+xml" title="阿比安吉" />
-	  <link href="https://abianji.com/code/index.xml" rel="feed" type="application/rss+xml" title="阿比安吉" />
 	
 
         
@@ -85,11 +83,10 @@
 
         <div class="main container">
             
-    
-    
-        <div class="article-wrapper u-cf">
-            
-                <a class="bubble" href="/code/2019-02-26/py-study-01/">
+     
+    <div class="article-wrapper u-cf single">
+        
+            <a class="bubble" href="/code/2019-02-26/py-study-01/">
     <i class="fa fa-fw fa-code"></i>
 </a>
 
@@ -123,9 +120,78 @@
     
         <p>Pipenv是Kenneth Reitz在2017年1月发布的Python依赖管理工具，现在由PyPA维护。你可以把它看做是pip和virtualenv的组合体，而它基于的Pipfile则用来替代旧的依赖记录方式（requirements.txt）</p>
 
-        
-            <a href="/code/2019-02-26/py-study-01/" class="more">Continue reading</a>
-        
+<p>很久很久以前,使用virtualenvs安装虚拟环境,后来出Python3.4以后可以使用类似如下命令创建</p>
+
+<pre><code class="language-bash">python3 -m venv xxx
+</code></pre>
+
+<p>但是&hellip;今天读书发现火箭已经到了火星了,而我在井底..当前只需要用pip去安装一个叫pipenv的包就可以全家桶搞定,类似node的npm</p>
+
+<pre><code class="language-bash">pip3 install pipenv
+pipenv --version
+pipenv, version 2018.11.26
+</code></pre>
+
+<p>然后cd到我们的工作目录下直接运行如下命令</p>
+
+<pre><code class="language-bash">pipenv install
+Creating a virtualenv for this project…
+Pipfile: /Users/admin/liseen/python-study/helloflask/Pipfile
+Using /usr/local/opt/python/bin/python3.7 (3.7.0) to create virtualenv…
+⠇ Creating virtual environment...Already using interpreter /usr/local/opt/python/bin/python3.7
+Using base prefix '/usr/local/Cellar/python/3.7.0/Frameworks/Python.framework/Versions/3.7'
+New python executable in /Users/admin/.local/share/virtualenvs/helloflask-7D2RnkZA/bin/python3.7
+Also creating executable in /Users/admin/.local/share/virtualenvs/helloflask-7D2RnkZA/bin/python
+Installing setuptools, pip, wheel...
+done.
+
+✔ Successfully created virtual environment!
+Virtualenv location: /Users/admin/.local/share/virtualenvs/helloflask-7D2RnkZA
+Creating a Pipfile for this project…
+Pipfile.lock not found, creating…
+Locking [dev-packages] dependencies…
+Locking [packages] dependencies…
+Updated Pipfile.lock (a65489)!
+Installing dependencies from Pipfile.lock (a65489)…
+  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ 0/0 — 00:00:00
+To activate this project's virtualenv, run pipenv shell.
+Alternatively, run a command inside the virtualenv with pipenv run.
+</code></pre>
+
+<p>狂拽酷炫吊炸天的创建好了虚拟环境.使用如下命令激活与退出</p>
+
+<pre><code class="language-bash">pipenv shell # 激活虚拟环境
+exit  # 退出虚拟环境
+</code></pre>
+
+<p>更帅的是可以不用激活的情况下直接以虚拟环境俩运行代码</p>
+
+<pre><code class="language-bash">pipenv run python hello.py
+</code></pre>
+
+<p>环境安装好后,就可以安装依赖了</p>
+
+<pre><code class="language-bash">pipenv install flask
+Installing flask…
+Adding flask to Pipfile's [packages]…
+✔ Installation Succeeded
+Pipfile.lock (662286) out of date, updating to (a65489)…
+Locking [dev-packages] dependencies…
+Locking [packages] dependencies…
+✔ Success!
+Updated Pipfile.lock (662286)!
+Installing dependencies from Pipfile.lock (662286)…
+  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ 6/6 — 00:00:01
+(helloflask)
+</code></pre>
+
+<p>自定义虚拟环境文件夹路径</p>
+
+<p>默认情况下，Pipenv会自动为你选择虚拟环境的存储位置，在Windows下通常为C:\Users\Administrator.virtualenvs\，而Linux或macOS则为~/.local/share/virtualenvs/。如果你想将虚拟环境文件夹在项目目录内创建，可以设置环境变量PIPENV_VENV_IN_PROJECT，这时名为.venv的虚拟环境文件夹将在项目根目录被创建。另外你也可以通过WORKON_HOME环境变量来自定义存储路径。</p>
+
+<p>官方文档地址</p>
+
+<p><a href="https://pipenv.readthedocs.io/en/latest/">https://pipenv.readthedocs.io/en/latest/</a></p>
     
 </div>
 
@@ -149,148 +215,14 @@
 
 </article>
 
-            
-        </div>
-    
-        <div class="article-wrapper u-cf">
-            
-                <a class="bubble" href="/code/2019-02-26/go-base-env/">
-    <i class="fa fa-fw fa-code"></i>
-</a>
-
-<article class="default article">
-    
-
-    <div class="content">
-    <h3><a href="/code/2019-02-26/go-base-env/">Go Base Env</a></h3>
-    <div class="meta">
-        
-            
-                <span class="date moment">2019-02-26</span>
-            
-        
-
-        
-
-        
-            <span class="categories">
-                
-                    <a href="/categories/code">Code</a>
-                
-            </span>
-        
-
-        
-            <span class="author"><a href="/author/liseen">liseen</a></span>
         
     </div>
 
     
-        <p>Go 基础环境安装,开发工具,插件配置,以及基础命令使用.</p>
-
-        
-            <a href="/code/2019-02-26/go-base-env/" class="more">Continue reading</a>
         
     
-</div>
 
-    
-<div class="footer">
-
-
-    
-        <div class="tags">
-            <i class="fa fa-tags"></i>
-            <div class="links">
-                
-                    <a href="/tags/golang">golang</a>
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-</article>
-
-            
-        </div>
-    
-        <div class="article-wrapper u-cf">
-            
-                <a class="bubble" href="/code/2019-02-25/go-base-intro/">
-    <i class="fa fa-fw fa-code"></i>
-</a>
-
-<article class="default article">
-    
-
-    <div class="content">
-    <h3><a href="/code/2019-02-25/go-base-intro/">Go Base Intro</a></h3>
-    <div class="meta">
-        
-            
-                <span class="date moment">2019-02-25</span>
-            
-        
-
-        
-
-        
-            <span class="categories">
-                
-                    <a href="/categories/code">Code</a>
-                
-            </span>
-        
-
-        
-            <span class="author"><a href="/author/liseen">liseen</a></span>
-        
-    </div>
-
-    
-        <p>Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言</p>
-
-        
-            <a href="/code/2019-02-25/go-base-intro/" class="more">Continue reading</a>
-        
-    
-</div>
-
-    
-<div class="footer">
-
-
-    
-        <div class="tags">
-            <i class="fa fa-tags"></i>
-            <div class="links">
-                
-                    <a href="/tags/golang">golang</a>
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-</article>
-
-            
-        </div>
-    
-
-    
-    <div class="paginator">
-        
-
-        
-    </div>
-
-
+     
 
         </div>
 

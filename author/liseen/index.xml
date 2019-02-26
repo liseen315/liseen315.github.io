@@ -5,10 +5,19 @@
     <link>https://abianji.com/author/liseen/</link>
     <description>Recent content in Liseen on 阿比安吉</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 26 Feb 2019 13:45:12 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 26 Feb 2019 15:49:58 +0800</lastBuildDate>
     
 	<atom:link href="https://abianji.com/author/liseen/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Pipenv:新一代Python项目环境与依赖管理工具</title>
+      <link>https://abianji.com/code/2019-02-26/py-study-01/</link>
+      <pubDate>Tue, 26 Feb 2019 15:49:58 +0800</pubDate>
+      
+      <guid>https://abianji.com/code/2019-02-26/py-study-01/</guid>
+      <description>&lt;p&gt;Pipenv是Kenneth Reitz在2017年1月发布的Python依赖管理工具，现在由PyPA维护。你可以把它看做是pip和virtualenv的组合体，而它基于的Pipfile则用来替代旧的依赖记录方式（requirements.txt）&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>妓和不如</title>
