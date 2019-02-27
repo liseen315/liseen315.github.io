@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Postgresql on 阿比安吉</title>
+    <link>https://abianji.com/categories/postgresql/</link>
+    <description>Recent content in Postgresql on 阿比安吉</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 27 Feb 2019 16:11:26 +0800</lastBuildDate>
+    
+	<atom:link href="https://abianji.com/categories/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Postgresql Install Mac</title>
+      <link>https://abianji.com/link/2019-02-27/postgresql-install-mac/</link>
+      <pubDate>Wed, 27 Feb 2019 16:11:26 +0800</pubDate>
+      
+      <guid>https://abianji.com/link/2019-02-27/postgresql-install-mac/</guid>
+      <description>Mac 上安装和使用PostgreSQL的方法</description>
+    </item>
+    
+  </channel>
+</rss>
