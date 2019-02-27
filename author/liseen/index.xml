@@ -5,10 +5,19 @@
     <link>https://abianji.com/author/liseen/</link>
     <description>Recent content in Liseen on 阿比安吉</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 26 Feb 2019 15:49:58 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 27 Feb 2019 11:44:18 +0800</lastBuildDate>
     
 	<atom:link href="https://abianji.com/author/liseen/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>python 函数参数</title>
+      <link>https://abianji.com/code/2019-02-27/py-study-02/</link>
+      <pubDate>Wed, 27 Feb 2019 11:44:18 +0800</pubDate>
+      
+      <guid>https://abianji.com/code/2019-02-27/py-study-02/</guid>
+      <description>&lt;p&gt;Python中函数的参数有五种：位置参数(必选参数)、默认参数、可变参数、关键字参数、命名关键字参数。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Pipenv:新一代Python项目环境与依赖管理工具</title>

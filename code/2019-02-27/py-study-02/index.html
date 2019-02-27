@@ -7,21 +7,19 @@
         <meta name="description" content="abianji|阿比安吉">
         <meta name="keywords" content="blog,personal,responsive,search,font awesome,pages,posts,multilingual,highlight.js,syntax highlighting,premium,shortcuts">
         <meta name="generator" content="Hugo 0.54.0" />
-        <title> Golang | 阿比安吉</title>
-        <meta name="description" content="Golang - abianji|阿比安吉">
-        <meta itemprop="name" content="Golang">
-        <meta itemprop="description" content="Golang - abianji|阿比安吉">
-        <meta property="og:title" content="Golang">
-        <meta property="og:description" content="Golang - abianji|阿比安吉">
+        <title> python 函数参数 | 阿比安吉</title>
+        <meta name="description" content="python 函数参数 - abianji|阿比安吉">
+        <meta itemprop="name" content="python 函数参数">
+        <meta itemprop="description" content="python 函数参数 - abianji|阿比安吉">
+        <meta property="og:title" content="python 函数参数">
+        <meta property="og:description" content="python 函数参数 - abianji|阿比安吉">
         <meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?size=200">
-        <meta property="og:url" content="https://abianji.com/tags/golang/">
-        <meta property="og:site_name" content="阿比安吉"><meta property="og:type" content="website">
+        <meta property="og:url" content="https://abianji.com/code/2019-02-27/py-study-02/">
+        <meta property="og:site_name" content="阿比安吉">
+        <meta property="og:type" content="article">
         <link rel="icon" type="image/png" href="https://abianji.com/favicon-32x32.png" sizes="32x32">
         <link rel="icon" type="image/png" href="https://abianji.com/favicon-16x16.png" sizes="16x16">
 
-	
-	  <link href="https://abianji.com/tags/golang/index.xml" rel="alternate" type="application/rss+xml" title="阿比安吉" />
-	  <link href="https://abianji.com/tags/golang/index.xml" rel="feed" type="application/rss+xml" title="阿比安吉" />
 	
 
         
@@ -85,11 +83,10 @@
 
         <div class="main container">
             
-    
-    
-        <div class="article-wrapper u-cf">
-            
-                <a class="bubble" href="/code/2019-02-26/go-base-env/">
+     
+    <div class="article-wrapper u-cf single">
+        
+            <a class="bubble" href="/code/2019-02-27/py-study-02/">
     <i class="fa fa-fw fa-code"></i>
 </a>
 
@@ -97,11 +94,11 @@
     
 
     <div class="content">
-    <h3><a href="/code/2019-02-26/go-base-env/">Go Base Env</a></h3>
+    <h3><a href="/code/2019-02-27/py-study-02/">python 函数参数</a></h3>
     <div class="meta">
         
             
-                <span class="date moment">2019-02-26</span>
+                <span class="date moment">2019-02-27</span>
             
         
 
@@ -121,11 +118,147 @@
     </div>
 
     
-        <p>Go 基础环境安装,开发工具,插件配置,以及基础命令使用.</p>
+        <p>Python中函数的参数有五种：位置参数(必选参数)、默认参数、可变参数、关键字参数、命名关键字参数。</p>
 
-        
-            <a href="/code/2019-02-26/go-base-env/" class="more">Continue reading</a>
-        
+<h4 id="位置参数">位置参数</h4>
+
+<pre><code>def sayHello(name):
+    print('hello',name)
+
+sayHello('liseen')
+
+# output: hello liseen
+</code></pre>
+
+<h4 id="默认参数">默认参数</h4>
+
+<pre><code>def sayHello(name='liseen'):
+    print('hello',name)
+sayHello()
+sayHello('fangshu')
+
+#output: 
+#hello liseen
+#hello fangshu
+</code></pre>
+
+<h4 id="可变参数">可变参数</h4>
+
+<p>可变参数的函数允许传入任意个参数，这些可变参数在函数调用的时候会自动组装成一个tuple。</p>
+
+<pre><code>def sayWhat(*something):
+    for temp in something:
+        print(temp)
+
+sayWhat('hello','world','liseen')
+names = ['liseen','fanghsu','bubu']
+ages = (20,30,40)
+sayWhat(*names)
+sayWhat(*ages)
+
+#output:
+#hello
+#world
+#liseen
+#liseen
+#fanghsu
+#bubu
+#20
+#30
+#40
+</code></pre>
+
+<h4 id="关键字参数">关键字参数</h4>
+
+<p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict</p>
+
+<pre><code>def sayWhat(**something):
+    for key,value in something.items():
+        print(key,value)
+
+sayWhat(name='liseen',wift='fangshu')
+
+#output:
+#name liseen
+#wift fangshu
+</code></pre>
+
+<h4 id="命名关键字参数">命名关键字参数</h4>
+
+<p>对于关键字参数，函数的调用者可以传入任意不受限制的关键字参数。至于到底传入了哪些，就需要在函数内部通过kw检查</p>
+
+<pre><code>def person(name, age, **kw):
+    if 'city' in kw:
+        # 有city参数
+        pass
+    if 'job' in kw:
+        # 有job参数
+        pass
+    print('name:', name, 'age:', age, 'other:', kw)
+</code></pre>
+
+<p>但是调用者仍可以传入不受限制的关键字参数：</p>
+
+<pre><code>&gt;&gt;&gt; person('Jack', 24, city='Beijing', addr='Chaoyang', zipcode=123456)
+</code></pre>
+
+<p>如果要限制关键字参数的名字，就可以用命名关键字参数，例如，只接收city和job作为关键字参数。这种方式定义的函数如下：</p>
+
+<pre><code>def person(name, age, *, city, job):
+    print(name, age, city, job)
+</code></pre>
+
+<p>和关键字参数**kw不同，命名关键字参数需要一个特殊分隔符*，*后面的参数被视为命名关键字参数。</p>
+
+<p>调用方式如下：</p>
+
+<pre><code>&gt;&gt;&gt; person('Jack', 24, city='Beijing', job='Engineer')
+Jack 24 Beijing Engineer
+</code></pre>
+
+<p>命名关键字参数必须传入参数名，这和位置参数不同。如果没有传入参数名，调用将报错：</p>
+
+<pre><code>&gt;&gt;&gt; person('Jack', 24, 'Beijing', 'Engineer')
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: person() takes 2 positional arguments but 4 were given
+</code></pre>
+
+<p>由于调用时缺少参数名city和job，Python解释器把这4个参数均视为位置参数，但person()函数仅接受2个位置参数。</p>
+
+<p>命名关键字参数可以有缺省值，从而简化调用：</p>
+
+<pre><code>def person(name, age, *, city='Beijing', job):
+    print(name, age, city, job)
+</code></pre>
+
+<p>由于命名关键字参数city具有默认值，调用时，可不传入city参数：</p>
+
+<pre><code>&gt;&gt;&gt; person('Jack', 24, job='Engineer')
+Jack 24 Beijing Engineer
+</code></pre>
+
+<p>使用命名关键字参数时，要特别注意，如果没有可变参数，就必须加一个*作为特殊分隔符。如果缺少*，Python解释器将无法识别位置参数和命名关键字参数：</p>
+
+<p>def person(name, age, city, job): # 缺少 *，city和job被视为位置参数 pass</p>
+
+<pre><code>def person(name, age, city, job):
+    # 缺少 *，city和job被视为位置参数
+    pass
+</code></pre>
+
+<p>命名关键字参数有两种形式</p>
+
+<pre><code>def person(name,age,*,city,job)
+</code></pre>
+
+<p>或者</p>
+
+<pre><code>def person(name,age,*city)
+</code></pre>
+
+<p>参考地址:
+<a href="https://blog.csdn.net/devin_hugh/article/details/79309884">https://blog.csdn.net/devin_hugh/article/details/79309884</a></p>
     
 </div>
 
@@ -138,7 +271,7 @@
             <i class="fa fa-tags"></i>
             <div class="links">
                 
-                    <a href="/tags/golang">golang</a>
+                    <a href="/tags/python">python</a>
                 
             </div>
         </div>
@@ -149,83 +282,14 @@
 
 </article>
 
-            
-        </div>
-    
-        <div class="article-wrapper u-cf">
-            
-                <a class="bubble" href="/code/2019-02-25/go-base-intro/">
-    <i class="fa fa-fw fa-code"></i>
-</a>
-
-<article class="default article">
-    
-
-    <div class="content">
-    <h3><a href="/code/2019-02-25/go-base-intro/">Go Base Intro</a></h3>
-    <div class="meta">
-        
-            
-                <span class="date moment">2019-02-25</span>
-            
-        
-
-        
-
-        
-            <span class="categories">
-                
-                    <a href="/categories/code">Code</a>
-                
-            </span>
-        
-
-        
-            <span class="author"><a href="/author/liseen">liseen</a></span>
         
     </div>
 
     
-        <p>Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言</p>
-
-        
-            <a href="/code/2019-02-25/go-base-intro/" class="more">Continue reading</a>
         
     
-</div>
 
-    
-<div class="footer">
-
-
-    
-        <div class="tags">
-            <i class="fa fa-tags"></i>
-            <div class="links">
-                
-                    <a href="/tags/golang">golang</a>
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-</article>
-
-            
-        </div>
-    
-
-    
-    <div class="paginator">
-        
-
-        
-    </div>
-
-
+     
 
         </div>
 

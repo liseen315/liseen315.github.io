@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://abianji.com/code/2019-02-27/py-study-02/</loc>
+    <lastmod>2019-02-27T11:44:18+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://abianji.com/code/2019-02-26/py-study-01/</loc>
     <lastmod>2019-02-26T15:49:58+08:00</lastmod>
   </url>
@@ -45,13 +50,13 @@
   
   <url>
     <loc>https://abianji.com/categories/code/</loc>
-    <lastmod>2019-02-26T15:49:58+08:00</lastmod>
+    <lastmod>2019-02-27T11:44:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://abianji.com/code/</loc>
-    <lastmod>2019-02-26T15:49:58+08:00</lastmod>
+    <lastmod>2019-02-27T11:44:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -63,7 +68,7 @@
   
   <url>
     <loc>https://abianji.com/author/liseen/</loc>
-    <lastmod>2019-02-26T15:49:58+08:00</lastmod>
+    <lastmod>2019-02-27T11:44:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -81,7 +86,7 @@
   
   <url>
     <loc>https://abianji.com/tags/python/</loc>
-    <lastmod>2019-02-26T15:49:58+08:00</lastmod>
+    <lastmod>2019-02-27T11:44:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -99,7 +104,7 @@
   
   <url>
     <loc>https://abianji.com/</loc>
-    <lastmod>2019-02-26T15:49:58+08:00</lastmod>
+    <lastmod>2019-02-27T11:44:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
