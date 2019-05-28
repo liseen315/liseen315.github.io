@@ -6,13 +6,13 @@
         <meta name="author" content="Liseen">
         <meta name="description" content="abianji|阿比安吉">
         <meta name="keywords" content="blog,personal,responsive,search,font awesome,pages,posts,multilingual,highlight.js,syntax highlighting,premium,shortcuts">
-        <meta name="generator" content="Hugo 0.54.0" />
-        <title> Golang | 阿比安吉</title>
-        <meta name="description" content="Golang - abianji|阿比安吉">
-        <meta itemprop="name" content="Golang">
-        <meta itemprop="description" content="Golang - abianji|阿比安吉">
-        <meta property="og:title" content="Golang">
-        <meta property="og:description" content="Golang - abianji|阿比安吉">
+        <meta name="generator" content="Hugo 0.55.6" />
+        <title> golang | 阿比安吉</title>
+        <meta name="description" content="golang - abianji|阿比安吉">
+        <meta itemprop="name" content="golang">
+        <meta itemprop="description" content="golang - abianji|阿比安吉">
+        <meta property="og:title" content="golang">
+        <meta property="og:description" content="golang - abianji|阿比安吉">
         <meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?size=200">
         <meta property="og:url" content="https://abianji.com/tags/golang/">
         <meta property="og:site_name" content="阿比安吉"><meta property="og:type" content="website">
@@ -123,9 +123,77 @@
     
         <p>Go 基础环境安装,开发工具,插件配置,以及基础命令使用.</p>
 
-        
-            <a href="/code/2019-02-26/go-base-env/" class="more">Continue reading</a>
-        
+<h4 id="go-开发环境的安装以及配置">Go 开发环境的安装以及配置</h4>
+
+<ul>
+<li>操作系统 macos</li>
+<li>编辑器vim &amp;&amp; vscode</li>
+</ul>
+
+<h5 id="压缩包安装">压缩包安装</h5>
+
+<pre><code class="language-bash">curl -O https://dl.google.com/go/go1.12.5.darwin-amd64.tar.gz
+
+# 选择指定系统下的版本解压缩到/user/local目录下
+tar -C /usr/local -xzf go1.12.5.darwin-amd64.tar.gz
+
+#配置环境变量
+export PATH=&quot;/usr/local/go/bin:$PATH&quot;
+
+# 确认安装
+go version
+
+# go version go1.12.5 darwin/amd64
+</code></pre>
+
+<h5 id="mac下可以直接使用brew-安装-go">mac下可以直接使用brew 安装 go</h5>
+
+<pre><code class="language-bash">$ brew install go
+$ go version
+go version go1.10.3 darwin/amd64
+</code></pre>
+
+<h5 id="vscode下载">vscode下载</h5>
+
+<p><em>vscode</em>: <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p>
+
+<ol>
+<li>插件选择安装go</li>
+<li>安装vpn或者使用shadowsocks开启http代理下载go插件内的各种依赖包</li>
+</ol>
+
+<h5 id="配置环境变量gopath-gobin">配置环境变量GOPATH GOBIN</h5>
+
+<pre><code class="language-bash">$ go env
+
+vim ~/.zshrc
+
+export GOPATH=/Users/xxxxx/golang-study
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+</code></pre>
+
+<p>当环境变量配置完后我们就可以在指定的目录下创建工作目录了.当前我使用的golang-study作为工作空间,在此目录内go约定使用三个目标文件夹分别是</p>
+
+<pre><code class="language-bash">├── bin  #存放编译后的可执行文件
+├── pkg  #存放包文件.a
+└── src  #源代码
+</code></pre>
+
+<h5 id="基础命令使用">基础命令使用</h5>
+
+<pre><code class="language-bash">build       compile packages and dependencies
+clean       remove object files and cached files
+doc         show documentation for package or symbol
+fmt         gofmt (reformat) package sources
+get         download and install packages and dependencies
+install     compile and install packages and dependencies
+run         compile and run Go program
+test        test packages
+version     print Go version
+</code></pre>
+
+<p>其中常用的命令是go run ,go build ,go get ,go install ,go test.</p>
     
 </div>
 

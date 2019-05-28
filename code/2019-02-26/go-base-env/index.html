@@ -6,7 +6,7 @@
         <meta name="author" content="Liseen">
         <meta name="description" content="abianji|阿比安吉">
         <meta name="keywords" content="blog,personal,responsive,search,font awesome,pages,posts,multilingual,highlight.js,syntax highlighting,premium,shortcuts">
-        <meta name="generator" content="Hugo 0.54.0" />
+        <meta name="generator" content="Hugo 0.55.6" />
         <title> Go Base Env | 阿比安吉</title>
         <meta name="description" content="Go Base Env - abianji|阿比安吉">
         <meta itemprop="name" content="Go Base Env">
@@ -127,9 +127,25 @@
 <li>编辑器vim &amp;&amp; vscode</li>
 </ul>
 
+<h5 id="压缩包安装">压缩包安装</h5>
+
+<pre><code class="language-bash">curl -O https://dl.google.com/go/go1.12.5.darwin-amd64.tar.gz
+
+# 选择指定系统下的版本解压缩到/user/local目录下
+tar -C /usr/local -xzf go1.12.5.darwin-amd64.tar.gz
+
+#配置环境变量
+export PATH=&quot;/usr/local/go/bin:$PATH&quot;
+
+# 确认安装
+go version
+
+# go version go1.12.5 darwin/amd64
+</code></pre>
+
 <h5 id="mac下可以直接使用brew-安装-go">mac下可以直接使用brew 安装 go</h5>
 
-<pre><code>$ brew install go
+<pre><code class="language-bash">$ brew install go
 $ go version
 go version go1.10.3 darwin/amd64
 </code></pre>
@@ -145,7 +161,7 @@ go version go1.10.3 darwin/amd64
 
 <h5 id="配置环境变量gopath-gobin">配置环境变量GOPATH GOBIN</h5>
 
-<pre><code>$ go env
+<pre><code class="language-bash">$ go env
 
 vim ~/.zshrc
 
@@ -156,14 +172,14 @@ export PATH=$PATH:$GOBIN
 
 <p>当环境变量配置完后我们就可以在指定的目录下创建工作目录了.当前我使用的golang-study作为工作空间,在此目录内go约定使用三个目标文件夹分别是</p>
 
-<pre><code>├── bin  #存放编译后的可执行文件
+<pre><code class="language-bash">├── bin  #存放编译后的可执行文件
 ├── pkg  #存放包文件.a
 └── src  #源代码
 </code></pre>
 
 <h5 id="基础命令使用">基础命令使用</h5>
 
-<pre><code>build       compile packages and dependencies
+<pre><code class="language-bash">build       compile packages and dependencies
 clean       remove object files and cached files
 doc         show documentation for package or symbol
 fmt         gofmt (reformat) package sources
