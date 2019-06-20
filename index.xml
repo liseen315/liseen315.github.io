@@ -4,10 +4,19 @@
     <link>https://abianji.com/</link>
     <description>Recent content on 阿比安吉</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 27 Feb 2019 16:11:26 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 20 Jun 2019 13:39:47 +0800</lastBuildDate>
     
         <atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>golang 的fmt</title>
+      <link>https://abianji.com/code/2019-06-20/go-print-fmt/</link>
+      <pubDate>Thu, 20 Jun 2019 13:39:47 +0800</pubDate>
+      
+      <guid>https://abianji.com/code/2019-06-20/go-print-fmt/</guid>
+      <description>&lt;p&gt;golang 的fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Postgresql Install Mac</title>

@@ -89,6 +89,144 @@
     
         <div class="article-wrapper u-cf">
             
+                <a class="bubble" href="/code/2019-06-20/go-print-fmt/">
+    <i class="fa fa-fw fa-code"></i>
+</a>
+
+<article class="default article">
+    
+
+    <div class="content">
+    <h3><a href="/code/2019-06-20/go-print-fmt/">golang 的fmt</a></h3>
+    <div class="meta">
+        
+            
+                <span class="date moment">2019-06-20</span>
+            
+        
+
+        
+
+        
+            <span class="categories">
+                
+                    <a href="/categories/code">Code</a>
+                
+            </span>
+        
+
+        
+            <span class="author"><a href="/author/liseen">liseen</a></span>
+        
+    </div>
+
+    
+        <p>golang 的fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf。</p>
+
+<pre><code># 定义示例类型和变量
+type Human struct {
+    Name string
+}
+
+var people = Human{Name:&quot;zhangsan&quot;}
+</code></pre>
+
+<p>普通占位符</p>
+
+<pre><code class="language-bash">占位符     说明                           举例                   输出
+%v      相应值的默认格式。            Printf(&quot;%v&quot;, people)   {zhangsan}，
+%+v     打印结构体时，会添加字段名      Printf(&quot;%+v&quot;, people)  {Name:zhangsan}
+%#v     相应值的Go语法表示            Printf(&quot;#v&quot;, people)   main.Human{Name:&quot;zhangsan&quot;}
+%T      相应值的类型的Go语法表示       Printf(&quot;%T&quot;, people)   main.Human
+%%      字面上的百分号，并非值的占位符  Printf(&quot;%%&quot;)            %
+</code></pre>
+
+<p>布尔占位符</p>
+
+<pre><code class="language-bash">占位符       说明                举例                     输出
+%t          true 或 false。     Printf(&quot;%t&quot;, true)      true
+</code></pre>
+
+<p>整数占位符</p>
+
+<pre><code class="language-bash">占位符     说明                                  举例                       输出
+%b      二进制表示                             Printf(&quot;%b&quot;, 5)             101
+%c      相应Unicode码点所表示的字符              Printf(&quot;%c&quot;, 0x4E2D)        中
+%d      十进制表示                             Printf(&quot;%d&quot;, 0x12)          18
+%o      八进制表示                             Printf(&quot;%d&quot;, 10)            12
+%q      单引号围绕的字符字面值，由Go语法安全地转义 Printf(&quot;%q&quot;, 0x4E2D)        '中'
+%x      十六进制表示，字母形式为小写 a-f         Printf(&quot;%x&quot;, 13)             d
+%X      十六进制表示，字母形式为大写 A-F         Printf(&quot;%x&quot;, 13)             D
+%U      Unicode格式：U+1234，等同于 &quot;U+%04X&quot;   Printf(&quot;%U&quot;, 0x4E2D)         U+4E2D
+</code></pre>
+
+<p>浮点数和复数的组成部分（实部和虚部）</p>
+
+<pre><code class="language-bash">占位符     说明                              举例            输出
+%b      无小数部分的，指数为二的幂的科学计数法，
+        与 strconv.FormatFloat 的 'b' 转换格式一致。例如 -123456p-78
+%e      科学计数法，例如 -1234.456e+78        Printf(&quot;%e&quot;, 10.2)     1.020000e+01
+%E      科学计数法，例如 -1234.456E+78        Printf(&quot;%e&quot;, 10.2)     1.020000E+01
+%f      有小数点而无指数，例如 123.456        Printf(&quot;%f&quot;, 10.2)     10.200000
+%g      根据情况选择 %e 或 %f 以产生更紧凑的（无末尾的0）输出 Printf(&quot;%g&quot;, 10.20)   10.2
+%G      根据情况选择 %E 或 %f 以产生更紧凑的（无末尾的0）输出 Printf(&quot;%G&quot;, 10.20+2i) (10.2+2i)
+</code></pre>
+
+<p>字符串与字节切片</p>
+
+<pre><code class="language-bash">占位符     说明                              举例                           输出
+%s      输出字符串表示（string类型或[]byte)   Printf(&quot;%s&quot;, []byte(&quot;Go语言&quot;))  Go语言
+%q      双引号围绕的字符串，由Go语法安全地转义  Printf(&quot;%q&quot;, &quot;Go语言&quot;)         &quot;Go语言&quot;
+%x      十六进制，小写字母，每字节两个字符      Printf(&quot;%x&quot;, &quot;golang&quot;)         676f6c616e67
+%X      十六进制，大写字母，每字节两个字符      Printf(&quot;%X&quot;, &quot;golang&quot;)         676F6C616E67
+</code></pre>
+
+<p>指针</p>
+
+<pre><code class="language-bash">占位符      说明                             举例          输出
++      总打印数值的正负号；对于%q（%+q）保证只输出ASCII编码的字符。 
+                                           Printf(&quot;%+q&quot;, &quot;中文&quot;)  &quot;\u4e2d\u6587&quot;
+-      在右侧而非左侧填充空格（左对齐该区域）
+#      备用格式：为八进制添加前导 0（%#o）      Printf(&quot;%#U&quot;, '中')      U+4E2D
+       为十六进制添加前导 0x（%#x）或 0X（%#X），为 %p（%#p）去掉前导 0x；
+       如果可能的话，%q（%#q）会打印原始 （即反引号围绕的）字符串；
+       如果是可打印字符，%U（%#U）会写出该字符的
+       Unicode 编码形式（如字符 x 会被打印成 U+0078 'x'）。
+' '    (空格)为数值中省略的正负号留出空白（% d）；
+       以十六进制（% x, % X）打印字符串或切片时，在字节之间用空格隔开
+0      填充前导的0而非空格；对于数字，这会将填充移到正负号之后
+</code></pre>
+
+<p>转载地址:
+<a href="https://www.cnblogs.com/qing123/articles/4353353.html?utm_campaign=studygolang.com&amp;utm_medium=studygolang.com&amp;utm_source=studygolang.com">qing123 博客园</a></p>
+    
+</div>
+
+    
+<div class="footer">
+
+
+    
+        <div class="tags">
+            <i class="fa fa-tags"></i>
+            <div class="links">
+                
+                    <a href="/tags/golang">golang</a>
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+</article>
+
+            
+        </div>
+    
+        <div class="article-wrapper u-cf">
+            
                 <a class="bubble" href="/code/2019-02-26/go-base-env/">
     <i class="fa fa-fw fa-code"></i>
 </a>
@@ -123,77 +261,9 @@
     
         <p>Go 基础环境安装,开发工具,插件配置,以及基础命令使用.</p>
 
-<h4 id="go-开发环境的安装以及配置">Go 开发环境的安装以及配置</h4>
-
-<ul>
-<li>操作系统 macos</li>
-<li>编辑器vim &amp;&amp; vscode</li>
-</ul>
-
-<h5 id="压缩包安装">压缩包安装</h5>
-
-<pre><code class="language-bash">curl -O https://dl.google.com/go/go1.12.5.darwin-amd64.tar.gz
-
-# 选择指定系统下的版本解压缩到/user/local目录下
-tar -C /usr/local -xzf go1.12.5.darwin-amd64.tar.gz
-
-#配置环境变量
-export PATH=&quot;/usr/local/go/bin:$PATH&quot;
-
-# 确认安装
-go version
-
-# go version go1.12.5 darwin/amd64
-</code></pre>
-
-<h5 id="mac下可以直接使用brew-安装-go">mac下可以直接使用brew 安装 go</h5>
-
-<pre><code class="language-bash">$ brew install go
-$ go version
-go version go1.10.3 darwin/amd64
-</code></pre>
-
-<h5 id="vscode下载">vscode下载</h5>
-
-<p><em>vscode</em>: <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p>
-
-<ol>
-<li>插件选择安装go</li>
-<li>安装vpn或者使用shadowsocks开启http代理下载go插件内的各种依赖包</li>
-</ol>
-
-<h5 id="配置环境变量gopath-gobin">配置环境变量GOPATH GOBIN</h5>
-
-<pre><code class="language-bash">$ go env
-
-vim ~/.zshrc
-
-export GOPATH=/Users/xxxxx/golang-study
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
-</code></pre>
-
-<p>当环境变量配置完后我们就可以在指定的目录下创建工作目录了.当前我使用的golang-study作为工作空间,在此目录内go约定使用三个目标文件夹分别是</p>
-
-<pre><code class="language-bash">├── bin  #存放编译后的可执行文件
-├── pkg  #存放包文件.a
-└── src  #源代码
-</code></pre>
-
-<h5 id="基础命令使用">基础命令使用</h5>
-
-<pre><code class="language-bash">build       compile packages and dependencies
-clean       remove object files and cached files
-doc         show documentation for package or symbol
-fmt         gofmt (reformat) package sources
-get         download and install packages and dependencies
-install     compile and install packages and dependencies
-run         compile and run Go program
-test        test packages
-version     print Go version
-</code></pre>
-
-<p>其中常用的命令是go run ,go build ,go get ,go install ,go test.</p>
+        
+            <a href="/code/2019-02-26/go-base-env/" class="more">Continue reading</a>
+        
     
 </div>
 
@@ -307,6 +377,10 @@ version     print Go version
                 <ul>
                 
                     <li>
+                        <a href="/code/2019-06-20/go-print-fmt/">golang 的fmt</a>
+                    </li>
+                
+                    <li>
                         <a href="/link/2019-02-27/postgresql-install-mac/">Postgresql Install Mac</a>
                     </li>
                 
@@ -326,10 +400,6 @@ version     print Go version
                         <a href="/code/2019-02-26/go-base-env/">Go Base Env</a>
                     </li>
                 
-                    <li>
-                        <a href="/code/2019-02-25/go-base-intro/">Go Base Intro</a>
-                    </li>
-                
                 </ul>
         </div>
         
@@ -340,7 +410,7 @@ version     print Go version
                 <ul>
                 
                     <li>
-                        <a href="/categories/code">Code (4)</a>
+                        <a href="/categories/code">Code (5)</a>
                     </li>
                 
                     <li>

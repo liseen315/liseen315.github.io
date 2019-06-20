@@ -5,10 +5,19 @@
     <link>https://abianji.com/categories/</link>
     <description>Recent content in Categories on 阿比安吉</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 27 Feb 2019 16:11:26 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 20 Jun 2019 13:39:47 +0800</lastBuildDate>
     
 	<atom:link href="https://abianji.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Code</title>
+      <link>https://abianji.com/categories/code/</link>
+      <pubDate>Thu, 20 Jun 2019 13:39:47 +0800</pubDate>
+      
+      <guid>https://abianji.com/categories/code/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>postgreSQL</title>
@@ -16,15 +25,6 @@
       <pubDate>Wed, 27 Feb 2019 16:11:26 +0800</pubDate>
       
       <guid>https://abianji.com/categories/postgresql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Code</title>
-      <link>https://abianji.com/categories/code/</link>
-      <pubDate>Wed, 27 Feb 2019 11:44:18 +0800</pubDate>
-      
-      <guid>https://abianji.com/categories/code/</guid>
       <description></description>
     </item>
     

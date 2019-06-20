@@ -7,14 +7,14 @@
         <meta name="description" content="abianji|阿比安吉">
         <meta name="keywords" content="blog,personal,responsive,search,font awesome,pages,posts,multilingual,highlight.js,syntax highlighting,premium,shortcuts">
         <meta name="generator" content="Hugo 0.55.6" />
-        <title> Go Base Intro | 阿比安吉</title>
-        <meta name="description" content="Go Base Intro - abianji|阿比安吉">
-        <meta itemprop="name" content="Go Base Intro">
-        <meta itemprop="description" content="Go Base Intro - abianji|阿比安吉">
-        <meta property="og:title" content="Go Base Intro">
-        <meta property="og:description" content="Go Base Intro - abianji|阿比安吉">
+        <title> golang 的fmt | 阿比安吉</title>
+        <meta name="description" content="golang 的fmt - abianji|阿比安吉">
+        <meta itemprop="name" content="golang 的fmt">
+        <meta itemprop="description" content="golang 的fmt - abianji|阿比安吉">
+        <meta property="og:title" content="golang 的fmt">
+        <meta property="og:description" content="golang 的fmt - abianji|阿比安吉">
         <meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?size=200">
-        <meta property="og:url" content="https://abianji.com/code/2019-02-25/go-base-intro/">
+        <meta property="og:url" content="https://abianji.com/code/2019-06-20/go-print-fmt/">
         <meta property="og:site_name" content="阿比安吉">
         <meta property="og:type" content="article">
         <link rel="icon" type="image/png" href="https://abianji.com/favicon-32x32.png" sizes="32x32">
@@ -86,7 +86,7 @@
      
     <div class="article-wrapper u-cf single">
         
-            <a class="bubble" href="/code/2019-02-25/go-base-intro/">
+            <a class="bubble" href="/code/2019-06-20/go-print-fmt/">
     <i class="fa fa-fw fa-code"></i>
 </a>
 
@@ -94,11 +94,11 @@
     
 
     <div class="content">
-    <h3><a href="/code/2019-02-25/go-base-intro/">Go Base Intro</a></h3>
+    <h3><a href="/code/2019-06-20/go-print-fmt/">golang 的fmt</a></h3>
     <div class="meta">
         
             
-                <span class="date moment">2019-02-25</span>
+                <span class="date moment">2019-06-20</span>
             
         
 
@@ -118,54 +118,84 @@
     </div>
 
     
-        <p>Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言</p>
+        <p>golang 的fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf。</p>
 
-<h3 id="介绍">介绍</h3>
-
-<p>Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言。为了方便搜索和识别，有时会将其称为Golang。</p>
-
-<p>Go语言于2009年11月正式宣布推出，成为开放源代码项目，并在Linux及Mac OS X平台上进行了实现，后来追加了Windows系统下的实现。</p>
-
-<p>2012年，Go语言的创造者们发布了它的1.0版本。Go语言的创造者们包括Unix操作系统和B语言（C语言的前身）的创造者、UTF-8编码的发明者Ken Thompson，Unix项目的参与者、UTF-8编码的联合创始人和Limbo编程语言（Go语言的前身）的创造者Rob Pike，以及著名的Javascript引擎V8的创造者Robert Griesemer。</p>
-
-<h3 id="用go解决现代编程难题">用Go解决现代编程难题</h3>
-
-<p>Go 在开发效率与性能之间做出了应有的权衡,Go的编译器速度非常快,类型系统简单且高效,Go拥有指针,但同时自带垃圾回收,不需要用户自己去管理内存。如下是Go的一
-些关键特性</p>
-
-<h4 id="开发速度">开发速度</h4>
-
-<p>编译大型的C或者C++项目及其的耗时,但是Go使用了更加智能的编译器,并简化了解决依赖库的算法,最终提供了更快的编译速度。在现代硬件上Go编译整个项目大概只消耗20秒</p>
-
-<h4 id="并发">并发</h4>
-
-<p>Go天生支持并发.goroutine,通道数据结构.</p>
-
-<h4 id="类型系统">类型系统</h4>
-
-<p>Go 语言提供了灵活的、无继承的类型系统，无需降低运行性能就能最大程度上复用代码。</p>
-
-<ul>
-<li>类型简单</li>
-<li>Go 接口对一组行为建模</li>
-</ul>
-
-<h4 id="内存管理">内存管理</h4>
-
-<p>不当的内存管理会导致程序崩溃或者内存泄漏，甚至让整个操作系统崩溃。Go 语言拥有现 代化的垃圾回收机制，能帮你解决这个难题。在其他系统语言(如 C 或者 C++)中，使用内存 前要先分配这段内存，而且使用完毕后要将其释放掉。哪怕只做错了一件事，都可能导致程序崩 溃或者内存泄漏。可惜，追踪内存是否还被使用本身就是十分艰难的事情，而要想支持多线程和 高并发，更是让这件事难上加难。虽然 Go 语言的垃圾回收会有一些额外的开销，但是编程时， 能显著降低开发难度。Go 语言把无趣的内存管理交给专业的编译器去做，而让程序员专注于更 有趣的事情</p>
-
-<h4 id="你好go">你好Go</h4>
-
-<pre><code class="language-sh">package main
-
-import &quot;fmt&quot;
-
-func main(){
-
-    fmt.Printf(&quot;Hello World!你好世界!&quot;);
-
+<pre><code># 定义示例类型和变量
+type Human struct {
+    Name string
 }
+
+var people = Human{Name:&quot;zhangsan&quot;}
 </code></pre>
+
+<p>普通占位符</p>
+
+<pre><code class="language-bash">占位符     说明                           举例                   输出
+%v      相应值的默认格式。            Printf(&quot;%v&quot;, people)   {zhangsan}，
+%+v     打印结构体时，会添加字段名      Printf(&quot;%+v&quot;, people)  {Name:zhangsan}
+%#v     相应值的Go语法表示            Printf(&quot;#v&quot;, people)   main.Human{Name:&quot;zhangsan&quot;}
+%T      相应值的类型的Go语法表示       Printf(&quot;%T&quot;, people)   main.Human
+%%      字面上的百分号，并非值的占位符  Printf(&quot;%%&quot;)            %
+</code></pre>
+
+<p>布尔占位符</p>
+
+<pre><code class="language-bash">占位符       说明                举例                     输出
+%t          true 或 false。     Printf(&quot;%t&quot;, true)      true
+</code></pre>
+
+<p>整数占位符</p>
+
+<pre><code class="language-bash">占位符     说明                                  举例                       输出
+%b      二进制表示                             Printf(&quot;%b&quot;, 5)             101
+%c      相应Unicode码点所表示的字符              Printf(&quot;%c&quot;, 0x4E2D)        中
+%d      十进制表示                             Printf(&quot;%d&quot;, 0x12)          18
+%o      八进制表示                             Printf(&quot;%d&quot;, 10)            12
+%q      单引号围绕的字符字面值，由Go语法安全地转义 Printf(&quot;%q&quot;, 0x4E2D)        '中'
+%x      十六进制表示，字母形式为小写 a-f         Printf(&quot;%x&quot;, 13)             d
+%X      十六进制表示，字母形式为大写 A-F         Printf(&quot;%x&quot;, 13)             D
+%U      Unicode格式：U+1234，等同于 &quot;U+%04X&quot;   Printf(&quot;%U&quot;, 0x4E2D)         U+4E2D
+</code></pre>
+
+<p>浮点数和复数的组成部分（实部和虚部）</p>
+
+<pre><code class="language-bash">占位符     说明                              举例            输出
+%b      无小数部分的，指数为二的幂的科学计数法，
+        与 strconv.FormatFloat 的 'b' 转换格式一致。例如 -123456p-78
+%e      科学计数法，例如 -1234.456e+78        Printf(&quot;%e&quot;, 10.2)     1.020000e+01
+%E      科学计数法，例如 -1234.456E+78        Printf(&quot;%e&quot;, 10.2)     1.020000E+01
+%f      有小数点而无指数，例如 123.456        Printf(&quot;%f&quot;, 10.2)     10.200000
+%g      根据情况选择 %e 或 %f 以产生更紧凑的（无末尾的0）输出 Printf(&quot;%g&quot;, 10.20)   10.2
+%G      根据情况选择 %E 或 %f 以产生更紧凑的（无末尾的0）输出 Printf(&quot;%G&quot;, 10.20+2i) (10.2+2i)
+</code></pre>
+
+<p>字符串与字节切片</p>
+
+<pre><code class="language-bash">占位符     说明                              举例                           输出
+%s      输出字符串表示（string类型或[]byte)   Printf(&quot;%s&quot;, []byte(&quot;Go语言&quot;))  Go语言
+%q      双引号围绕的字符串，由Go语法安全地转义  Printf(&quot;%q&quot;, &quot;Go语言&quot;)         &quot;Go语言&quot;
+%x      十六进制，小写字母，每字节两个字符      Printf(&quot;%x&quot;, &quot;golang&quot;)         676f6c616e67
+%X      十六进制，大写字母，每字节两个字符      Printf(&quot;%X&quot;, &quot;golang&quot;)         676F6C616E67
+</code></pre>
+
+<p>指针</p>
+
+<pre><code class="language-bash">占位符      说明                             举例          输出
++      总打印数值的正负号；对于%q（%+q）保证只输出ASCII编码的字符。 
+                                           Printf(&quot;%+q&quot;, &quot;中文&quot;)  &quot;\u4e2d\u6587&quot;
+-      在右侧而非左侧填充空格（左对齐该区域）
+#      备用格式：为八进制添加前导 0（%#o）      Printf(&quot;%#U&quot;, '中')      U+4E2D
+       为十六进制添加前导 0x（%#x）或 0X（%#X），为 %p（%#p）去掉前导 0x；
+       如果可能的话，%q（%#q）会打印原始 （即反引号围绕的）字符串；
+       如果是可打印字符，%U（%#U）会写出该字符的
+       Unicode 编码形式（如字符 x 会被打印成 U+0078 'x'）。
+' '    (空格)为数值中省略的正负号留出空白（% d）；
+       以十六进制（% x, % X）打印字符串或切片时，在字节之间用空格隔开
+0      填充前导的0而非空格；对于数字，这会将填充移到正负号之后
+</code></pre>
+
+<p>转载地址:
+<a href="https://www.cnblogs.com/qing123/articles/4353353.html?utm_campaign=studygolang.com&amp;utm_medium=studygolang.com&amp;utm_source=studygolang.com">qing123 博客园</a></p>
     
 </div>
 
