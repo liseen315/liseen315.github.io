@@ -5,7 +5,7 @@
     <link>https://abianji.com/page/</link>
     <description>Recent content in Pages on 阿比安吉</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 26 Feb 2019 09:28:05 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 01 Aug 2019 11:38:03 +0800</lastBuildDate>
     
 	<atom:link href="https://abianji.com/page/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,10 +13,19 @@
     <item>
       <title>About</title>
       <link>https://abianji.com/page/about/</link>
-      <pubDate>Tue, 26 Feb 2019 09:28:05 +0800</pubDate>
+      <pubDate>Thu, 01 Aug 2019 11:38:03 +0800</pubDate>
       
       <guid>https://abianji.com/page/about/</guid>
       <description>我想变成一个向日葵 我开心时 向着太阳 我不开心的时候 嗑瓜子</description>
+    </item>
+    
+    <item>
+      <title>Gitbook</title>
+      <link>https://abianji.com/page/gitbook/</link>
+      <pubDate>Tue, 26 Feb 2019 09:28:05 +0800</pubDate>
+      
+      <guid>https://abianji.com/page/gitbook/</guid>
+      <description></description>
     </item>
     
   </channel>

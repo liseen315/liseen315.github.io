@@ -3,6 +3,23 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://abianji.com/page/about/</loc>
+    <lastmod>2019-08-01T11:38:03+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/page/</loc>
+    <lastmod>2019-08-01T11:38:03+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/</loc>
+    <lastmod>2019-08-01T11:38:03+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://abianji.com/author/</loc>
     <lastmod>2019-06-20T13:39:47+08:00</lastmod>
     <priority>0</priority>
@@ -27,6 +44,12 @@
   </url>
   
   <url>
+    <loc>https://abianji.com/author/liseen/</loc>
+    <lastmod>2019-06-20T13:39:47+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://abianji.com/tags/</loc>
     <lastmod>2019-06-20T13:39:47+08:00</lastmod>
     <priority>0</priority>
@@ -41,18 +64,6 @@
   <url>
     <loc>https://abianji.com/code/2019-06-20/go-print-fmt/</loc>
     <lastmod>2019-06-20T13:39:47+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://abianji.com/author/liseen/</loc>
-    <lastmod>2019-06-20T13:39:47+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://abianji.com/</loc>
-    <lastmod>2019-06-20T13:39:47+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -135,14 +146,8 @@
   </url>
   
   <url>
-    <loc>https://abianji.com/page/about/</loc>
+    <loc>https://abianji.com/page/gitbook/</loc>
     <lastmod>2019-02-26T09:28:05+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://abianji.com/page/</loc>
-    <lastmod>2019-02-26T09:28:05+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
