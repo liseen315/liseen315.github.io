@@ -3,20 +3,25 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://abianji.com/page/about/</loc>
-    <lastmod>2019-08-01T11:38:03+08:00</lastmod>
+    <loc>https://abianji.com/page/gitbook/</loc>
+    <lastmod>2019-08-02T17:58:12+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://abianji.com/page/</loc>
-    <lastmod>2019-08-01T11:38:03+08:00</lastmod>
+    <lastmod>2019-08-02T17:58:12+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://abianji.com/</loc>
-    <lastmod>2019-08-01T11:38:03+08:00</lastmod>
+    <lastmod>2019-08-02T17:58:12+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://abianji.com/page/about/</loc>
+    <lastmod>2019-08-01T11:38:03+08:00</lastmod>
   </url>
   
   <url>
