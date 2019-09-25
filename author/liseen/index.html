@@ -7,12 +7,12 @@
         <meta name="description" content="abianji|阿比安吉">
         <meta name="keywords" content="blog,personal,responsive,search,font awesome,pages,posts,multilingual,highlight.js,syntax highlighting,premium,shortcuts">
         <meta name="generator" content="Hugo 0.56.1" />
-        <title> Liseen | 阿比安吉</title>
-        <meta name="description" content="Liseen - abianji|阿比安吉">
-        <meta itemprop="name" content="Liseen">
-        <meta itemprop="description" content="Liseen - abianji|阿比安吉">
-        <meta property="og:title" content="Liseen">
-        <meta property="og:description" content="Liseen - abianji|阿比安吉">
+        <title> liseen | 阿比安吉</title>
+        <meta name="description" content="liseen - abianji|阿比安吉">
+        <meta itemprop="name" content="liseen">
+        <meta itemprop="description" content="liseen - abianji|阿比安吉">
+        <meta property="og:title" content="liseen">
+        <meta property="og:description" content="liseen - abianji|阿比安吉">
         <meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?size=200">
         <meta property="og:url" content="https://abianji.com/author/liseen/">
         <meta property="og:site_name" content="阿比安吉"><meta property="og:type" content="website">
@@ -93,6 +93,272 @@
     
         <div class="article-wrapper u-cf">
             
+                <a class="bubble" href="https://abianji.com/code/2019-09-25/laravel-study-facade/">
+    <i class="fa fa-fw fa-code"></i>
+</a>
+
+<article class="default article">
+    
+
+    <div class="content">
+    <h3><a href="https://abianji.com/code/2019-09-25/laravel-study-facade/">Laravel学习-Facade</a></h3>
+    <div class="meta">
+        
+            
+                <span class="date moment">2019-09-25</span>
+            
+        
+
+        
+
+        
+            <span class="categories">
+                
+                    <a href="/categories/code">Code</a>
+                
+            </span>
+        
+
+        
+            <span class="author"><a href="/author/liseen">liseen</a></span>
+        
+    </div>
+
+    
+        <p>在web服务框架学习首要面对的一个问题是路由,Laravel的路由是怎么实现的呢?先总结一下,Laravel暴露给我们的路由其实是一个别名后的Facade,那我们就先看看什么是Facade吧</p>
+
+<p>在<code>public/index.php</code>中是Laravel的启动目录所以我们先看一下index.php文件内容</p>
+
+<pre><code class="language-php">&lt;?php
+
+// 引入引导
+require __DIR__.'/../vendor/autoload.php';
+
+// 应用程序核心
+$app = require_once __DIR__.'/../bootstrap/app.php';
+
+</code></pre>
+
+<p>我们的web路由在routes/web.php内定义的</p>
+
+<pre><code class="language-php">&lt;?php
+// get请求路由
+Route::get(
+    '/',
+    function () {
+        return 'Index';
+    }
+);
+</code></pre>
+
+<p>我们如果安装了ide_help后会发现这个Route实际是一个<code>Facade</code>.路径为<code>\Illuminate\Support\Facades\Route</code>然后我们看一下它的源码</p>
+
+<pre><code class="language-php">class Route extends Facade
+{
+    protected static function getFacadeAccessor()
+    {
+        return 'router';
+    }
+}
+</code></pre>
+
+<p>可以看到这是一个继承自<code>Facade</code>的子类,其中也只有一个<code>getFacadeAccessor</code>方法返回了一个字符串<code>router</code>那么<code>Route::get()</code>是怎么来的呢？我们继续看下Facade发现也没有所谓的<code>get()</code>方法,但是我们却在类的最下面发现了一个php的魔术方法<code>__callStatic</code></p>
+
+<pre><code class="language-php">
+public static function __callStatic($method, $args)
+{
+    $instance = static::getFacadeRoot();
+
+    if (! $instance) {
+        throw new RuntimeException('A facade root has not been set.');
+    }
+
+    return $instance-&gt;$method(...$args);
+}
+</code></pre>
+
+<p>查阅资料后发现这个魔术方法是指当调用类的不存在静态方法时会触发这个方法的调用,好那我个人理解就是<code>get()</code>这个方法实际上在这里被调用了.然后我们继续看下<code>getFacadeRoot</code>方法</p>
+
+<pre><code class="language-php">public static function getFacadeRoot()
+{
+    return static::resolveFacadeInstance(static::getFacadeAccessor());
+}
+</code></pre>
+
+<p>这个方法又调用了<code>resolveFacadeInstance</code>这个方法内接收了<code>getFacadeAccessor</code>函数的返回.回忆一下<code>getFacadeAccessor</code>是不是在刚才<code>Route</code>子类内覆盖过并返回一个字符串<code>route</code>,好那么继续看<code>resolveFacadeInstance</code>实现</p>
+
+<pre><code class="language-php">protected static function resolveFacadeInstance($name)
+{
+    if (is_object($name)) {
+        return $name;
+    }
+    // 这里做了一层缓存方便快速调用
+    if (isset(static::$resolvedInstance[$name])) {
+        return static::$resolvedInstance[$name];
+    }
+    // 直接拿字符串去$app上实例化了
+    if (static::$app) {
+        return static::$resolvedInstance[$name] = static::$app[$name];
+    }
+}
+</code></pre>
+
+<p>看到这里可能会有些懵逼.为啥<code>$app[$name]</code>就返回了实例了.<code>$app</code>又是啥.实际上<code>$app</code>来自于<code>Facade</code>类的静态方法<code>setFacadeApplication</code></p>
+
+<pre><code class="language-php">public static function setFacadeApplication($app)
+{
+    static::$app = $app;
+}
+</code></pre>
+
+<p><a id="registerFacades">那么这个方法什么时候被调用的？我们查找引用发现是在<code>Illuminate/Foundation/Bootstrap/RegisterFacades.php</code>内被调用的</A></p>
+
+<pre><code class="language-php">class RegisterFacades
+{
+    public function bootstrap(Application $app)
+    {
+        Facade::clearResolvedInstances();
+        // 看这里...
+        Facade::setFacadeApplication($app);
+        AliasLoader::getInstance(array_merge(
+            $app-&gt;make('config')-&gt;get('app.aliases', []),
+            $app-&gt;make(PackageManifest::class)-&gt;aliases()
+        ))-&gt;register();
+    }
+}
+</code></pre>
+
+<p>好像越来越复杂了.这个bootstrap又是啥时候被调用的.好吧坚持住.我本人也尝试用查找引用去查发现没找到.然后我又回过头去看初始化的代码发现在<code>bootstrap/app.php</code>代码内除了实例化<code>Application</code>实际还创建了几个注册,其中重要的是<code>App\Http\Kernel</code></p>
+
+<pre><code class="language-php">$app = new Illuminate\Foundation\Application(
+    $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
+);
+
+// 注册Kernel到Container
+$app-&gt;singleton(
+    Illuminate\Contracts\Http\Kernel::class,
+    App\Http\Kernel::class
+);
+</code></pre>
+
+<p>然后我们看下<code>Kernel</code>的实现,发现里面定义了一堆中间件数组,我们先不管这些,继续看它的父类<code>HttpKernel</code>,wow..代码真是多..其实当前有用的就是<code>handle</code>方法,我们先看下实现然后在去看是在哪调用的<code>handle</code></p>
+
+<pre><code class="language-php">public function handle($request)
+{
+    try {
+        $request-&gt;enableHttpMethodParameterOverride();
+        // 主要看这个方法接收了$request参数
+        $response = $this-&gt;sendRequestThroughRouter($request);
+    } catch (Exception $e) {
+        $this-&gt;reportException($e);
+
+        $response = $this-&gt;renderException($request, $e);
+    } catch (Throwable $e) {
+        $this-&gt;reportException($e = new FatalThrowableError($e));
+
+        $response = $this-&gt;renderException($request, $e);
+    }
+
+    $this-&gt;app['events']-&gt;dispatch(
+        new Events\RequestHandled($request, $response)
+    );
+
+    return $response;
+}
+
+protected function sendRequestThroughRouter($request)
+{
+    $this-&gt;app-&gt;instance('request', $request);
+
+    Facade::clearResolvedInstance('request');
+    // 看这个引导方法
+    $this-&gt;bootstrap();
+
+    return (new Pipeline($this-&gt;app))
+                -&gt;send($request)
+                -&gt;through($this-&gt;app-&gt;shouldSkipMiddleware() ? [] : $this-&gt;middleware)
+                -&gt;then($this-&gt;dispatchToRouter());
+}
+
+public function bootstrap()
+{
+    // 就是这里..先调用了bootstrappers
+    if (! $this-&gt;app-&gt;hasBeenBootstrapped()) {
+        $this-&gt;app-&gt;bootstrapWith($this-&gt;bootstrappers());
+    }
+}
+// 这个方法都返回了些啥？
+protected function bootstrappers()
+{
+    return $this-&gt;bootstrappers;
+}
+// 发现什么了么?RegisterFacades对。就是它
+protected $bootstrappers = [
+    \Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables::class,
+    \Illuminate\Foundation\Bootstrap\LoadConfiguration::class,
+    \Illuminate\Foundation\Bootstrap\HandleExceptions::class,
+    \Illuminate\Foundation\Bootstrap\RegisterFacades::class,
+    \Illuminate\Foundation\Bootstrap\RegisterProviders::class,
+    \Illuminate\Foundation\Bootstrap\BootProviders::class,
+];
+</code></pre>
+
+<p>看了三个方法终于找到了<code>RegisterFacades</code>在哪出现了.然后实际上这个引导数组又作为参数传到了<code>Illuminate/Foundation/Application.php</code>内的<code>bootstrapWith</code>方法内,还是看源码吧.</p>
+
+<pre><code class="language-php">public function bootstrapWith(array $bootstrappers)
+{
+    $this-&gt;hasBeenBootstrapped = true;
+
+    foreach ($bootstrappers as $bootstrapper) {
+        $this['events']-&gt;dispatch('bootstrapping: '.$bootstrapper, [$this]);
+        // 循环刚才的bootstrap类数组调用了make方法然后调用了bootstrap()
+        $this-&gt;make($bootstrapper)-&gt;bootstrap($this);
+
+        $this['events']-&gt;dispatch('bootstrapped: '.$bootstrapper, [$this]);
+    }
+}
+</code></pre>
+
+<p>实际上<code>make</code>方法内处理也相对复杂,不过针对当前来说就是调用了php的反射<code>ReflectionClass</code>来实例化了类,紧接这调用了<code>RegisterFacades</code>内的<code>bootstrap</code>方法.我们可以回头去看下<a href="#registerFacades"><u>这个类的实现</u></a>.好吧,我们终于知道了<code>$app</code>是怎么到<code>Facade</code>内的了。刚才说的<code>handler</code>方法实际是在<code>public/index.php</code>内就被调用了,可以看下代码</p>
+
+<pre><code class="language-php">$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);
+// 看这里...
+$response = $kernel-&gt;handle(
+    $request = Illuminate\Http\Request::capture()
+);
+</code></pre>
+
+<p>但是这一切貌似都断层了,说了一大堆<code>Route::get()</code>呢?emmm..看下一篇笔记吧.</p>
+    
+</div>
+
+    
+<div class="footer">
+
+
+    
+        <div class="tags">
+            <i class="fa fa-tags"></i>
+            <div class="links">
+                
+                    <a href="/tags/laravel">laravel</a>
+                
+                    <a href="/tags/php">php</a>
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+</article>
+
+            
+        </div>
+    
+        <div class="article-wrapper u-cf">
+            
                 <a class="bubble" href="https://abianji.com/code/2019-06-20/go-print-fmt/">
     <i class="fa fa-fw fa-code"></i>
 </a>
@@ -127,159 +393,9 @@
     
         <p>golang 的fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf。</p>
 
-<pre><code class="language-bash"># 定义示例类型和变量
-type Human struct {
-    Name string
-}
-
-var people = Human{Name:&quot;zhangsan&quot;}
-</code></pre>
-
-<p>普通占位符</p>
-
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>举例</th>
-<th>输出</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>%v</td>
-<td>相应值的默认格式。</td>
-<td>Printf(&ldquo;%v&rdquo;, people)</td>
-<td>{zhangsan}</td>
-</tr>
-
-<tr>
-<td>%+v</td>
-<td>打印结构体时，会添加字段名</td>
-<td>Printf(&ldquo;%+v&rdquo;, people)</td>
-<td>{Name:zhangsan}</td>
-</tr>
-
-<tr>
-<td>%#v</td>
-<td>相应值的Go语法表示</td>
-<td>Printf(&ldquo;#v&rdquo;, people)</td>
-<td>main.Human{Name:&ldquo;zhangsan&rdquo;}</td>
-</tr>
-
-<tr>
-<td>%T</td>
-<td>相应值的类型的Go语法表示</td>
-<td>Printf(&ldquo;%T&rdquo;, people)</td>
-<td>main.Human</td>
-</tr>
-
-<tr>
-<td>%%</td>
-<td>字面上的百分号，并非值的占位符</td>
-<td>Printf(&ldquo;%%&rdquo;)</td>
-<td>%</td>
-</tr>
-</tbody>
-</table>
-
-<p>布尔占位符</p>
-
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>举例</th>
-<th>输出</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>%t</td>
-<td>true 或 false</td>
-<td>Printf(&ldquo;%t&rdquo;, true)</td>
-<td>true</td>
-</tr>
-</tbody>
-</table>
-
-<p>整数占位符</p>
-
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>举例</th>
-<th>输出</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>%b</td>
-<td>二进制表示</td>
-<td>Printf(&ldquo;%b&rdquo;, 5)</td>
-<td>101</td>
-</tr>
-
-<tr>
-<td>%c</td>
-<td>相应Unicode码点所表示的字符</td>
-<td>Printf(&ldquo;%c&rdquo;, 0x4E2D)</td>
-<td>中</td>
-</tr>
-
-<tr>
-<td>%d</td>
-<td>十进制表示</td>
-<td>Printf(&ldquo;%d&rdquo;, 0x12)</td>
-<td>18</td>
-</tr>
-
-<tr>
-<td>%o</td>
-<td>八进制表示</td>
-<td>Printf(&ldquo;%d&rdquo;, 10</td>
-<td>12</td>
-</tr>
-
-<tr>
-<td>%q</td>
-<td>单引号围绕的字符字面值，由Go语法安全地转义</td>
-<td>Printf(&ldquo;%q&rdquo;, 0x4E2D)</td>
-<td>&lsquo;中&rsquo;</td>
-</tr>
-
-<tr>
-<td>%x</td>
-<td>十六进制表示，字母形式为小写 a-f</td>
-<td>Printf(&ldquo;%x&rdquo;, 13)</td>
-<td>d</td>
-</tr>
-
-<tr>
-<td>%X</td>
-<td>十六进制表示，字母形式为大写 A-F</td>
-<td>Printf(&ldquo;%x&rdquo;, 13)</td>
-<td>D</td>
-</tr>
-
-<tr>
-<td>%U</td>
-<td>Unicode格式：U+1234，等同于 &ldquo;U+%04X&rdquo;</td>
-<td>Printf(&ldquo;%U&rdquo;, 0x4E2D)</td>
-<td>U+4E2D</td>
-</tr>
-</tbody>
-</table>
-
-<p>转载地址:
-<a href="https://golang.org/pkg/fmt/">golang官方fmt说明</a></p>
+        
+            <a href="https://abianji.com/code/2019-06-20/go-print-fmt/" class="more">Continue reading</a>
+        
     
 </div>
 
@@ -664,6 +780,10 @@ var people = Human{Name:&quot;zhangsan&quot;}
                 <ul>
                 
                     <li>
+                        <a href="https://abianji.com/code/2019-09-25/laravel-study-facade/">Laravel学习-Facade</a>
+                    </li>
+                
+                    <li>
                         <a href="https://abianji.com/code/2019-06-20/go-print-fmt/">golang 的fmt</a>
                     </li>
                 
@@ -679,10 +799,6 @@ var people = Human{Name:&quot;zhangsan&quot;}
                         <a href="https://abianji.com/code/2019-02-26/py-study-01/">Pipenv:新一代Python项目环境与依赖管理工具</a>
                     </li>
                 
-                    <li>
-                        <a href="https://abianji.com/audio/2019-02-26/not-as-good/">妓和不如</a>
-                    </li>
-                
                 </ul>
         </div>
         
@@ -693,7 +809,7 @@ var people = Human{Name:&quot;zhangsan&quot;}
                 <ul>
                 
                     <li>
-                        <a href="/categories/code">Code (5)</a>
+                        <a href="/categories/code">Code (6)</a>
                     </li>
                 
                     <li>

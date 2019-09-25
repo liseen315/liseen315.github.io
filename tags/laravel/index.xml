@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>laravel on 阿比安吉</title>
+    <link>https://abianji.com/tags/laravel/</link>
+    <description>Recent content in laravel on 阿比安吉</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 25 Sep 2019 16:11:23 +0800</lastBuildDate>
+    
+	<atom:link href="https://abianji.com/tags/laravel/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Laravel学习-Facade</title>
+      <link>https://abianji.com/code/2019-09-25/laravel-study-facade/</link>
+      <pubDate>Wed, 25 Sep 2019 16:11:23 +0800</pubDate>
+      
+      <guid>https://abianji.com/code/2019-09-25/laravel-study-facade/</guid>
+      <description>&lt;p&gt;在web服务框架学习首要面对的一个问题是路由,Laravel的路由是怎么实现的呢?先总结一下,Laravel暴露给我们的路由其实是一个别名后的Facade,那我们就先看看什么是Facade吧&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
