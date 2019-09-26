@@ -127,159 +127,9 @@
     
         <p>golang 的fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf。</p>
 
-<pre><code class="language-bash"># 定义示例类型和变量
-type Human struct {
-    Name string
-}
-
-var people = Human{Name:&quot;zhangsan&quot;}
-</code></pre>
-
-<p>普通占位符</p>
-
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>举例</th>
-<th>输出</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>%v</td>
-<td>相应值的默认格式。</td>
-<td>Printf(&ldquo;%v&rdquo;, people)</td>
-<td>{zhangsan}</td>
-</tr>
-
-<tr>
-<td>%+v</td>
-<td>打印结构体时，会添加字段名</td>
-<td>Printf(&ldquo;%+v&rdquo;, people)</td>
-<td>{Name:zhangsan}</td>
-</tr>
-
-<tr>
-<td>%#v</td>
-<td>相应值的Go语法表示</td>
-<td>Printf(&ldquo;#v&rdquo;, people)</td>
-<td>main.Human{Name:&ldquo;zhangsan&rdquo;}</td>
-</tr>
-
-<tr>
-<td>%T</td>
-<td>相应值的类型的Go语法表示</td>
-<td>Printf(&ldquo;%T&rdquo;, people)</td>
-<td>main.Human</td>
-</tr>
-
-<tr>
-<td>%%</td>
-<td>字面上的百分号，并非值的占位符</td>
-<td>Printf(&ldquo;%%&rdquo;)</td>
-<td>%</td>
-</tr>
-</tbody>
-</table>
-
-<p>布尔占位符</p>
-
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>举例</th>
-<th>输出</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>%t</td>
-<td>true 或 false</td>
-<td>Printf(&ldquo;%t&rdquo;, true)</td>
-<td>true</td>
-</tr>
-</tbody>
-</table>
-
-<p>整数占位符</p>
-
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>举例</th>
-<th>输出</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>%b</td>
-<td>二进制表示</td>
-<td>Printf(&ldquo;%b&rdquo;, 5)</td>
-<td>101</td>
-</tr>
-
-<tr>
-<td>%c</td>
-<td>相应Unicode码点所表示的字符</td>
-<td>Printf(&ldquo;%c&rdquo;, 0x4E2D)</td>
-<td>中</td>
-</tr>
-
-<tr>
-<td>%d</td>
-<td>十进制表示</td>
-<td>Printf(&ldquo;%d&rdquo;, 0x12)</td>
-<td>18</td>
-</tr>
-
-<tr>
-<td>%o</td>
-<td>八进制表示</td>
-<td>Printf(&ldquo;%d&rdquo;, 10</td>
-<td>12</td>
-</tr>
-
-<tr>
-<td>%q</td>
-<td>单引号围绕的字符字面值，由Go语法安全地转义</td>
-<td>Printf(&ldquo;%q&rdquo;, 0x4E2D)</td>
-<td>&lsquo;中&rsquo;</td>
-</tr>
-
-<tr>
-<td>%x</td>
-<td>十六进制表示，字母形式为小写 a-f</td>
-<td>Printf(&ldquo;%x&rdquo;, 13)</td>
-<td>d</td>
-</tr>
-
-<tr>
-<td>%X</td>
-<td>十六进制表示，字母形式为大写 A-F</td>
-<td>Printf(&ldquo;%x&rdquo;, 13)</td>
-<td>D</td>
-</tr>
-
-<tr>
-<td>%U</td>
-<td>Unicode格式：U+1234，等同于 &ldquo;U+%04X&rdquo;</td>
-<td>Printf(&ldquo;%U&rdquo;, 0x4E2D)</td>
-<td>U+4E2D</td>
-</tr>
-</tbody>
-</table>
-
-<p>转载地址:
-<a href="https://golang.org/pkg/fmt/">golang官方fmt说明</a></p>
+        
+            <a href="https://abianji.com/code/2019-06-20/go-print-fmt/" class="more">Continue reading</a>
+        
     
 </div>
 
@@ -458,6 +308,10 @@ var people = Human{Name:&quot;zhangsan&quot;}
                 <ul>
                 
                     <li>
+                        <a href="https://abianji.com/code/2019-09-26/laravel-study-serviceprovider/">Laravel学习-服务容器(1)</a>
+                    </li>
+                
+                    <li>
                         <a href="https://abianji.com/code/2019-09-25/laravel-study-facade/">Laravel学习-Facade</a>
                     </li>
                 
@@ -473,10 +327,6 @@ var people = Human{Name:&quot;zhangsan&quot;}
                         <a href="https://abianji.com/code/2019-02-27/py-study-02/">python 函数参数</a>
                     </li>
                 
-                    <li>
-                        <a href="https://abianji.com/code/2019-02-26/py-study-01/">Pipenv:新一代Python项目环境与依赖管理工具</a>
-                    </li>
-                
                 </ul>
         </div>
         
@@ -487,7 +337,7 @@ var people = Human{Name:&quot;zhangsan&quot;}
                 <ul>
                 
                     <li>
-                        <a href="/categories/code">Code (6)</a>
+                        <a href="/categories/code">Code (7)</a>
                     </li>
                 
                     <li>

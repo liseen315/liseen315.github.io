@@ -7,21 +7,19 @@
         <meta name="description" content="abianji|阿比安吉">
         <meta name="keywords" content="blog,personal,responsive,search,font awesome,pages,posts,multilingual,highlight.js,syntax highlighting,premium,shortcuts">
         <meta name="generator" content="Hugo 0.56.1" />
-        <title> Have a dream and do it | 阿比安吉</title>
-        <meta name="description" content="abianji|阿比安吉">
-        <meta itemprop="name" content="Have a dream and do it">
-        <meta itemprop="description" content="abianji|阿比安吉">
-        <meta property="og:title" content="Have a dream and do it">
-        <meta property="og:description" content="abianji|阿比安吉">
+        <title> Laravel学习-服务容器(1) | 阿比安吉</title>
+        <meta name="description" content="Laravel学习-服务容器(1) - abianji|阿比安吉">
+        <meta itemprop="name" content="Laravel学习-服务容器(1)">
+        <meta itemprop="description" content="Laravel学习-服务容器(1) - abianji|阿比安吉">
+        <meta property="og:title" content="Laravel学习-服务容器(1)">
+        <meta property="og:description" content="Laravel学习-服务容器(1) - abianji|阿比安吉">
         <meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?size=200">
-        <meta property="og:url" content="https://abianji.com/">
-        <meta property="og:site_name" content="阿比安吉"><meta property="og:type" content="website">
+        <meta property="og:url" content="https://abianji.com/code/2019-09-26/laravel-study-serviceprovider/">
+        <meta property="og:site_name" content="阿比安吉">
+        <meta property="og:type" content="article">
         <link rel="icon" type="image/png" href="https://abianji.com/favicon-32x32.png" sizes="32x32">
         <link rel="icon" type="image/png" href="https://abianji.com/favicon-16x16.png" sizes="16x16">
 
-	
-	  <link href="/" rel="alternate" type="application/rss+xml" title="阿比安吉" />
-	  <link href="/" rel="feed" type="application/rss+xml" title="阿比安吉" />
 	
 
         
@@ -89,16 +87,10 @@
 
         <div class="main container">
             
-
-
-
-    
-
-    
+     
+    <div class="article-wrapper u-cf single">
         
-    <div class="article-wrapper u-cf">
-        
-            <a class="bubble" href="https://abianji.com/code/2019-02-26/go-base-env/">
+            <a class="bubble" href="https://abianji.com/code/2019-09-26/laravel-study-serviceprovider/">
     <i class="fa fa-fw fa-code"></i>
 </a>
 
@@ -106,11 +98,11 @@
     
 
     <div class="content">
-    <h3><a href="https://abianji.com/code/2019-02-26/go-base-env/">Go Base Env</a></h3>
+    <h3><a href="https://abianji.com/code/2019-09-26/laravel-study-serviceprovider/">Laravel学习-服务容器(1)</a></h3>
     <div class="meta">
         
             
-                <span class="date moment">2019-02-26</span>
+                <span class="date moment">2019-09-26</span>
             
         
 
@@ -130,11 +122,113 @@
     </div>
 
     
-        <p>Go 基础环境安装,开发工具,插件配置,以及基础命令使用.</p>
+        <p>之前的文章说到了<code>Route::get()</code>其实是一个别名后的<code>Facade</code>然后最终通过魔术方法调用了<code>get()</code>之类的方法.但是在追踪到如下代码的时候就断层了.我们只看到了实例化了路由对象但是没看到具体的路由实现在哪.那么我们下面就来尝试揭秘</p>
 
-        
-            <a href="https://abianji.com/code/2019-02-26/go-base-env/" class="more">Continue reading</a>
-        
+<pre><code class="language-php">if (static::$app) {
+    return static::$resolvedInstance[$name] = static::$app[$name];
+}
+</code></pre>
+
+<p>Laravel的Application实际上是一个IOC容器,关于IOC容器的解释可以<a href="https://www.insp.top/learn-laravel-container">看这篇文章</a>引用这篇文章内的一段话</p>
+
+<blockquote>
+<p>一个类要被容器所能够提取,必须要先注册至这个容器.既然 laravel 称这个容器叫做服务容器,那么我们需要某个服务,就得先注册、绑定这个服务到容器,那么提供服务并绑定服务至容器的东西,就是 服务提供者（ServiceProvider）。</p>
+</blockquote>
+
+<p>那可以理解我们的<code>$app[$name]</code>实际是一个服务的提取过程,所以我们还是回归到容器内吧
+<code>Illuminate/Foundation/Application.php</code>查看构造函数</p>
+
+<pre><code class="language-php">public function __construct($basePath = null)
+{
+    if ($basePath) {
+        $this-&gt;setBasePath($basePath);
+    }
+
+    $this-&gt;registerBaseBindings();
+    // 在这里注册了基础的服务提供者
+    $this-&gt;registerBaseServiceProviders();
+    $this-&gt;registerCoreContainerAliases();
+}
+
+protected function registerBaseServiceProviders()
+{
+    $this-&gt;register(new EventServiceProvider($this));
+    $this-&gt;register(new LogServiceProvider($this));
+    // 注册路由服务提供者
+    $this-&gt;register(new RoutingServiceProvider($this));
+}
+</code></pre>
+
+<p>然后我们去看下一下<code>RoutingServiceProvider</code>的源码,发现了<code>register</code>函数</p>
+
+<pre><code class="language-php">public function register()
+{
+    // 这里注册了路由的实际Provider
+    $this-&gt;registerRouter();
+    $this-&gt;registerUrlGenerator();
+    $this-&gt;registerRedirector();
+    $this-&gt;registerPsrRequest();
+    $this-&gt;registerPsrResponse();
+    $this-&gt;registerResponseFactory();
+    $this-&gt;registerControllerDispatcher();
+}
+</code></pre>
+
+<p>那这个<code>register</code>函数又是何时被调用的?实际如果我们查看刚才的<code>$this-&gt;register(new RoutingServiceProvider($this));</code>的<code>register</code>方法就可以看到实际是在容器内注册的</p>
+
+<pre><code class="language-php">public function register($provider, $force = false)
+{
+    if (($registered = $this-&gt;getProvider($provider)) &amp;&amp; ! $force) {
+        return $registered;
+    }
+    if (is_string($provider)) {
+        $provider = $this-&gt;resolveProvider($provider);
+    }
+    // 这里注册
+    $provider-&gt;register();
+
+    if (property_exists($provider, 'bindings')) {
+        foreach ($provider-&gt;bindings as $key =&gt; $value) {
+            $this-&gt;bind($key, $value);
+        }
+    }
+
+    if (property_exists($provider, 'singletons')) {
+        foreach ($provider-&gt;singletons as $key =&gt; $value) {
+            $this-&gt;singleton($key, $value);
+        }
+    }
+
+    $this-&gt;markAsRegistered($provider);
+
+    if ($this-&gt;isBooted()) {
+        $this-&gt;bootProvider($provider);
+    }
+
+    return $provider;
+}
+</code></pre>
+
+<p>现在我们回头去看具体被注册的<code>provider</code>吧.</p>
+
+<pre><code class="language-php">protected function registerRouter()
+{
+    $this-&gt;app-&gt;singleton('router', function ($app) {
+        // 终于找到了实际的Route了
+        return new Router($app['events'], $app);
+    });
+}
+</code></pre>
+
+<p>然后我们去看<code>Illuminate/Routing/Router.php</code>就会发现<code>get</code>方法就定义在这里了.</p>
+
+<pre><code class="language-php">public function get($uri, $action = null)
+{
+    return $this-&gt;addRoute(['GET', 'HEAD'], $uri, $action);
+}
+</code></pre>
+
+<p>好,至此我们找到了真正的路由实现在哪里,可是<code>static::$app[$name];</code>又是怎么根据前一篇文章提到的<code>router</code>将Facade与具体的服务关联起来的?下片文章我们在继续探索.</p>
     
 </div>
 
@@ -147,7 +241,9 @@
             <i class="fa fa-tags"></i>
             <div class="links">
                 
-                    <a href="/tags/golang">golang</a>
+                    <a href="/tags/laravel">laravel</a>
+                
+                    <a href="/tags/php">php</a>
                 
             </div>
         </div>
@@ -163,83 +259,9 @@
 
     
         
-    <div class="article-wrapper u-cf">
-        
-            <a class="bubble" href="https://abianji.com/code/2019-02-25/go-base-intro/">
-    <i class="fa fa-fw fa-code"></i>
-</a>
-
-<article class="default article">
     
 
-    <div class="content">
-    <h3><a href="https://abianji.com/code/2019-02-25/go-base-intro/">Go Base Intro</a></h3>
-    <div class="meta">
-        
-            
-                <span class="date moment">2019-02-25</span>
-            
-        
-
-        
-
-        
-            <span class="categories">
-                
-                    <a href="/categories/code">Code</a>
-                
-            </span>
-        
-
-        
-            <span class="author"><a href="/author/liseen">liseen</a></span>
-        
-    </div>
-
-    
-        <p>Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言</p>
-
-        
-            <a href="https://abianji.com/code/2019-02-25/go-base-intro/" class="more">Continue reading</a>
-        
-    
-</div>
-
-    
-<div class="footer">
-
-
-    
-        <div class="tags">
-            <i class="fa fa-tags"></i>
-            <div class="links">
-                
-                    <a href="/tags/golang">golang</a>
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-</article>
-
-        
-    </div>
-
-    
-
-    
-    <div class="paginator">
-        
-
-        
-            <a href="/" class="newer">Newer posts <i class="fa fa-angle-double-right"></i></a>
-        
-    </div>
-
-
+     
 
         </div>
 

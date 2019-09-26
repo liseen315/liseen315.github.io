@@ -5,10 +5,19 @@
     <link>https://abianji.com/tags/laravel/</link>
     <description>Recent content in laravel on 阿比安吉</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 25 Sep 2019 16:11:23 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 26 Sep 2019 09:54:50 +0800</lastBuildDate>
     
 	<atom:link href="https://abianji.com/tags/laravel/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Laravel学习-服务容器(1)</title>
+      <link>https://abianji.com/code/2019-09-26/laravel-study-serviceprovider/</link>
+      <pubDate>Thu, 26 Sep 2019 09:54:50 +0800</pubDate>
+      
+      <guid>https://abianji.com/code/2019-09-26/laravel-study-serviceprovider/</guid>
+      <description>&lt;p&gt;之前的文章说到了&lt;code&gt;Route::get()&lt;/code&gt;其实是一个别名后的&lt;code&gt;Facade&lt;/code&gt;然后最终通过魔术方法调用了&lt;code&gt;get()&lt;/code&gt;之类的方法.但是在追踪到如下代码的时候就断层了.我们只看到了实例化了路由对象但是没看到具体的路由实现在哪.那么我们下面就来尝试揭秘&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Laravel学习-Facade</title>
