@@ -7,21 +7,19 @@
         <meta name="description" content="abianji|阿比安吉">
         <meta name="keywords" content="blog,personal,responsive,search,font awesome,pages,posts,multilingual,highlight.js,syntax highlighting,premium,shortcuts">
         <meta name="generator" content="Hugo 0.56.1" />
-        <title> Links | 阿比安吉</title>
-        <meta name="description" content="Links - abianji|阿比安吉">
-        <meta itemprop="name" content="Links">
-        <meta itemprop="description" content="Links - abianji|阿比安吉">
-        <meta property="og:title" content="Links">
-        <meta property="og:description" content="Links - abianji|阿比安吉">
+        <title> Laravel学习-服务容器(2) | 阿比安吉</title>
+        <meta name="description" content="Laravel学习-服务容器(2) - abianji|阿比安吉">
+        <meta itemprop="name" content="Laravel学习-服务容器(2)">
+        <meta itemprop="description" content="Laravel学习-服务容器(2) - abianji|阿比安吉">
+        <meta property="og:title" content="Laravel学习-服务容器(2)">
+        <meta property="og:description" content="Laravel学习-服务容器(2) - abianji|阿比安吉">
         <meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?size=200">
-        <meta property="og:url" content="https://abianji.com/link/">
-        <meta property="og:site_name" content="阿比安吉"><meta property="og:type" content="website">
+        <meta property="og:url" content="https://abianji.com/code/2019-09-26/laravel-study-serviceprovider2/">
+        <meta property="og:site_name" content="阿比安吉">
+        <meta property="og:type" content="article">
         <link rel="icon" type="image/png" href="https://abianji.com/favicon-32x32.png" sizes="32x32">
         <link rel="icon" type="image/png" href="https://abianji.com/favicon-16x16.png" sizes="16x16">
 
-	
-	  <link href="/link/" rel="alternate" type="application/rss+xml" title="阿比安吉" />
-	  <link href="/link/" rel="feed" type="application/rss+xml" title="阿比安吉" />
 	
 
         
@@ -89,35 +87,167 @@
 
         <div class="main container">
             
-    
-    
-        <div class="article-wrapper u-cf">
-            
-                <a class="bubble" href="https://www.jianshu.com/p/fedda9824f6a" target="_blank">
-    <i class="fa fa-fw fa-link"></i>
+     
+    <div class="article-wrapper u-cf single">
+        
+            <a class="bubble" href="https://abianji.com/code/2019-09-26/laravel-study-serviceprovider2/">
+    <i class="fa fa-fw fa-code"></i>
 </a>
 
-<article class="link">
+<article class="default article">
     
-    <a href="https://www.jianshu.com/p/fedda9824f6a" target="_blank">
-        <h4>Postgresql Install Mac</h4>
-        <p>Mac 上安装和使用PostgreSQL的方法</p>
 
-    </a>
-</article>
-
+    <div class="content">
+    <h3><a href="https://abianji.com/code/2019-09-26/laravel-study-serviceprovider2/">Laravel学习-服务容器(2)</a></h3>
+    <div class="meta">
+        
             
+                <span class="date moment">2019-09-26</span>
+            
+        
+
+        
+
+        
+            <span class="categories">
+                
+                    <a href="/categories/code">Code</a>
+                
+            </span>
+        
+
+        
+            <span class="author"><a href="/author/liseen">liseen</a></span>
+        
+    </div>
+
+    
+        <p>探秘的过程是非常有意思的,通过阅读代码我们可以更多的了解作者的思路为自己以及工作中总结经验,废话有点多.我们在之前的文章知道了看到了如下代码</p>
+
+<pre><code class="language-php">if (static::$app) {
+    return static::$resolvedInstance[$name] = static::$app[$name];
+}
+</code></pre>
+
+<p><code>static::$app[$name];</code>其实是用数组的方式访问对象,我们可以看到<code>Application</code>继承了<code>Container</code>而容器又实现了<code>ArrayAccess</code>接口,翻阅<a href="https://www.php.net/manual/zh/class.arrayaccess.php">php文档</a>后我们发现一个重要方法</p>
+
+<pre><code class="language-php">public function offsetGet($offset) {
+    return isset($this-&gt;container[$offset]) ? $this-&gt;container[$offset] : null;
+}
+</code></pre>
+
+<p>那么对应到容器内的方法实现如下</p>
+
+<pre><code class="language-php">public function offsetGet($key)
+{
+    // 这里的$key就是static::$app[$name];中的$name
+    return $this-&gt;make($key);
+}
+</code></pre>
+
+<p>那么我们可以进一步查看<code>make</code>方法的实现</p>
+
+<pre><code class="language-php">public function make($abstract, array $parameters = [])
+{
+    return $this-&gt;resolve($abstract, $parameters);
+}
+
+protected function resolve($abstract, $parameters = [], $raiseEvents = true)
+{
+    $abstract = $this-&gt;getAlias($abstract);
+
+    $needsContextualBuild = ! empty($parameters) || ! is_null(
+        $this-&gt;getContextualConcrete($abstract)
+    );
+
+    if (isset($this-&gt;instances[$abstract]) &amp;&amp; ! $needsContextualBuild) {
+        return $this-&gt;instances[$abstract];
+    }
+
+    $this-&gt;with[] = $parameters;
+    // 这里通过抽象名字获取之前绑定的实现
+    $concrete = $this-&gt;getConcrete($abstract);
+    // 判断实现是否是闭包或者实现与抽象是否同名
+    if ($this-&gt;isBuildable($concrete, $abstract)) {
+        // 进行构建
+        $object = $this-&gt;build($concrete);
+    } else {
+        $object = $this-&gt;make($concrete);
+    }
+
+    foreach ($this-&gt;getExtenders($abstract) as $extender) {
+        $object = $extender($object, $this);
+    }
+
+    if ($this-&gt;isShared($abstract) &amp;&amp; ! $needsContextualBuild) {
+        $this-&gt;instances[$abstract] = $object;
+    }
+
+    if ($raiseEvents) {
+        $this-&gt;fireResolvingCallbacks($abstract, $object);
+    }
+
+    $this-&gt;resolved[$abstract] = true;
+
+    array_pop($this-&gt;with);
+
+    return $object;
+}
+
+public function build($concrete)
+{
+    // 如果是闭包的话就调用闭包
+    if ($concrete instanceof Closure) {
+        return $concrete($this, $this-&gt;getLastParameterOverride());
+    }
+}
+</code></pre>
+
+<p>这里真相大明了.原来我们之前在<code>RoutingServiceProvider</code>内调用的<code>registerRouter</code>方法返回了确实是一个闭包,而且闭包内return了真正的的Router服务.</p>
+
+<pre><code class="language-php">protected function registerRouter()
+{
+    $this-&gt;app-&gt;singleton('router', function ($app) {
+        // 终于找到了实际的Route了
+        return new Router($app['events'], $app);
+    });
+}
+</code></pre>
+
+<p>好了,至此我们已经正式的找到了一个作为Facade后的Router是如何被创建起来的.但是问题来了,为什么我可以在web.php内直接调用这个Facade呢.之前说过实际上我们调用的是一个别名后的Facade,那么我接下里会讨论关于别名的内容.</p>
+    
+</div>
+
+    
+<div class="footer">
+
+
+    
+        <div class="tags">
+            <i class="fa fa-tags"></i>
+            <div class="links">
+                
+                    <a href="/tags/laravel">laravel</a>
+                
+                    <a href="/tags/php">php</a>
+                
+            </div>
         </div>
     
 
     
-    <div class="paginator">
-        
+</div>
+
+</article>
 
         
     </div>
 
+    
+        
+    
 
+     
 
         </div>
 

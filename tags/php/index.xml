@@ -5,10 +5,19 @@
     <link>https://abianji.com/tags/php/</link>
     <description>Recent content in php on 阿比安吉</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 26 Sep 2019 09:54:50 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 26 Sep 2019 14:37:03 +0800</lastBuildDate>
     
 	<atom:link href="https://abianji.com/tags/php/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Laravel学习-服务容器(2)</title>
+      <link>https://abianji.com/code/2019-09-26/laravel-study-serviceprovider2/</link>
+      <pubDate>Thu, 26 Sep 2019 14:37:03 +0800</pubDate>
+      
+      <guid>https://abianji.com/code/2019-09-26/laravel-study-serviceprovider2/</guid>
+      <description>&lt;p&gt;探秘的过程是非常有意思的,通过阅读代码我们可以更多的了解作者的思路为自己以及工作中总结经验,废话有点多.我们在之前的文章知道了看到了如下代码&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Laravel学习-服务容器(1)</title>
