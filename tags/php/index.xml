@@ -1,39 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>php on 阿比安吉</title>
+    <title>php on ABIANJI</title>
     <link>https://abianji.com/tags/php/</link>
-    <description>Recent content in php on 阿比安吉</description>
+    <description>Recent content in php on ABIANJI</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 26 Sep 2019 14:37:03 +0800</lastBuildDate>
-    
-	<atom:link href="https://abianji.com/tags/php/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Thu, 26 Sep 2019 14:37:03 +0800</lastBuildDate><atom:link href="https://abianji.com/tags/php/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel学习-服务容器(2)</title>
-      <link>https://abianji.com/code/2019-09-26/laravel-study-serviceprovider2/</link>
+      <link>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider2/</link>
       <pubDate>Thu, 26 Sep 2019 14:37:03 +0800</pubDate>
       
-      <guid>https://abianji.com/code/2019-09-26/laravel-study-serviceprovider2/</guid>
+      <guid>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider2/</guid>
       <description>&lt;p&gt;探秘的过程是非常有意思的,通过阅读代码我们可以更多的了解作者的思路为自己以及工作中总结经验,废话有点多.我们在之前的文章知道了看到了如下代码&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Laravel学习-服务容器(1)</title>
-      <link>https://abianji.com/code/2019-09-26/laravel-study-serviceprovider/</link>
+      <link>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider/</link>
       <pubDate>Thu, 26 Sep 2019 09:54:50 +0800</pubDate>
       
-      <guid>https://abianji.com/code/2019-09-26/laravel-study-serviceprovider/</guid>
+      <guid>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider/</guid>
       <description>&lt;p&gt;之前的文章说到了&lt;code&gt;Route::get()&lt;/code&gt;其实是一个别名后的&lt;code&gt;Facade&lt;/code&gt;然后最终通过魔术方法调用了&lt;code&gt;get()&lt;/code&gt;之类的方法.但是在追踪到如下代码的时候就断层了.我们只看到了实例化了路由对象但是没看到具体的路由实现在哪.那么我们下面就来尝试揭秘&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Laravel学习-Facade</title>
-      <link>https://abianji.com/code/2019-09-25/laravel-study-facade/</link>
+      <link>https://abianji.com/posts/2019-09-25/laravel-study-facade/</link>
       <pubDate>Wed, 25 Sep 2019 16:11:23 +0800</pubDate>
       
-      <guid>https://abianji.com/code/2019-09-25/laravel-study-facade/</guid>
+      <guid>https://abianji.com/posts/2019-09-25/laravel-study-facade/</guid>
       <description>&lt;p&gt;在web服务框架学习首要面对的一个问题是路由,Laravel的路由是怎么实现的呢?先总结一下,Laravel暴露给我们的路由其实是一个别名后的Facade,那我们就先看看什么是Facade吧&lt;/p&gt;</description>
     </item>
     

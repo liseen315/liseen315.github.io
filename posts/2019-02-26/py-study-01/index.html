@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="Pipenv:新一代Python项目环境与依赖管理工具">
+<meta itemprop="description" content="Pipenv 是 Kenneth Reitz 在 2017 年 1 月发布的 Python 依赖管理工具，现在由 PyPA 维护。你可以把它看做是 pip 和 virtualenv 的组合体，而它基于的 Pipfile 则用来替代旧的依赖记录方式（requirements.txt）">
+<meta itemprop="datePublished" content="2019-02-26T15:49:58+08:00" />
+<meta itemprop="dateModified" content="2019-02-26T15:49:58+08:00" />
+<meta itemprop="wordCount" content="883">
+
+
+
+<meta itemprop="keywords" content="python," />
+<meta property="og:title" content="Pipenv:新一代Python项目环境与依赖管理工具" />
+<meta property="og:description" content="Pipenv 是 Kenneth Reitz 在 2017 年 1 月发布的 Python 依赖管理工具，现在由 PyPA 维护。你可以把它看做是 pip 和 virtualenv 的组合体，而它基于的 Pipfile 则用来替代旧的依赖记录方式（requirements.txt）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://abianji.com/posts/2019-02-26/py-study-01/" />
+<meta property="article:published_time" content="2019-02-26T15:49:58+08:00" />
+<meta property="article:modified_time" content="2019-02-26T15:49:58+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pipenv:新一代Python项目环境与依赖管理工具"/>
+<meta name="twitter:description" content="Pipenv 是 Kenneth Reitz 在 2017 年 1 月发布的 Python 依赖管理工具，现在由 PyPA 维护。你可以把它看做是 pip 和 virtualenv 的组合体，而它基于的 Pipfile 则用来替代旧的依赖记录方式（requirements.txt）"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Pipenv:新一代Python项目环境与依赖管理工具</title>
+	<link rel="stylesheet" href="https://abianji.com/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://abianji.com/">ABIANJI</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://abianji.com/posts/">Posts</a>
+				<a href="https://abianji.com/about/">About</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://github.com/liseen315" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="https://twitter.com/AbianjiLiu" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://instagram.com/" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://abianji.com/posts/">Posts</a></li>
+			<li><a href="https://abianji.com/about/">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Feb 26, 2019</span></div>
+				<h1>Pipenv:新一代Python项目环境与依赖管理工具</h1>
+			</header>
+			<div class="content">
+				<p>Pipenv 是 Kenneth Reitz 在 2017 年 1 月发布的 Python 依赖管理工具，现在由 PyPA 维护。你可以把它看做是 pip 和 virtualenv 的组合体，而它基于的 Pipfile 则用来替代旧的依赖记录方式（requirements.txt）</p>
+<p>很久很久以前,使用 virtualenvs 安装虚拟环境,后来出 Python3.4 以后可以使用类似如下命令创建</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">python3 -m venv xxx
+</code></pre></div><p>但是&hellip;今天读书发现火箭已经到了火星了,而我在井底..当前只需要用 pip 去安装一个叫 pipenv 的包就可以全家桶搞定,类似 node 的 npm</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip3 install pipenv
+pipenv --version
+pipenv, version 2018.11.26
+</code></pre></div><p>然后 cd 到我们的工作目录下直接运行如下命令</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv install
+Creating a virtualenv <span class="k">for</span> this project…
+Pipfile: /Users/admin/liseen/python-study/helloflask/Pipfile
+Using /usr/local/opt/python/bin/python3.7 <span class="o">(</span>3.7.0<span class="o">)</span> to create virtualenv…
+⠇ Creating virtual environment...Already using interpreter /usr/local/opt/python/bin/python3.7
+Using base prefix <span class="s1">&#39;/usr/local/Cellar/python/3.7.0/Frameworks/Python.framework/Versions/3.7&#39;</span>
+New python executable in /Users/admin/.local/share/virtualenvs/helloflask-7D2RnkZA/bin/python3.7
+Also creating executable in /Users/admin/.local/share/virtualenvs/helloflask-7D2RnkZA/bin/python
+Installing setuptools, pip, wheel...
+<span class="k">done</span>.
+
+✔ Successfully created virtual environment!
+Virtualenv location: /Users/admin/.local/share/virtualenvs/helloflask-7D2RnkZA
+Creating a Pipfile <span class="k">for</span> this project…
+Pipfile.lock not found, creating…
+Locking <span class="o">[</span>dev-packages<span class="o">]</span> dependencies…
+Locking <span class="o">[</span>packages<span class="o">]</span> dependencies…
+Updated Pipfile.lock <span class="o">(</span>a65489<span class="o">)</span>!
+Installing dependencies from Pipfile.lock <span class="o">(</span>a65489<span class="o">)</span>…
+  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ 0/0 — 00:00:00
+To activate this project<span class="err">&#39;</span>s virtualenv, run pipenv shell.
+Alternatively, run a <span class="nb">command</span> inside the virtualenv with pipenv run.
+</code></pre></div><p>狂拽酷炫吊炸天的创建好了虚拟环境.使用如下命令激活与退出</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv shell <span class="c1"># 激活虚拟环境</span>
+<span class="nb">exit</span>  <span class="c1"># 退出虚拟环境</span>
+</code></pre></div><p>更帅的是可以不用激活的情况下直接以虚拟环境俩运行代码</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv run python hello.py
+</code></pre></div><p>环境安装好后,就可以安装依赖了</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv install flask
+Installing flask…
+Adding flask to Pipfile<span class="err">&#39;</span>s <span class="o">[</span>packages<span class="o">]</span>…
+✔ Installation Succeeded
+Pipfile.lock <span class="o">(</span>662286<span class="o">)</span> out of date, updating to <span class="o">(</span>a65489<span class="o">)</span>…
+Locking <span class="o">[</span>dev-packages<span class="o">]</span> dependencies…
+Locking <span class="o">[</span>packages<span class="o">]</span> dependencies…
+✔ Success!
+Updated Pipfile.lock <span class="o">(</span>662286<span class="o">)</span>!
+Installing dependencies from Pipfile.lock <span class="o">(</span>662286<span class="o">)</span>…
+  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ 6/6 — 00:00:01
+<span class="o">(</span>helloflask<span class="o">)</span>
+</code></pre></div><p>安装 pack 特别慢
+进到项目内查看 Pipfile 更改镜像</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">url</span> <span class="o">=</span> <span class="s2">&#34;https://mirrors.aliyun.com/pypi/simple&#34;</span>
+</code></pre></div><p>lock 特别慢可以先使用参数跳过 lock &ndash;skip-lock</p>
+<p>自定义虚拟环境文件夹路径</p>
+<p>默认情况下，Pipenv 会自动为你选择虚拟环境的存储位置，在 Windows 下通常为 C:\Users\Administrator.virtualenvs\，而 Linux 或 macOS 则为~/.local/share/virtualenvs/。如果你想将虚拟环境文件夹在项目目录内创建，可以设置环境变量 PIPENV_VENV_IN_PROJECT，这时名为.venv 的虚拟环境文件夹将在项目根目录被创建。另外你也可以通过 WORKON_HOME 环境变量来自定义存储路径。</p>
+<p>官方文档地址</p>
+<p><a href="https://pipenv.readthedocs.io/en/latest/">https://pipenv.readthedocs.io/en/latest/</a></p>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>liseen</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://abianji.com/tags/python">python</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>883 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-02-26 15:49 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://abianji.com/posts/2019-02-27/py-study-02/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>python 函数参数</span>
+			</a>
+			<a class="prev-post" href="https://abianji.com/posts/2019-02-26/go-base-env/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Go Base Env</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://abianji.com/">Liseen</a> &#183; <a href="https://beian.miit.gov.cn" target="_blank">京ICP备19058619号</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://abianji.com/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://abianji.com/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

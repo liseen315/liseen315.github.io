@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="Laravel学习-服务容器(1)">
+<meta itemprop="description" content="之前的文章说到了Route::get()其实是一个别名后的Facade然后最终通过魔术方法调用了get()之类的方法.但是在追踪到如下代码的时候就断层了.我们只看到了实例化了路由对象但是没看到具体的路由实现在哪.那么我们下面就来尝试揭秘">
+<meta itemprop="datePublished" content="2019-09-26T09:54:50+08:00" />
+<meta itemprop="dateModified" content="2019-09-26T09:54:50+08:00" />
+<meta itemprop="wordCount" content="906">
+
+
+
+<meta itemprop="keywords" content="laravel,php," />
+<meta property="og:title" content="Laravel学习-服务容器(1)" />
+<meta property="og:description" content="之前的文章说到了Route::get()其实是一个别名后的Facade然后最终通过魔术方法调用了get()之类的方法.但是在追踪到如下代码的时候就断层了.我们只看到了实例化了路由对象但是没看到具体的路由实现在哪.那么我们下面就来尝试揭秘" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider/" />
+<meta property="article:published_time" content="2019-09-26T09:54:50+08:00" />
+<meta property="article:modified_time" content="2019-09-26T09:54:50+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Laravel学习-服务容器(1)"/>
+<meta name="twitter:description" content="之前的文章说到了Route::get()其实是一个别名后的Facade然后最终通过魔术方法调用了get()之类的方法.但是在追踪到如下代码的时候就断层了.我们只看到了实例化了路由对象但是没看到具体的路由实现在哪.那么我们下面就来尝试揭秘"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Laravel学习-服务容器(1)</title>
+	<link rel="stylesheet" href="https://abianji.com/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://abianji.com/">ABIANJI</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://abianji.com/posts/">Posts</a>
+				<a href="https://abianji.com/about/">About</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://github.com/liseen315" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="https://twitter.com/AbianjiLiu" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://instagram.com/" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://abianji.com/posts/">Posts</a></li>
+			<li><a href="https://abianji.com/about/">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Sep 26, 2019</span></div>
+				<h1>Laravel学习-服务容器(1)</h1>
+			</header>
+			<div class="content">
+				<p>之前的文章说到了<code>Route::get()</code>其实是一个别名后的<code>Facade</code>然后最终通过魔术方法调用了<code>get()</code>之类的方法.但是在追踪到如下代码的时候就断层了.我们只看到了实例化了路由对象但是没看到具体的路由实现在哪.那么我们下面就来尝试揭秘</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">if</span> <span class="p">(</span><span class="k">static</span><span class="o">::</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="nv">$resolvedInstance</span><span class="p">[</span><span class="nv">$name</span><span class="p">]</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="nv">$app</span><span class="p">[</span><span class="nv">$name</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div><p>Laravel的Application实际上是一个IOC容器,关于IOC容器的解释可以<!-- raw HTML omitted -->看这篇文章<!-- raw HTML omitted -->引用这篇文章内的一段话</p>
+<blockquote>
+<p>一个类要被容器所能够提取,必须要先注册至这个容器.既然 laravel 称这个容器叫做服务容器,那么我们需要某个服务,就得先注册、绑定这个服务到容器,那么提供服务并绑定服务至容器的东西,就是 服务提供者（ServiceProvider）。</p>
+</blockquote>
+<p>那可以理解我们的<code>$app[$name]</code>实际是一个服务的提取过程,所以我们还是回归到容器内吧
+<code>Illuminate/Foundation/Application.php</code>查看构造函数</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$basePath</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$basePath</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setBasePath</span><span class="p">(</span><span class="nv">$basePath</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerBaseBindings</span><span class="p">();</span>
+    <span class="c1">// 在这里注册了基础的服务提供者
+</span><span class="c1"></span>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerBaseServiceProviders</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerCoreContainerAliases</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">registerBaseServiceProviders</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">EventServiceProvider</span><span class="p">(</span><span class="nv">$this</span><span class="p">));</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">LogServiceProvider</span><span class="p">(</span><span class="nv">$this</span><span class="p">));</span>
+    <span class="c1">// 注册路由服务提供者
+</span><span class="c1"></span>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">RoutingServiceProvider</span><span class="p">(</span><span class="nv">$this</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div><p>然后我们去看下一下<code>RoutingServiceProvider</code>的源码,发现了<code>register</code>函数</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">register</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// 这里注册了路由的实际Provider
+</span><span class="c1"></span>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerRouter</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerUrlGenerator</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerRedirector</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerPsrRequest</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerPsrResponse</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerResponseFactory</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerControllerDispatcher</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div><p>那这个<code>register</code>函数又是何时被调用的?实际如果我们查看刚才的<code>$this-&gt;register(new RoutingServiceProvider($this));</code>的<code>register</code>方法就可以看到实际是在容器内注册的</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">register</span><span class="p">(</span><span class="nv">$provider</span><span class="p">,</span> <span class="nv">$force</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="nv">$registered</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getProvider</span><span class="p">(</span><span class="nv">$provider</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="o">!</span> <span class="nv">$force</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$registered</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">is_string</span><span class="p">(</span><span class="nv">$provider</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$provider</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">resolveProvider</span><span class="p">(</span><span class="nv">$provider</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// 这里注册
+</span><span class="c1"></span>    <span class="nv">$provider</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">property_exists</span><span class="p">(</span><span class="nv">$provider</span><span class="p">,</span> <span class="s1">&#39;bindings&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$provider</span><span class="o">-&gt;</span><span class="na">bindings</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">property_exists</span><span class="p">(</span><span class="nv">$provider</span><span class="p">,</span> <span class="s1">&#39;singletons&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$provider</span><span class="o">-&gt;</span><span class="na">singletons</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">singleton</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">markAsRegistered</span><span class="p">(</span><span class="nv">$provider</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isBooted</span><span class="p">())</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bootProvider</span><span class="p">(</span><span class="nv">$provider</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$provider</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>现在我们回头去看具体被注册的<code>provider</code>吧.</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">function</span> <span class="nf">registerRouter</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">singleton</span><span class="p">(</span><span class="s1">&#39;router&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 终于找到了实际的Route了
+</span><span class="c1"></span>        <span class="k">return</span> <span class="k">new</span> <span class="nx">Router</span><span class="p">(</span><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;events&#39;</span><span class="p">],</span> <span class="nv">$app</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div><p>然后我们去看<code>Illuminate/Routing/Router.php</code>就会发现<code>get</code>方法就定义在这里了.</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">get</span><span class="p">(</span><span class="nv">$uri</span><span class="p">,</span> <span class="nv">$action</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addRoute</span><span class="p">([</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;HEAD&#39;</span><span class="p">],</span> <span class="nv">$uri</span><span class="p">,</span> <span class="nv">$action</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><p>好,至此我们找到了真正的路由实现在哪里,可是<code>static::$app[$name];</code>又是怎么根据前一篇文章提到的<code>router</code>将Facade与具体的服务关联起来的?下片文章我们在继续探索.</p>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>liseen</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://abianji.com/tags/laravel">laravel</a></span><span class="tag"><a href="https://abianji.com/tags/php">php</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>906 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-09-26 09:54 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider2/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Laravel学习-服务容器(2)</span>
+			</a>
+			<a class="prev-post" href="https://abianji.com/posts/2019-09-25/laravel-study-facade/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Laravel学习-Facade</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://abianji.com/">Liseen</a> &#183; <a href="https://beian.miit.gov.cn" target="_blank">京ICP备19058619号</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://abianji.com/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://abianji.com/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Pages on 阿比安吉</title>
+    <title>Pages on ABIANJI</title>
     <link>https://abianji.com/page/</link>
-    <description>Recent content in Pages on 阿比安吉</description>
+    <description>Recent content in Pages on ABIANJI</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 02 Aug 2019 17:58:12 +0800</lastBuildDate>
-    
-	<atom:link href="https://abianji.com/page/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 02 Aug 2019 17:58:12 +0800</lastBuildDate><atom:link href="https://abianji.com/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Gitbook</title>
       <link>https://abianji.com/page/gitbook/</link>
@@ -25,11 +23,7 @@
       <pubDate>Thu, 01 Aug 2019 11:38:03 +0800</pubDate>
       
       <guid>https://abianji.com/page/about/</guid>
-      <description>我想变成一朵向日葵
-我开心时
-向着太阳
-我不开心的时候
-嗑瓜子</description>
+      <description>我想变成一朵向日葵我开心时向着太阳我不开心的时候嗑瓜子</description>
     </item>
     
   </channel>

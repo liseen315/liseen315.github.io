@@ -1,0 +1,780 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Posts on ABIANJI</title>
+		<link>https://abianji.com/posts/</link>
+		<description>Recent content in Posts on ABIANJI</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en-us</language>
+		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+		<lastBuildDate>Thu, 26 Sep 2019 14:37:03 +0800</lastBuildDate>
+		<atom:link href="https://abianji.com/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Laravel学习-服务容器(2)</title>
+			<link>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider2/</link>
+			<pubDate>Thu, 26 Sep 2019 14:37:03 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider2/</guid>
+			<description>&lt;p&gt;探秘的过程是非常有意思的,通过阅读代码我们可以更多的了解作者的思路为自己以及工作中总结经验,废话有点多.我们在之前的文章知道了看到了如下代码&lt;/p&gt;</description>
+			<content type="html"><![CDATA[<p>探秘的过程是非常有意思的,通过阅读代码我们可以更多的了解作者的思路为自己以及工作中总结经验,废话有点多.我们在之前的文章知道了看到了如下代码</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">if</span> <span class="p">(</span><span class="k">static</span><span class="o">::</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="nv">$resolvedInstance</span><span class="p">[</span><span class="nv">$name</span><span class="p">]</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="nv">$app</span><span class="p">[</span><span class="nv">$name</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div><p><code>static::$app[$name];</code>其实是用数组的方式访问对象,我们可以看到<code>Application</code>继承了<code>Container</code>而容器又实现了<code>ArrayAccess</code>接口,翻阅<!-- raw HTML omitted -->php文档<!-- raw HTML omitted -->后我们发现一个重要方法</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">offsetGet</span><span class="p">(</span><span class="nv">$offset</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="p">[</span><span class="nv">$offset</span><span class="p">])</span> <span class="o">?</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="p">[</span><span class="nv">$offset</span><span class="p">]</span> <span class="o">:</span> <span class="k">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>那么对应到容器内的方法实现如下</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">offsetGet</span><span class="p">(</span><span class="nv">$key</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 这里的$key就是static::$app[$name];中的$name
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nv">$key</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><p>那么我们可以进一步查看<code>make</code>方法的实现</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">make</span><span class="p">(</span><span class="nv">$abstract</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$parameters</span> <span class="o">=</span> <span class="p">[])</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">resolve</span><span class="p">(</span><span class="nv">$abstract</span><span class="p">,</span> <span class="nv">$parameters</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">resolve</span><span class="p">(</span><span class="nv">$abstract</span><span class="p">,</span> <span class="nv">$parameters</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">$raiseEvents</span> <span class="o">=</span> <span class="k">true</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$abstract</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getAlias</span><span class="p">(</span><span class="nv">$abstract</span><span class="p">);</span>
+
+    <span class="nv">$needsContextualBuild</span> <span class="o">=</span> <span class="o">!</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$parameters</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span> <span class="nx">is_null</span><span class="p">(</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getContextualConcrete</span><span class="p">(</span><span class="nv">$abstract</span><span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">instances</span><span class="p">[</span><span class="nv">$abstract</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="o">!</span> <span class="nv">$needsContextualBuild</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">instances</span><span class="p">[</span><span class="nv">$abstract</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$parameters</span><span class="p">;</span>
+    <span class="c1">// 这里通过抽象名字获取之前绑定的实现
+</span><span class="c1"></span>    <span class="nv">$concrete</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConcrete</span><span class="p">(</span><span class="nv">$abstract</span><span class="p">);</span>
+    <span class="c1">// 判断实现是否是闭包或者实现与抽象是否同名
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isBuildable</span><span class="p">(</span><span class="nv">$concrete</span><span class="p">,</span> <span class="nv">$abstract</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// 进行构建
+</span><span class="c1"></span>        <span class="nv">$object</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">build</span><span class="p">(</span><span class="nv">$concrete</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nv">$object</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nv">$concrete</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getExtenders</span><span class="p">(</span><span class="nv">$abstract</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$extender</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$object</span> <span class="o">=</span> <span class="nv">$extender</span><span class="p">(</span><span class="nv">$object</span><span class="p">,</span> <span class="nv">$this</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isShared</span><span class="p">(</span><span class="nv">$abstract</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span> <span class="nv">$needsContextualBuild</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">instances</span><span class="p">[</span><span class="nv">$abstract</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$object</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$raiseEvents</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fireResolvingCallbacks</span><span class="p">(</span><span class="nv">$abstract</span><span class="p">,</span> <span class="nv">$object</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">resolved</span><span class="p">[</span><span class="nv">$abstract</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+
+    <span class="nx">array_pop</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$object</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">build</span><span class="p">(</span><span class="nv">$concrete</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 如果是闭包的话就调用闭包
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nv">$concrete</span> <span class="nx">instanceof</span> <span class="nx">Closure</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$concrete</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getLastParameterOverride</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>这里真相大明了.原来我们之前在<code>RoutingServiceProvider</code>内调用的<code>registerRouter</code>方法返回了确实是一个闭包,而且闭包内return了真正的的Router服务.</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">function</span> <span class="nf">registerRouter</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">singleton</span><span class="p">(</span><span class="s1">&#39;router&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 终于找到了实际的Route了
+</span><span class="c1"></span>        <span class="k">return</span> <span class="k">new</span> <span class="nx">Router</span><span class="p">(</span><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;events&#39;</span><span class="p">],</span> <span class="nv">$app</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div><p>好了,至此我们已经正式的找到了一个作为Facade后的Router是如何被创建起来的.但是问题来了,为什么我可以在web.php内直接调用这个Facade呢.之前说过实际上我们调用的是一个别名后的Facade,那么我接下里会讨论关于别名的内容.</p>]]></content>
+		</item>
+		
+		<item>
+			<title>Laravel学习-服务容器(1)</title>
+			<link>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider/</link>
+			<pubDate>Thu, 26 Sep 2019 09:54:50 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider/</guid>
+			<description>&lt;p&gt;之前的文章说到了&lt;code&gt;Route::get()&lt;/code&gt;其实是一个别名后的&lt;code&gt;Facade&lt;/code&gt;然后最终通过魔术方法调用了&lt;code&gt;get()&lt;/code&gt;之类的方法.但是在追踪到如下代码的时候就断层了.我们只看到了实例化了路由对象但是没看到具体的路由实现在哪.那么我们下面就来尝试揭秘&lt;/p&gt;</description>
+			<content type="html"><![CDATA[<p>之前的文章说到了<code>Route::get()</code>其实是一个别名后的<code>Facade</code>然后最终通过魔术方法调用了<code>get()</code>之类的方法.但是在追踪到如下代码的时候就断层了.我们只看到了实例化了路由对象但是没看到具体的路由实现在哪.那么我们下面就来尝试揭秘</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">if</span> <span class="p">(</span><span class="k">static</span><span class="o">::</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="nv">$resolvedInstance</span><span class="p">[</span><span class="nv">$name</span><span class="p">]</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="nv">$app</span><span class="p">[</span><span class="nv">$name</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div><p>Laravel的Application实际上是一个IOC容器,关于IOC容器的解释可以<!-- raw HTML omitted -->看这篇文章<!-- raw HTML omitted -->引用这篇文章内的一段话</p>
+<blockquote>
+<p>一个类要被容器所能够提取,必须要先注册至这个容器.既然 laravel 称这个容器叫做服务容器,那么我们需要某个服务,就得先注册、绑定这个服务到容器,那么提供服务并绑定服务至容器的东西,就是 服务提供者（ServiceProvider）。</p>
+</blockquote>
+<p>那可以理解我们的<code>$app[$name]</code>实际是一个服务的提取过程,所以我们还是回归到容器内吧
+<code>Illuminate/Foundation/Application.php</code>查看构造函数</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$basePath</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$basePath</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setBasePath</span><span class="p">(</span><span class="nv">$basePath</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerBaseBindings</span><span class="p">();</span>
+    <span class="c1">// 在这里注册了基础的服务提供者
+</span><span class="c1"></span>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerBaseServiceProviders</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerCoreContainerAliases</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">registerBaseServiceProviders</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">EventServiceProvider</span><span class="p">(</span><span class="nv">$this</span><span class="p">));</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">LogServiceProvider</span><span class="p">(</span><span class="nv">$this</span><span class="p">));</span>
+    <span class="c1">// 注册路由服务提供者
+</span><span class="c1"></span>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">RoutingServiceProvider</span><span class="p">(</span><span class="nv">$this</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div><p>然后我们去看下一下<code>RoutingServiceProvider</code>的源码,发现了<code>register</code>函数</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">register</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// 这里注册了路由的实际Provider
+</span><span class="c1"></span>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerRouter</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerUrlGenerator</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerRedirector</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerPsrRequest</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerPsrResponse</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerResponseFactory</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerControllerDispatcher</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div><p>那这个<code>register</code>函数又是何时被调用的?实际如果我们查看刚才的<code>$this-&gt;register(new RoutingServiceProvider($this));</code>的<code>register</code>方法就可以看到实际是在容器内注册的</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">register</span><span class="p">(</span><span class="nv">$provider</span><span class="p">,</span> <span class="nv">$force</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="nv">$registered</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getProvider</span><span class="p">(</span><span class="nv">$provider</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="o">!</span> <span class="nv">$force</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$registered</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">is_string</span><span class="p">(</span><span class="nv">$provider</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$provider</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">resolveProvider</span><span class="p">(</span><span class="nv">$provider</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// 这里注册
+</span><span class="c1"></span>    <span class="nv">$provider</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">property_exists</span><span class="p">(</span><span class="nv">$provider</span><span class="p">,</span> <span class="s1">&#39;bindings&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$provider</span><span class="o">-&gt;</span><span class="na">bindings</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bind</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">property_exists</span><span class="p">(</span><span class="nv">$provider</span><span class="p">,</span> <span class="s1">&#39;singletons&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$provider</span><span class="o">-&gt;</span><span class="na">singletons</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">singleton</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">markAsRegistered</span><span class="p">(</span><span class="nv">$provider</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isBooted</span><span class="p">())</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bootProvider</span><span class="p">(</span><span class="nv">$provider</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$provider</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>现在我们回头去看具体被注册的<code>provider</code>吧.</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">function</span> <span class="nf">registerRouter</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">singleton</span><span class="p">(</span><span class="s1">&#39;router&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 终于找到了实际的Route了
+</span><span class="c1"></span>        <span class="k">return</span> <span class="k">new</span> <span class="nx">Router</span><span class="p">(</span><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;events&#39;</span><span class="p">],</span> <span class="nv">$app</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div><p>然后我们去看<code>Illuminate/Routing/Router.php</code>就会发现<code>get</code>方法就定义在这里了.</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">get</span><span class="p">(</span><span class="nv">$uri</span><span class="p">,</span> <span class="nv">$action</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addRoute</span><span class="p">([</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;HEAD&#39;</span><span class="p">],</span> <span class="nv">$uri</span><span class="p">,</span> <span class="nv">$action</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><p>好,至此我们找到了真正的路由实现在哪里,可是<code>static::$app[$name];</code>又是怎么根据前一篇文章提到的<code>router</code>将Facade与具体的服务关联起来的?下片文章我们在继续探索.</p>]]></content>
+		</item>
+		
+		<item>
+			<title>Laravel学习-Facade</title>
+			<link>https://abianji.com/posts/2019-09-25/laravel-study-facade/</link>
+			<pubDate>Wed, 25 Sep 2019 16:11:23 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2019-09-25/laravel-study-facade/</guid>
+			<description>&lt;p&gt;在web服务框架学习首要面对的一个问题是路由,Laravel的路由是怎么实现的呢?先总结一下,Laravel暴露给我们的路由其实是一个别名后的Facade,那我们就先看看什么是Facade吧&lt;/p&gt;</description>
+			<content type="html"><![CDATA[<p>在web服务框架学习首要面对的一个问题是路由,Laravel的路由是怎么实现的呢?先总结一下,Laravel暴露给我们的路由其实是一个别名后的Facade,那我们就先看看什么是Facade吧</p>
+<p>在<code>public/index.php</code>中是Laravel的启动目录所以我们先看一下index.php文件内容</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="c1">// 引入引导
+</span><span class="c1"></span><span class="k">require</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="c1">// 应用程序核心
+</span><span class="c1"></span><span class="nv">$app</span> <span class="o">=</span> <span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../bootstrap/app.php&#39;</span><span class="p">;</span>
+
+</code></pre></div><p>我们的web路由在routes/web.php内定义的</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="c1">// get请求路由
+</span><span class="c1"></span><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span>
+    <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+    <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;Index&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div><p>我们如果安装了ide_help后会发现这个Route实际是一个<code>Facade</code>.路径为<code>\Illuminate\Support\Facades\Route</code>然后我们看一下它的源码</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">class</span> <span class="nc">Route</span> <span class="k">extends</span> <span class="nx">Facade</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getFacadeAccessor</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;router&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>可以看到这是一个继承自<code>Facade</code>的子类,其中也只有一个<code>getFacadeAccessor</code>方法返回了一个字符串<code>router</code>那么<code>Route::get()</code>是怎么来的呢？我们继续看下Facade发现也没有所谓的<code>get()</code>方法,但是我们却在类的最下面发现了一个php的魔术方法<code>__callStatic</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php">
+<span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="fm">__callStatic</span><span class="p">(</span><span class="nv">$method</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$instance</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">getFacadeRoot</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nv">$instance</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">RuntimeException</span><span class="p">(</span><span class="s1">&#39;A facade root has not been set.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$instance</span><span class="o">-&gt;</span><span class="nv">$method</span><span class="p">(</span><span class="o">...</span><span class="nv">$args</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><p>查阅资料后发现这个魔术方法是指当调用类的不存在静态方法时会触发这个方法的调用,好那我个人理解就是<code>get()</code>这个方法实际上在这里被调用了.然后我们继续看下<code>getFacadeRoot</code>方法</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getFacadeRoot</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="na">resolveFacadeInstance</span><span class="p">(</span><span class="k">static</span><span class="o">::</span><span class="na">getFacadeAccessor</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div><p>这个方法又调用了<code>resolveFacadeInstance</code>这个方法内接收了<code>getFacadeAccessor</code>函数的返回.回忆一下<code>getFacadeAccessor</code>是不是在刚才<code>Route</code>子类内覆盖过并返回一个字符串<code>route</code>,好那么继续看<code>resolveFacadeInstance</code>实现</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">resolveFacadeInstance</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">is_object</span><span class="p">(</span><span class="nv">$name</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// 这里做了一层缓存方便快速调用
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="k">static</span><span class="o">::</span><span class="nv">$resolvedInstance</span><span class="p">[</span><span class="nv">$name</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="nv">$resolvedInstance</span><span class="p">[</span><span class="nv">$name</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="c1">// 直接拿字符串去$app上实例化了
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">static</span><span class="o">::</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="nv">$resolvedInstance</span><span class="p">[</span><span class="nv">$name</span><span class="p">]</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="nv">$app</span><span class="p">[</span><span class="nv">$name</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>看到这里可能会有些懵逼.为啥<code>$app[$name]</code>就返回了实例了.<code>$app</code>又是啥.实际上<code>$app</code>来自于<code>Facade</code>类的静态方法<code>setFacadeApplication</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">setFacadeApplication</span><span class="p">(</span><span class="nv">$app</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">static</span><span class="o">::</span><span class="nv">$app</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p><!-- raw HTML omitted -->那么这个方法什么时候被调用的？我们查找引用发现是在<code>Illuminate/Foundation/Bootstrap/RegisterFacades.php</code>内被调用的<!-- raw HTML omitted --></p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">class</span> <span class="nc">RegisterFacades</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">bootstrap</span><span class="p">(</span><span class="nx">Application</span> <span class="nv">$app</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">Facade</span><span class="o">::</span><span class="na">clearResolvedInstances</span><span class="p">();</span>
+        <span class="c1">// 看这里...
+</span><span class="c1"></span>        <span class="nx">Facade</span><span class="o">::</span><span class="na">setFacadeApplication</span><span class="p">(</span><span class="nv">$app</span><span class="p">);</span>
+        <span class="nx">AliasLoader</span><span class="o">::</span><span class="na">getInstance</span><span class="p">(</span><span class="nx">array_merge</span><span class="p">(</span>
+            <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="s1">&#39;config&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;app.aliases&#39;</span><span class="p">,</span> <span class="p">[]),</span>
+            <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nx">PackageManifest</span><span class="o">::</span><span class="na">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">aliases</span><span class="p">()</span>
+        <span class="p">))</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>好像越来越复杂了.这个bootstrap又是啥时候被调用的.好吧坚持住.我本人也尝试用查找引用去查发现没找到.然后我又回过头去看初始化的代码发现在<code>bootstrap/app.php</code>代码内除了实例化<code>Application</code>实际还创建了几个注册,其中重要的是<code>App\Http\Kernel</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Illuminate\Foundation\Application</span><span class="p">(</span>
+    <span class="nv">$_ENV</span><span class="p">[</span><span class="s1">&#39;APP_BASE_PATH&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="nx">dirname</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// 注册Kernel到Container
+</span><span class="c1"></span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">singleton</span><span class="p">(</span>
+    <span class="nx">Illuminate\Contracts\Http\Kernel</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="nx">App\Http\Kernel</span><span class="o">::</span><span class="na">class</span>
+<span class="p">);</span>
+</code></pre></div><p>然后我们看下<code>Kernel</code>的实现,发现里面定义了一堆中间件数组,我们先不管这些,继续看它的父类<code>HttpKernel</code>,wow..代码真是多..其实当前有用的就是<code>handle</code>方法,我们先看下实现然后在去看是在哪调用的<code>handle</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">enableHttpMethodParameterOverride</span><span class="p">();</span>
+        <span class="c1">// 主要看这个方法接收了$request参数
+</span><span class="c1"></span>        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sendRequestThroughRouter</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">reportException</span><span class="p">(</span><span class="nv">$e</span><span class="p">);</span>
+
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">renderException</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$e</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Throwable</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">reportException</span><span class="p">(</span><span class="nv">$e</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FatalThrowableError</span><span class="p">(</span><span class="nv">$e</span><span class="p">));</span>
+
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">renderException</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$e</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="p">[</span><span class="s1">&#39;events&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span>
+        <span class="k">new</span> <span class="nx">Events\RequestHandled</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">sendRequestThroughRouter</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">instance</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">,</span> <span class="nv">$request</span><span class="p">);</span>
+
+    <span class="nx">Facade</span><span class="o">::</span><span class="na">clearResolvedInstance</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">);</span>
+    <span class="c1">// 看这个引导方法
+</span><span class="c1"></span>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Pipeline</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="p">))</span>
+                <span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span>
+                <span class="o">-&gt;</span><span class="na">through</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">shouldSkipMiddleware</span><span class="p">()</span> <span class="o">?</span> <span class="p">[]</span> <span class="o">:</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">middleware</span><span class="p">)</span>
+                <span class="o">-&gt;</span><span class="na">then</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatchToRouter</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">bootstrap</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// 就是这里..先调用了bootstrappers
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">hasBeenBootstrapped</span><span class="p">())</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">bootstrapWith</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bootstrappers</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 这个方法都返回了些啥？
+</span><span class="c1"></span><span class="k">protected</span> <span class="k">function</span> <span class="nf">bootstrappers</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bootstrappers</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 发现什么了么?RegisterFacades对。就是它
+</span><span class="c1"></span><span class="k">protected</span> <span class="nv">$bootstrappers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nx">\Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="nx">\Illuminate\Foundation\Bootstrap\LoadConfiguration</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="nx">\Illuminate\Foundation\Bootstrap\HandleExceptions</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="nx">\Illuminate\Foundation\Bootstrap\RegisterFacades</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="nx">\Illuminate\Foundation\Bootstrap\RegisterProviders</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="nx">\Illuminate\Foundation\Bootstrap\BootProviders</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+<span class="p">];</span>
+</code></pre></div><p>看了三个方法终于找到了<code>RegisterFacades</code>在哪出现了.然后实际上这个引导数组又作为参数传到了<code>Illuminate/Foundation/Application.php</code>内的<code>bootstrapWith</code>方法内,还是看源码吧.</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">bootstrapWith</span><span class="p">(</span><span class="k">array</span> <span class="nv">$bootstrappers</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hasBeenBootstrapped</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$bootstrappers</span> <span class="k">as</span> <span class="nv">$bootstrapper</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="p">[</span><span class="s1">&#39;events&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="s1">&#39;bootstrapping: &#39;</span><span class="o">.</span><span class="nv">$bootstrapper</span><span class="p">,</span> <span class="p">[</span><span class="nv">$this</span><span class="p">]);</span>
+        <span class="c1">// 循环刚才的bootstrap类数组调用了make方法然后调用了bootstrap()
+</span><span class="c1"></span>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nv">$bootstrapper</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="p">[</span><span class="s1">&#39;events&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="s1">&#39;bootstrapped: &#39;</span><span class="o">.</span><span class="nv">$bootstrapper</span><span class="p">,</span> <span class="p">[</span><span class="nv">$this</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>实际上<code>make</code>方法内处理也相对复杂,不过针对当前来说就是调用了php的反射<code>ReflectionClass</code>来实例化了类,紧接这调用了<code>RegisterFacades</code>内的<code>bootstrap</code>方法.我们可以回头去看下<!-- raw HTML omitted --><!-- raw HTML omitted -->这个类的实现<!-- raw HTML omitted --><!-- raw HTML omitted -->.好吧,我们终于知道了<code>$app</code>是怎么到<code>Facade</code>内的了。刚才说的<code>handler</code>方法实际是在<code>public/index.php</code>内就被调用了,可以看下代码</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="nv">$kernel</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nx">Illuminate\Contracts\Http\Kernel</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="c1">// 看这里...
+</span><span class="c1"></span><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$kernel</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span>
+    <span class="nv">$request</span> <span class="o">=</span> <span class="nx">Illuminate\Http\Request</span><span class="o">::</span><span class="na">capture</span><span class="p">()</span>
+<span class="p">);</span>
+</code></pre></div><p>但是这一切貌似都断层了,说了一大堆<code>Route::get()</code>呢?emmm..看下一篇笔记吧.</p>]]></content>
+		</item>
+		
+		<item>
+			<title>golang 的fmt</title>
+			<link>https://abianji.com/posts/2019-06-20/go-print-fmt/</link>
+			<pubDate>Thu, 20 Jun 2019 13:39:47 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2019-06-20/go-print-fmt/</guid>
+			<description>&lt;p&gt;golang 的fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf。&lt;/p&gt;</description>
+			<content type="html"><![CDATA[<p>golang 的fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 定义示例类型和变量</span>
+<span class="nb">type</span> Human struct <span class="o">{</span>
+    Name string
+<span class="o">}</span>
+
+var <span class="nv">people</span> <span class="o">=</span> Human<span class="o">{</span>Name:<span class="s2">&#34;zhangsan&#34;</span><span class="o">}</span>
+</code></pre></div><p>普通占位符</p>
+<table>
+<thead>
+<tr>
+<th>占位符</th>
+<th>说明</th>
+<th>举例</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%v</td>
+<td>相应值的默认格式。</td>
+<td>Printf(&quot;%v&quot;, people)</td>
+<td>{zhangsan}</td>
+</tr>
+<tr>
+<td>%+v</td>
+<td>打印结构体时，会添加字段名</td>
+<td>Printf(&quot;%+v&quot;, people)</td>
+<td>{Name:zhangsan}</td>
+</tr>
+<tr>
+<td>%#v</td>
+<td>相应值的Go语法表示</td>
+<td>Printf(&quot;#v&quot;, people)</td>
+<td>main.Human{Name:&ldquo;zhangsan&rdquo;}</td>
+</tr>
+<tr>
+<td>%T</td>
+<td>相应值的类型的Go语法表示</td>
+<td>Printf(&quot;%T&quot;, people)</td>
+<td>main.Human</td>
+</tr>
+<tr>
+<td>%%</td>
+<td>字面上的百分号，并非值的占位符</td>
+<td>Printf(&quot;%%&quot;)</td>
+<td>%</td>
+</tr>
+</tbody>
+</table>
+<p>布尔占位符</p>
+<table>
+<thead>
+<tr>
+<th>占位符</th>
+<th>说明</th>
+<th>举例</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%t</td>
+<td>true 或 false</td>
+<td>Printf(&quot;%t&quot;, true)</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<p>整数占位符</p>
+<table>
+<thead>
+<tr>
+<th>占位符</th>
+<th>说明</th>
+<th>举例</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%b</td>
+<td>二进制表示</td>
+<td>Printf(&quot;%b&quot;, 5)</td>
+<td>101</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>相应Unicode码点所表示的字符</td>
+<td>Printf(&quot;%c&quot;, 0x4E2D)</td>
+<td>中</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>十进制表示</td>
+<td>Printf(&quot;%d&quot;, 0x12)</td>
+<td>18</td>
+</tr>
+<tr>
+<td>%o</td>
+<td>八进制表示</td>
+<td>Printf(&quot;%d&quot;, 10</td>
+<td>12</td>
+</tr>
+<tr>
+<td>%q</td>
+<td>单引号围绕的字符字面值，由Go语法安全地转义</td>
+<td>Printf(&quot;%q&quot;, 0x4E2D)</td>
+<td>&lsquo;中&rsquo;</td>
+</tr>
+<tr>
+<td>%x</td>
+<td>十六进制表示，字母形式为小写 a-f</td>
+<td>Printf(&quot;%x&quot;, 13)</td>
+<td>d</td>
+</tr>
+<tr>
+<td>%X</td>
+<td>十六进制表示，字母形式为大写 A-F</td>
+<td>Printf(&quot;%x&quot;, 13)</td>
+<td>D</td>
+</tr>
+<tr>
+<td>%U</td>
+<td>Unicode格式：U+1234，等同于 &ldquo;U+%04X&rdquo;</td>
+<td>Printf(&quot;%U&quot;, 0x4E2D)</td>
+<td>U+4E2D</td>
+</tr>
+</tbody>
+</table>
+<p>转载地址:
+<a href="https://golang.org/pkg/fmt/">golang官方fmt说明</a></p>]]></content>
+		</item>
+		
+		<item>
+			<title>python 函数参数</title>
+			<link>https://abianji.com/posts/2019-02-27/py-study-02/</link>
+			<pubDate>Wed, 27 Feb 2019 11:44:18 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2019-02-27/py-study-02/</guid>
+			<description>&lt;p&gt;Python中函数的参数有五种：位置参数(必选参数)、默认参数、可变参数、关键字参数、命名关键字参数。&lt;/p&gt;</description>
+			<content type="html"><![CDATA[<p>Python中函数的参数有五种：位置参数(必选参数)、默认参数、可变参数、关键字参数、命名关键字参数。</p>
+<h4 id="位置参数">位置参数</h4>
+<pre><code>def sayHello(name):
+    print('hello',name)
+
+sayHello('liseen')
+
+# output: hello liseen
+</code></pre><h4 id="默认参数">默认参数</h4>
+<pre><code>def sayHello(name='liseen'):
+    print('hello',name)
+sayHello()
+sayHello('fangshu')
+
+#output: 
+#hello liseen
+#hello fangshu
+</code></pre><h4 id="可变参数">可变参数</h4>
+<p>可变参数的函数允许传入任意个参数，这些可变参数在函数调用的时候会自动组装成一个tuple。</p>
+<pre><code>def sayWhat(*something):
+    for temp in something:
+        print(temp)
+
+sayWhat('hello','world','liseen')
+names = ['liseen','fanghsu','bubu']
+ages = (20,30,40)
+sayWhat(*names)
+sayWhat(*ages)
+
+#output:
+#hello
+#world
+#liseen
+#liseen
+#fanghsu
+#bubu
+#20
+#30
+#40
+</code></pre><h4 id="关键字参数">关键字参数</h4>
+<p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict</p>
+<pre><code>def sayWhat(**something):
+    for key,value in something.items():
+        print(key,value)
+
+sayWhat(name='liseen',wift='fangshu')
+
+#output:
+#name liseen
+#wift fangshu
+</code></pre><h4 id="命名关键字参数">命名关键字参数</h4>
+<p>对于关键字参数，函数的调用者可以传入任意不受限制的关键字参数。至于到底传入了哪些，就需要在函数内部通过kw检查</p>
+<pre><code>def person(name, age, **kw):
+    if 'city' in kw:
+        # 有city参数
+        pass
+    if 'job' in kw:
+        # 有job参数
+        pass
+    print('name:', name, 'age:', age, 'other:', kw)
+</code></pre><p>但是调用者仍可以传入不受限制的关键字参数：</p>
+<pre><code>&gt;&gt;&gt; person('Jack', 24, city='Beijing', addr='Chaoyang', zipcode=123456)
+</code></pre><p>如果要限制关键字参数的名字，就可以用命名关键字参数，例如，只接收city和job作为关键字参数。这种方式定义的函数如下：</p>
+<pre><code>def person(name, age, *, city, job):
+    print(name, age, city, job)
+</code></pre><p>和关键字参数**kw不同，命名关键字参数需要一个特殊分隔符*，*后面的参数被视为命名关键字参数。</p>
+<p>调用方式如下：</p>
+<pre><code>&gt;&gt;&gt; person('Jack', 24, city='Beijing', job='Engineer')
+Jack 24 Beijing Engineer
+</code></pre><p>命名关键字参数必须传入参数名，这和位置参数不同。如果没有传入参数名，调用将报错：</p>
+<pre><code>&gt;&gt;&gt; person('Jack', 24, 'Beijing', 'Engineer')
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: person() takes 2 positional arguments but 4 were given
+</code></pre><p>由于调用时缺少参数名city和job，Python解释器把这4个参数均视为位置参数，但person()函数仅接受2个位置参数。</p>
+<p>命名关键字参数可以有缺省值，从而简化调用：</p>
+<pre><code>def person(name, age, *, city='Beijing', job):
+    print(name, age, city, job)
+</code></pre><p>由于命名关键字参数city具有默认值，调用时，可不传入city参数：</p>
+<pre><code>&gt;&gt;&gt; person('Jack', 24, job='Engineer')
+Jack 24 Beijing Engineer
+</code></pre><p>使用命名关键字参数时，要特别注意，如果没有可变参数，就必须加一个<em>作为特殊分隔符。如果缺少</em>，Python解释器将无法识别位置参数和命名关键字参数：</p>
+<p>def person(name, age, city, job): # 缺少 *，city和job被视为位置参数 pass</p>
+<pre><code>def person(name, age, city, job):
+    # 缺少 *，city和job被视为位置参数
+    pass
+</code></pre><p>命名关键字参数有两种形式</p>
+<pre><code>def person(name,age,*,city,job)
+</code></pre><p>或者</p>
+<pre><code>def person(name,age,*city)
+</code></pre><p>参考地址:
+<a href="https://blog.csdn.net/devin_hugh/article/details/79309884">https://blog.csdn.net/devin_hugh/article/details/79309884</a></p>]]></content>
+		</item>
+		
+		<item>
+			<title>Pipenv:新一代Python项目环境与依赖管理工具</title>
+			<link>https://abianji.com/posts/2019-02-26/py-study-01/</link>
+			<pubDate>Tue, 26 Feb 2019 15:49:58 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2019-02-26/py-study-01/</guid>
+			<description>&lt;p&gt;Pipenv 是 Kenneth Reitz 在 2017 年 1 月发布的 Python 依赖管理工具，现在由 PyPA 维护。你可以把它看做是 pip 和 virtualenv 的组合体，而它基于的 Pipfile 则用来替代旧的依赖记录方式（requirements.txt）&lt;/p&gt;</description>
+			<content type="html"><![CDATA[<p>Pipenv 是 Kenneth Reitz 在 2017 年 1 月发布的 Python 依赖管理工具，现在由 PyPA 维护。你可以把它看做是 pip 和 virtualenv 的组合体，而它基于的 Pipfile 则用来替代旧的依赖记录方式（requirements.txt）</p>
+<p>很久很久以前,使用 virtualenvs 安装虚拟环境,后来出 Python3.4 以后可以使用类似如下命令创建</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">python3 -m venv xxx
+</code></pre></div><p>但是&hellip;今天读书发现火箭已经到了火星了,而我在井底..当前只需要用 pip 去安装一个叫 pipenv 的包就可以全家桶搞定,类似 node 的 npm</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip3 install pipenv
+pipenv --version
+pipenv, version 2018.11.26
+</code></pre></div><p>然后 cd 到我们的工作目录下直接运行如下命令</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv install
+Creating a virtualenv <span class="k">for</span> this project…
+Pipfile: /Users/admin/liseen/python-study/helloflask/Pipfile
+Using /usr/local/opt/python/bin/python3.7 <span class="o">(</span>3.7.0<span class="o">)</span> to create virtualenv…
+⠇ Creating virtual environment...Already using interpreter /usr/local/opt/python/bin/python3.7
+Using base prefix <span class="s1">&#39;/usr/local/Cellar/python/3.7.0/Frameworks/Python.framework/Versions/3.7&#39;</span>
+New python executable in /Users/admin/.local/share/virtualenvs/helloflask-7D2RnkZA/bin/python3.7
+Also creating executable in /Users/admin/.local/share/virtualenvs/helloflask-7D2RnkZA/bin/python
+Installing setuptools, pip, wheel...
+<span class="k">done</span>.
+
+✔ Successfully created virtual environment!
+Virtualenv location: /Users/admin/.local/share/virtualenvs/helloflask-7D2RnkZA
+Creating a Pipfile <span class="k">for</span> this project…
+Pipfile.lock not found, creating…
+Locking <span class="o">[</span>dev-packages<span class="o">]</span> dependencies…
+Locking <span class="o">[</span>packages<span class="o">]</span> dependencies…
+Updated Pipfile.lock <span class="o">(</span>a65489<span class="o">)</span>!
+Installing dependencies from Pipfile.lock <span class="o">(</span>a65489<span class="o">)</span>…
+  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ 0/0 — 00:00:00
+To activate this project<span class="err">&#39;</span>s virtualenv, run pipenv shell.
+Alternatively, run a <span class="nb">command</span> inside the virtualenv with pipenv run.
+</code></pre></div><p>狂拽酷炫吊炸天的创建好了虚拟环境.使用如下命令激活与退出</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv shell <span class="c1"># 激活虚拟环境</span>
+<span class="nb">exit</span>  <span class="c1"># 退出虚拟环境</span>
+</code></pre></div><p>更帅的是可以不用激活的情况下直接以虚拟环境俩运行代码</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv run python hello.py
+</code></pre></div><p>环境安装好后,就可以安装依赖了</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pipenv install flask
+Installing flask…
+Adding flask to Pipfile<span class="err">&#39;</span>s <span class="o">[</span>packages<span class="o">]</span>…
+✔ Installation Succeeded
+Pipfile.lock <span class="o">(</span>662286<span class="o">)</span> out of date, updating to <span class="o">(</span>a65489<span class="o">)</span>…
+Locking <span class="o">[</span>dev-packages<span class="o">]</span> dependencies…
+Locking <span class="o">[</span>packages<span class="o">]</span> dependencies…
+✔ Success!
+Updated Pipfile.lock <span class="o">(</span>662286<span class="o">)</span>!
+Installing dependencies from Pipfile.lock <span class="o">(</span>662286<span class="o">)</span>…
+  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ 6/6 — 00:00:01
+<span class="o">(</span>helloflask<span class="o">)</span>
+</code></pre></div><p>安装 pack 特别慢
+进到项目内查看 Pipfile 更改镜像</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">url</span> <span class="o">=</span> <span class="s2">&#34;https://mirrors.aliyun.com/pypi/simple&#34;</span>
+</code></pre></div><p>lock 特别慢可以先使用参数跳过 lock &ndash;skip-lock</p>
+<p>自定义虚拟环境文件夹路径</p>
+<p>默认情况下，Pipenv 会自动为你选择虚拟环境的存储位置，在 Windows 下通常为 C:\Users\Administrator.virtualenvs\，而 Linux 或 macOS 则为~/.local/share/virtualenvs/。如果你想将虚拟环境文件夹在项目目录内创建，可以设置环境变量 PIPENV_VENV_IN_PROJECT，这时名为.venv 的虚拟环境文件夹将在项目根目录被创建。另外你也可以通过 WORKON_HOME 环境变量来自定义存储路径。</p>
+<p>官方文档地址</p>
+<p><a href="https://pipenv.readthedocs.io/en/latest/">https://pipenv.readthedocs.io/en/latest/</a></p>]]></content>
+		</item>
+		
+		<item>
+			<title>Go Base Env</title>
+			<link>https://abianji.com/posts/2019-02-26/go-base-env/</link>
+			<pubDate>Tue, 26 Feb 2019 09:37:58 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2019-02-26/go-base-env/</guid>
+			<description>&lt;p&gt;Go 基础环境安装,开发工具,插件配置,以及基础命令使用.&lt;/p&gt;</description>
+			<content type="html"><![CDATA[<p>Go 基础环境安装,开发工具,插件配置,以及基础命令使用.</p>
+<h4 id="go-开发环境的安装以及配置">Go 开发环境的安装以及配置</h4>
+<ul>
+<li>操作系统 macos</li>
+<li>编辑器vim &amp;&amp; vscode</li>
+</ul>
+<h5 id="压缩包安装">压缩包安装</h5>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">curl -O https://dl.google.com/go/go1.12.5.darwin-amd64.tar.gz
+
+<span class="c1"># 选择指定系统下的版本解压缩到/user/local目录下</span>
+tar -C /usr/local -xzf go1.12.5.darwin-amd64.tar.gz
+
+<span class="c1">#配置环境变量</span>
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;/usr/local/go/bin:</span><span class="nv">$PATH</span><span class="s2">&#34;</span>
+
+<span class="c1"># 确认安装</span>
+go version
+
+<span class="c1"># go version go1.12.5 darwin/amd64</span>
+</code></pre></div><h5 id="mac下可以直接使用brew-安装-go">mac下可以直接使用brew 安装 go</h5>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ brew install go
+$ go version
+go version go1.10.3 darwin/amd64
+</code></pre></div><h5 id="vscode下载">vscode下载</h5>
+<p><em>vscode</em>: <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p>
+<ol>
+<li>插件选择安装go</li>
+<li>安装vpn或者使用shadowsocks开启http代理下载go插件内的各种依赖包</li>
+</ol>
+<h5 id="配置环境变量gopath-gobin">配置环境变量GOPATH GOBIN</h5>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ go env
+
+vim ~/.zshrc
+
+<span class="nb">export</span> <span class="nv">GOPATH</span><span class="o">=</span>/Users/xxxxx/golang-study
+<span class="nb">export</span> <span class="nv">GOBIN</span><span class="o">=</span><span class="nv">$GOPATH</span>/bin
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$GOBIN</span>
+</code></pre></div><p>当环境变量配置完后我们就可以在指定的目录下创建工作目录了.当前我使用的golang-study作为工作空间,在此目录内go约定使用三个目标文件夹分别是</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">├── bin  <span class="c1">#存放编译后的可执行文件</span>
+├── pkg  <span class="c1">#存放包文件.a</span>
+└── src  <span class="c1">#源代码</span>
+</code></pre></div><h5 id="基础命令使用">基础命令使用</h5>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">build       compile packages and dependencies
+clean       remove object files and cached files
+doc         show documentation <span class="k">for</span> package or symbol
+fmt         gofmt <span class="o">(</span>reformat<span class="o">)</span> package sources
+get         download and install packages and dependencies
+install     compile and install packages and dependencies
+run         compile and run Go program
+<span class="nb">test</span>        <span class="nb">test</span> packages
+version     print Go version
+</code></pre></div><p>其中常用的命令是go run ,go build ,go get ,go install ,go test.</p>]]></content>
+		</item>
+		
+		<item>
+			<title>Go Base Intro</title>
+			<link>https://abianji.com/posts/2019-02-25/go-base-intro/</link>
+			<pubDate>Mon, 25 Feb 2019 14:40:31 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2019-02-25/go-base-intro/</guid>
+			<description>&lt;p&gt;Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言&lt;/p&gt;</description>
+			<content type="html"><![CDATA[<p>Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言</p>
+<h3 id="介绍">介绍</h3>
+<p>Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言。为了方便搜索和识别，有时会将其称为Golang。</p>
+<p>Go语言于2009年11月正式宣布推出，成为开放源代码项目，并在Linux及Mac OS X平台上进行了实现，后来追加了Windows系统下的实现。</p>
+<p>2012年，Go语言的创造者们发布了它的1.0版本。Go语言的创造者们包括Unix操作系统和B语言（C语言的前身）的创造者、UTF-8编码的发明者Ken Thompson，Unix项目的参与者、UTF-8编码的联合创始人和Limbo编程语言（Go语言的前身）的创造者Rob Pike，以及著名的Javascript引擎V8的创造者Robert Griesemer。</p>
+<h3 id="用go解决现代编程难题">用Go解决现代编程难题</h3>
+<p>Go 在开发效率与性能之间做出了应有的权衡,Go的编译器速度非常快,类型系统简单且高效,Go拥有指针,但同时自带垃圾回收,不需要用户自己去管理内存。如下是Go的一
+些关键特性</p>
+<h4 id="开发速度">开发速度</h4>
+<p>编译大型的C或者C++项目及其的耗时,但是Go使用了更加智能的编译器,并简化了解决依赖库的算法,最终提供了更快的编译速度。在现代硬件上Go编译整个项目大概只消耗20秒</p>
+<h4 id="并发">并发</h4>
+<p>Go天生支持并发.goroutine,通道数据结构.</p>
+<h4 id="类型系统">类型系统</h4>
+<p>Go 语言提供了灵活的、无继承的类型系统，无需降低运行性能就能最大程度上复用代码。</p>
+<ul>
+<li>类型简单</li>
+<li>Go 接口对一组行为建模</li>
+</ul>
+<h4 id="内存管理">内存管理</h4>
+<p>不当的内存管理会导致程序崩溃或者内存泄漏，甚至让整个操作系统崩溃。Go 语言拥有现 代化的垃圾回收机制，能帮你解决这个难题。在其他系统语言(如 C 或者 C++)中，使用内存 前要先分配这段内存，而且使用完毕后要将其释放掉。哪怕只做错了一件事，都可能导致程序崩 溃或者内存泄漏。可惜，追踪内存是否还被使用本身就是十分艰难的事情，而要想支持多线程和 高并发，更是让这件事难上加难。虽然 Go 语言的垃圾回收会有一些额外的开销，但是编程时， 能显著降低开发难度。Go 语言把无趣的内存管理交给专业的编译器去做，而让程序员专注于更 有趣的事情</p>
+<h4 id="你好go">你好Go</h4>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">package main
+
+import <span class="s2">&#34;fmt&#34;</span>
+
+func main<span class="o">(){</span>
+
+    fmt.Printf<span class="o">(</span><span class="s2">&#34;Hello World!你好世界!&#34;</span><span class="o">)</span><span class="p">;</span>
+
+<span class="o">}</span>
+</code></pre></div>]]></content>
+		</item>
+		
+	</channel>
+</rss>

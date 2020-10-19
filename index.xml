@@ -1,101 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>阿比安吉</title>
+    <title>ABIANJI</title>
     <link>https://abianji.com/</link>
-    <description>Recent content on 阿比安吉</description>
+    <description>Recent content on ABIANJI</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 26 Sep 2019 14:37:03 +0800</lastBuildDate>
-    
-        <atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Thu, 26 Sep 2019 14:37:03 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel学习-服务容器(2)</title>
-      <link>https://abianji.com/code/2019-09-26/laravel-study-serviceprovider2/</link>
+      <link>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider2/</link>
       <pubDate>Thu, 26 Sep 2019 14:37:03 +0800</pubDate>
       
-      <guid>https://abianji.com/code/2019-09-26/laravel-study-serviceprovider2/</guid>
+      <guid>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider2/</guid>
       <description>&lt;p&gt;探秘的过程是非常有意思的,通过阅读代码我们可以更多的了解作者的思路为自己以及工作中总结经验,废话有点多.我们在之前的文章知道了看到了如下代码&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Laravel学习-服务容器(1)</title>
-      <link>https://abianji.com/code/2019-09-26/laravel-study-serviceprovider/</link>
+      <link>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider/</link>
       <pubDate>Thu, 26 Sep 2019 09:54:50 +0800</pubDate>
       
-      <guid>https://abianji.com/code/2019-09-26/laravel-study-serviceprovider/</guid>
+      <guid>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider/</guid>
       <description>&lt;p&gt;之前的文章说到了&lt;code&gt;Route::get()&lt;/code&gt;其实是一个别名后的&lt;code&gt;Facade&lt;/code&gt;然后最终通过魔术方法调用了&lt;code&gt;get()&lt;/code&gt;之类的方法.但是在追踪到如下代码的时候就断层了.我们只看到了实例化了路由对象但是没看到具体的路由实现在哪.那么我们下面就来尝试揭秘&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Laravel学习-Facade</title>
-      <link>https://abianji.com/code/2019-09-25/laravel-study-facade/</link>
+      <link>https://abianji.com/posts/2019-09-25/laravel-study-facade/</link>
       <pubDate>Wed, 25 Sep 2019 16:11:23 +0800</pubDate>
       
-      <guid>https://abianji.com/code/2019-09-25/laravel-study-facade/</guid>
+      <guid>https://abianji.com/posts/2019-09-25/laravel-study-facade/</guid>
       <description>&lt;p&gt;在web服务框架学习首要面对的一个问题是路由,Laravel的路由是怎么实现的呢?先总结一下,Laravel暴露给我们的路由其实是一个别名后的Facade,那我们就先看看什么是Facade吧&lt;/p&gt;</description>
     </item>
     
     <item>
+      <title>Gitbook</title>
+      <link>https://abianji.com/page/gitbook/</link>
+      <pubDate>Fri, 02 Aug 2019 17:58:12 +0800</pubDate>
+      
+      <guid>https://abianji.com/page/gitbook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://abianji.com/page/about/</link>
+      <pubDate>Thu, 01 Aug 2019 11:38:03 +0800</pubDate>
+      
+      <guid>https://abianji.com/page/about/</guid>
+      <description>我想变成一朵向日葵我开心时向着太阳我不开心的时候嗑瓜子</description>
+    </item>
+    
+    <item>
       <title>golang 的fmt</title>
-      <link>https://abianji.com/code/2019-06-20/go-print-fmt/</link>
+      <link>https://abianji.com/posts/2019-06-20/go-print-fmt/</link>
       <pubDate>Thu, 20 Jun 2019 13:39:47 +0800</pubDate>
       
-      <guid>https://abianji.com/code/2019-06-20/go-print-fmt/</guid>
+      <guid>https://abianji.com/posts/2019-06-20/go-print-fmt/</guid>
       <description>&lt;p&gt;golang 的fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Postgresql Install Mac</title>
-      <link>https://abianji.com/link/2019-02-27/postgresql-install-mac/</link>
-      <pubDate>Wed, 27 Feb 2019 16:11:26 +0800</pubDate>
-      
-      <guid>https://abianji.com/link/2019-02-27/postgresql-install-mac/</guid>
-      <description>Mac 上安装和使用PostgreSQL的方法</description>
-    </item>
-    
-    <item>
       <title>python 函数参数</title>
-      <link>https://abianji.com/code/2019-02-27/py-study-02/</link>
+      <link>https://abianji.com/posts/2019-02-27/py-study-02/</link>
       <pubDate>Wed, 27 Feb 2019 11:44:18 +0800</pubDate>
       
-      <guid>https://abianji.com/code/2019-02-27/py-study-02/</guid>
+      <guid>https://abianji.com/posts/2019-02-27/py-study-02/</guid>
       <description>&lt;p&gt;Python中函数的参数有五种：位置参数(必选参数)、默认参数、可变参数、关键字参数、命名关键字参数。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Pipenv:新一代Python项目环境与依赖管理工具</title>
-      <link>https://abianji.com/code/2019-02-26/py-study-01/</link>
+      <link>https://abianji.com/posts/2019-02-26/py-study-01/</link>
       <pubDate>Tue, 26 Feb 2019 15:49:58 +0800</pubDate>
       
-      <guid>https://abianji.com/code/2019-02-26/py-study-01/</guid>
+      <guid>https://abianji.com/posts/2019-02-26/py-study-01/</guid>
       <description>&lt;p&gt;Pipenv 是 Kenneth Reitz 在 2017 年 1 月发布的 Python 依赖管理工具，现在由 PyPA 维护。你可以把它看做是 pip 和 virtualenv 的组合体，而它基于的 Pipfile 则用来替代旧的依赖记录方式（requirements.txt）&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>妓和不如</title>
-      <link>https://abianji.com/audio/2019-02-26/not-as-good/</link>
-      <pubDate>Tue, 26 Feb 2019 13:45:12 +0800</pubDate>
-      
-      <guid>https://abianji.com/audio/2019-02-26/not-as-good/</guid>
-      <description>我们见识到的世界比任何一代人都大,可是对自我的认知却如此的浅薄。我们很难找到自己想要做的事情,最后&amp;hellip;活成了一副得过且过面无表情的样子。</description>
-    </item>
-    
-    <item>
       <title>Go Base Env</title>
-      <link>https://abianji.com/code/2019-02-26/go-base-env/</link>
+      <link>https://abianji.com/posts/2019-02-26/go-base-env/</link>
       <pubDate>Tue, 26 Feb 2019 09:37:58 +0800</pubDate>
       
-      <guid>https://abianji.com/code/2019-02-26/go-base-env/</guid>
+      <guid>https://abianji.com/posts/2019-02-26/go-base-env/</guid>
       <description>&lt;p&gt;Go 基础环境安装,开发工具,插件配置,以及基础命令使用.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Go Base Intro</title>
-      <link>https://abianji.com/code/2019-02-25/go-base-intro/</link>
+      <link>https://abianji.com/posts/2019-02-25/go-base-intro/</link>
       <pubDate>Mon, 25 Feb 2019 14:40:31 +0800</pubDate>
       
-      <guid>https://abianji.com/code/2019-02-25/go-base-intro/</guid>
+      <guid>https://abianji.com/posts/2019-02-25/go-base-intro/</guid>
       <description>&lt;p&gt;Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言&lt;/p&gt;</description>
     </item>
     
