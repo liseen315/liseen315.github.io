@@ -6,11 +6,71 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Wed, 21 Oct 2020 09:26:24 +0800</lastBuildDate>
+		<lastBuildDate>Wed, 21 Oct 2020 09:57:10 +0800</lastBuildDate>
 		<atom:link href="https://abianji.com/posts/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
-			<title>Leetcode学习-两数之和</title>
+			<title>Leetcode学习 一维数组的动态和</title>
+			<link>https://abianji.com/posts/2020-10-21/leetcode-study-running-sum-of-1d-array/</link>
+			<pubDate>Wed, 21 Oct 2020 09:57:10 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2020-10-21/leetcode-study-running-sum-of-1d-array/</guid>
+			<description>给你一个数组 nums 。数组「动态和」的计算公式为：runningSum[i] = sum(nums[0]…nums[i]) 。 请返回 nums 的动态和。 示例1 输</description>
+			<content type="html"><![CDATA[<p>给你一个数组 nums 。数组「动态和」的计算公式为：runningSum[i] = sum(nums[0]…nums[i]) 。</p>
+<p>请返回 nums 的动态和。</p>
+<p><strong>示例1</strong></p>
+<pre><code>输入：nums = [1,2,3,4]
+输出：[1,3,6,10]
+解释：动态和计算过程为 [1, 1+2, 1+2+3, 1+2+3+4] 。
+</code></pre><p><strong>示例2</strong></p>
+<pre><code>输入：nums = [1,1,1,1,1]
+输出：[1,2,3,4,5]
+解释：动态和计算过程为 [1, 1+1, 1+1+1, 1+1+1+1, 1+1+1+1+1] 。
+</code></pre><p><strong>示例3</strong></p>
+<pre><code>输入：nums = [3,1,2,10,1]
+输出：[3,4,6,16,17]
+</code></pre><p><strong>提示</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 1000</code></li>
+<li><code>-10^6 &lt;= nums[i] &lt;= 10^6</code></li>
+</ul>
+<p><strong>题解(javascript)</strong></p>
+<hr>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 循环累加记录法
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">runningSum</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">bcList</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="kd">let</span> <span class="nx">preNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">nums</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="c1">// 循环累加
+</span><span class="c1"></span>        <span class="kd">let</span> <span class="nx">currentValue</span> <span class="o">=</span> <span class="nx">preNum</span><span class="o">+</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="nx">bcList</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">currentValue</span><span class="p">);</span>
+        <span class="c1">// 记录之前累加过的数值
+</span><span class="c1"></span>        <span class="nx">preNum</span> <span class="o">=</span> <span class="nx">currentValue</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">bcList</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div><hr>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/*
+</span><span class="cm">  Array高级函数reduce()
+</span><span class="cm">  函数接收如下四个参数
+</span><span class="cm">  Accumulator (acc) (累计器)
+</span><span class="cm">  Current Value (cur) (当前值)
+</span><span class="cm">  Current Index (idx) (当前索引可选)
+</span><span class="cm">  Source Array (src) (源数组可选)
+</span><span class="cm">*/</span>
+<span class="kd">var</span> <span class="nx">runningSum</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 高阶函数直接累加并覆盖nums返回
+</span><span class="c1"></span>    <span class="nx">nums</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">prev</span><span class="p">,</span> <span class="nx">curr</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">nums</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="nx">prev</span> <span class="o">+</span> <span class="nx">curr</span>
+        <span class="k">return</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+    <span class="p">})</span>
+    <span class="k">return</span> <span class="nx">nums</span>
+<span class="p">};</span>
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>Leetcode学习 两数之和</title>
 			<link>https://abianji.com/posts/2020-10-21/leetcode-study-two-sum/</link>
 			<pubDate>Wed, 21 Oct 2020 09:26:24 +0800</pubDate>
 			

@@ -7,9 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 21 Oct 2020 09:26:24 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Oct 2020 09:57:10 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Leetcode学习-两数之和</title>
+      <title>Leetcode学习 一维数组的动态和</title>
+      <link>https://abianji.com/posts/2020-10-21/leetcode-study-running-sum-of-1d-array/</link>
+      <pubDate>Wed, 21 Oct 2020 09:57:10 +0800</pubDate>
+      
+      <guid>https://abianji.com/posts/2020-10-21/leetcode-study-running-sum-of-1d-array/</guid>
+      <description>给你一个数组 nums 。数组「动态和」的计算公式为：runningSum[i] = sum(nums[0]…nums[i]) 。 请返回 nums 的动态和。 示例1 输</description>
+    </item>
+    
+    <item>
+      <title>Leetcode学习 两数之和</title>
       <link>https://abianji.com/posts/2020-10-21/leetcode-study-two-sum/</link>
       <pubDate>Wed, 21 Oct 2020 09:26:24 +0800</pubDate>
       
@@ -87,15 +96,6 @@
       
       <guid>https://abianji.com/posts/2019-02-26/py-study-01/</guid>
       <description>&lt;p&gt;Pipenv 是 Kenneth Reitz 在 2017 年 1 月发布的 Python 依赖管理工具，现在由 PyPA 维护。你可以把它看做是 pip 和 virtualenv 的组合体，而它基于的 Pipfile 则用来替代旧的依赖记录方式（requirements.txt）&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Go Base Env</title>
-      <link>https://abianji.com/posts/2019-02-26/go-base-env/</link>
-      <pubDate>Tue, 26 Feb 2019 09:37:58 +0800</pubDate>
-      
-      <guid>https://abianji.com/posts/2019-02-26/go-base-env/</guid>
-      <description>&lt;p&gt;Go 基础环境安装,开发工具,插件配置,以及基础命令使用.&lt;/p&gt;</description>
     </item>
     
   </channel>
