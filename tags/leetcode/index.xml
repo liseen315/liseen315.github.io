@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 21 Oct 2020 09:57:10 +0800</lastBuildDate><atom:link href="https://abianji.com/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Oct 2020 15:05:11 +0800</lastBuildDate><atom:link href="https://abianji.com/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode学习 长按键入</title>
+      <link>https://abianji.com/posts/2020-10-21/leetcode-study-long-pressed-name/</link>
+      <pubDate>Wed, 21 Oct 2020 15:05:11 +0800</pubDate>
+      
+      <guid>https://abianji.com/posts/2020-10-21/leetcode-study-long-pressed-name/</guid>
+      <description>你的朋友正在使用键盘输入他的名字 name。偶尔，在键入字符 c 时，按键可能会被长按，而字符可能被输入 1 次或多次。 你将会检查键盘输入的字符 typ</description>
+    </item>
+    
     <item>
       <title>Leetcode学习 一维数组的动态和</title>
       <link>https://abianji.com/posts/2020-10-21/leetcode-study-running-sum-of-1d-array/</link>

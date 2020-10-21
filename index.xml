@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 21 Oct 2020 09:57:10 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Oct 2020 15:05:11 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode学习 长按键入</title>
+      <link>https://abianji.com/posts/2020-10-21/leetcode-study-long-pressed-name/</link>
+      <pubDate>Wed, 21 Oct 2020 15:05:11 +0800</pubDate>
+      
+      <guid>https://abianji.com/posts/2020-10-21/leetcode-study-long-pressed-name/</guid>
+      <description>你的朋友正在使用键盘输入他的名字 name。偶尔，在键入字符 c 时，按键可能会被长按，而字符可能被输入 1 次或多次。 你将会检查键盘输入的字符 typ</description>
+    </item>
+    
     <item>
       <title>Leetcode学习 一维数组的动态和</title>
       <link>https://abianji.com/posts/2020-10-21/leetcode-study-running-sum-of-1d-array/</link>
@@ -87,15 +96,6 @@
       
       <guid>https://abianji.com/posts/2019-02-27/py-study-02/</guid>
       <description>&lt;p&gt;Python中函数的参数有五种：位置参数(必选参数)、默认参数、可变参数、关键字参数、命名关键字参数。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Pipenv:新一代Python项目环境与依赖管理工具</title>
-      <link>https://abianji.com/posts/2019-02-26/py-study-01/</link>
-      <pubDate>Tue, 26 Feb 2019 15:49:58 +0800</pubDate>
-      
-      <guid>https://abianji.com/posts/2019-02-26/py-study-01/</guid>
-      <description>&lt;p&gt;Pipenv 是 Kenneth Reitz 在 2017 年 1 月发布的 Python 依赖管理工具，现在由 PyPA 维护。你可以把它看做是 pip 和 virtualenv 的组合体，而它基于的 Pipfile 则用来替代旧的依赖记录方式（requirements.txt）&lt;/p&gt;</description>
     </item>
     
   </channel>
