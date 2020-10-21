@@ -6,8 +6,56 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Thu, 26 Sep 2019 14:37:03 +0800</lastBuildDate>
+		<lastBuildDate>Wed, 21 Oct 2020 09:26:24 +0800</lastBuildDate>
 		<atom:link href="https://abianji.com/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Leetcode学习-两数之和</title>
+			<link>https://abianji.com/posts/2020-10-21/leetcode-study-two-sum/</link>
+			<pubDate>Wed, 21 Oct 2020 09:26:24 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2020-10-21/leetcode-study-two-sum/</guid>
+			<description>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。 你可以假设每种输入只会对应一个答</description>
+			<content type="html"><![CDATA[<p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。</p>
+<p><strong>示例:</strong></p>
+<pre><code>给定 nums = [2, 7, 11, 15], target = 9
+
+因为 nums[0] + nums[1] = 2 + 7 = 9
+所以返回 [0, 1]
+</code></pre><p><strong>题解(javascript)</strong></p>
+<hr>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 暴力破解法
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">twoSum</span> <span class="o">=</span> <span class="p">(</span><span class="nx">nums</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span> <span class="nx">nums</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="nx">j</span><span class="o">&lt;</span><span class="nx">nums</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// 依次循环数组内的每个元素如果前一个+后面的等于目标则返回索引
+</span><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">==</span> <span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="p">[</span><span class="nx">i</span><span class="p">,</span><span class="nx">j</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div><hr>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// Hash法
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">twoSum</span> <span class="o">=</span> <span class="p">(</span><span class="nx">nums</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">prevNums</span> <span class="o">=</span> <span class="p">{};</span> <span class="c1">// map存储出现过的数字,以数字为键索引为值           
+</span><span class="c1"></span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">nums</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">indexNum</span> <span class="o">=</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span> <span class="c1">// 循环数组元素
+</span><span class="c1"></span>      <span class="kr">const</span> <span class="nx">targetNum</span> <span class="o">=</span> <span class="nx">target</span> <span class="o">-</span> <span class="nx">indexNum</span><span class="p">;</span> <span class="c1">// 目标数值减去循环的元素即为两数中的另外一个目标数
+</span><span class="c1"></span>      <span class="kr">const</span> <span class="nx">targetIndex</span> <span class="o">=</span> <span class="nx">prevNums</span><span class="p">[</span><span class="nx">targetNum</span><span class="p">];</span> <span class="c1">// 从hashmap中读取是否存在对应的键
+</span><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">targetIndex</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// 如果存在对应的键则返回两数所在的索引
+</span><span class="c1"></span>          <span class="k">return</span> <span class="p">[</span><span class="nx">targetIndex</span><span class="p">,</span><span class="nx">i</span><span class="p">]</span>
+      <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+          <span class="c1">// 如果在map中不存在则记录数组索引与值到hash中
+</span><span class="c1"></span>          <span class="nx">prevNums</span><span class="p">[</span><span class="nx">indexNum</span><span class="p">]</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>]]></content>
+		</item>
 		
 		<item>
 			<title>Laravel学习-服务容器(2)</title>

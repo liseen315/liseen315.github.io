@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 26 Sep 2019 14:37:03 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Oct 2020 09:26:24 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode学习-两数之和</title>
+      <link>https://abianji.com/posts/2020-10-21/leetcode-study-two-sum/</link>
+      <pubDate>Wed, 21 Oct 2020 09:26:24 +0800</pubDate>
+      
+      <guid>https://abianji.com/posts/2020-10-21/leetcode-study-two-sum/</guid>
+      <description>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。 你可以假设每种输入只会对应一个答</description>
+    </item>
+    
     <item>
       <title>Laravel学习-服务容器(2)</title>
       <link>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider2/</link>
@@ -87,15 +96,6 @@
       
       <guid>https://abianji.com/posts/2019-02-26/go-base-env/</guid>
       <description>&lt;p&gt;Go 基础环境安装,开发工具,插件配置,以及基础命令使用.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Go Base Intro</title>
-      <link>https://abianji.com/posts/2019-02-25/go-base-intro/</link>
-      <pubDate>Mon, 25 Feb 2019 14:40:31 +0800</pubDate>
-      
-      <guid>https://abianji.com/posts/2019-02-25/go-base-intro/</guid>
-      <description>&lt;p&gt;Go语言是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言&lt;/p&gt;</description>
     </item>
     
   </channel>
