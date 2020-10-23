@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 21 Oct 2020 15:05:11 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Oct 2020 14:22:56 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode Study Move Zeroes</title>
+      <link>https://abianji.com/posts/2020-10-23/leetcode-study-move-zeroes/</link>
+      <pubDate>Fri, 23 Oct 2020 14:22:56 +0800</pubDate>
+      
+      <guid>https://abianji.com/posts/2020-10-23/leetcode-study-move-zeroes/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Leetcode学习 长按键入</title>
       <link>https://abianji.com/posts/2020-10-21/leetcode-study-long-pressed-name/</link>
@@ -87,15 +96,6 @@
       
       <guid>https://abianji.com/posts/2019-06-20/go-print-fmt/</guid>
       <description>&lt;p&gt;golang 的fmt 包实现了格式化I/O函数，类似于C的 printf 和 scanf。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>python 函数参数</title>
-      <link>https://abianji.com/posts/2019-02-27/py-study-02/</link>
-      <pubDate>Wed, 27 Feb 2019 11:44:18 +0800</pubDate>
-      
-      <guid>https://abianji.com/posts/2019-02-27/py-study-02/</guid>
-      <description>&lt;p&gt;Python中函数的参数有五种：位置参数(必选参数)、默认参数、可变参数、关键字参数、命名关键字参数。&lt;/p&gt;</description>
     </item>
     
   </channel>
