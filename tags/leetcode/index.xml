@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 23 Oct 2020 14:22:56 +0800</lastBuildDate><atom:link href="https://abianji.com/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Oct 2020 15:17:16 +0800</lastBuildDate><atom:link href="https://abianji.com/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode Study 左旋转字符串</title>
+      <link>https://abianji.com/posts/2020-10-26/leetcode-study-zuo-xuan-zhuan-zi-fu-chuan-lcof/</link>
+      <pubDate>Mon, 26 Oct 2020 15:17:16 +0800</pubDate>
+      
+      <guid>https://abianji.com/posts/2020-10-26/leetcode-study-zuo-xuan-zhuan-zi-fu-chuan-lcof/</guid>
+      <description>字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串&amp;quot;abc</description>
+    </item>
+    
     <item>
       <title>Leetcode学习 移动零</title>
       <link>https://abianji.com/posts/2020-10-23/leetcode-study-move-zeroes/</link>
