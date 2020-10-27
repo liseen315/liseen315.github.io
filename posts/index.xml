@@ -10,13 +10,36 @@
 		<atom:link href="https://abianji.com/posts/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
-			<title>Leetcode Study Shu Zu Zhong Zhong Fu De Shu Zi Lcof</title>
+			<title>Leetcode学习 数组中重复的数字</title>
 			<link>https://abianji.com/posts/2020-10-27/leetcode-study-shu-zu-zhong-zhong-fu-de-shu-zi-lcof/</link>
 			<pubDate>Tue, 27 Oct 2020 14:43:45 +0800</pubDate>
 			
 			<guid>https://abianji.com/posts/2020-10-27/leetcode-study-shu-zu-zhong-zhong-fu-de-shu-zi-lcof/</guid>
-			<description></description>
-			<content type="html"><![CDATA[]]></content>
+			<description>找出数组中重复的数字。 在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每</description>
+			<content type="html"><![CDATA[<p>找出数组中重复的数字。</p>
+<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
+<p><strong>示例</strong></p>
+<pre><code>输入：
+[2, 3, 1, 0, 2, 5, 3]
+输出：2 或 3 
+</code></pre><p><strong>限制</strong></p>
+<ul>
+<li><code>2 &lt;= n &lt;= 100000</code></li>
+</ul>
+<p><strong>题解(javascript)</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// hash记录法
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">findRepeatNumber</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span> <span class="nx">nums</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+      <span class="c1">// 如果在hash中不存在则记录一次
+</span><span class="c1"></span>      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">map</span><span class="p">[</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]]){</span>
+        <span class="nx">map</span><span class="p">[</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span> 
+      <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>]]></content>
 		</item>
 		
 		<item>
