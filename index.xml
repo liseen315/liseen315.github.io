@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 27 Oct 2020 09:53:11 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Oct 2020 14:43:45 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode Study Shu Zu Zhong Zhong Fu De Shu Zi Lcof</title>
+      <link>https://abianji.com/posts/2020-10-27/leetcode-study-shu-zu-zhong-zhong-fu-de-shu-zi-lcof/</link>
+      <pubDate>Tue, 27 Oct 2020 14:43:45 +0800</pubDate>
+      
+      <guid>https://abianji.com/posts/2020-10-27/leetcode-study-shu-zu-zhong-zhong-fu-de-shu-zi-lcof/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Leetcode学习 好数对的数目</title>
       <link>https://abianji.com/posts/2020-10-27/leetcode-study-number-of-good-pairs/</link>
@@ -87,15 +96,6 @@
       
       <guid>https://abianji.com/posts/2019-09-25/laravel-study-facade/</guid>
       <description>&lt;p&gt;在web服务框架学习首要面对的一个问题是路由,Laravel的路由是怎么实现的呢?先总结一下,Laravel暴露给我们的路由其实是一个别名后的Facade,那我们就先看看什么是Facade吧&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Gitbook</title>
-      <link>https://abianji.com/page/gitbook/</link>
-      <pubDate>Fri, 02 Aug 2019 17:58:12 +0800</pubDate>
-      
-      <guid>https://abianji.com/page/gitbook/</guid>
-      <description></description>
     </item>
     
   </channel>

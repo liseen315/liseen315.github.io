@@ -6,8 +6,18 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Tue, 27 Oct 2020 09:53:11 +0800</lastBuildDate>
+		<lastBuildDate>Tue, 27 Oct 2020 14:43:45 +0800</lastBuildDate>
 		<atom:link href="https://abianji.com/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Leetcode Study Shu Zu Zhong Zhong Fu De Shu Zi Lcof</title>
+			<link>https://abianji.com/posts/2020-10-27/leetcode-study-shu-zu-zhong-zhong-fu-de-shu-zi-lcof/</link>
+			<pubDate>Tue, 27 Oct 2020 14:43:45 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2020-10-27/leetcode-study-shu-zu-zhong-zhong-fu-de-shu-zi-lcof/</guid>
+			<description></description>
+			<content type="html"><![CDATA[]]></content>
+		</item>
 		
 		<item>
 			<title>Leetcode学习 好数对的数目</title>
