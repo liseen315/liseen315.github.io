@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 28 Oct 2020 10:13:24 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Oct 2020 16:02:50 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode学习 拥有最多糖果的孩子</title>
+      <link>https://abianji.com/posts/2020-10-28/leetcode-study-kids-with-the-greatest-number-of-candies/</link>
+      <pubDate>Wed, 28 Oct 2020 16:02:50 +0800</pubDate>
+      
+      <guid>https://abianji.com/posts/2020-10-28/leetcode-study-kids-with-the-greatest-number-of-candies/</guid>
+      <description>给你一个数组 candies 和一个整数 extraCandies ，其中 candies[i] 代表第 i 个孩子拥有的糖果数目。 对每一个孩子，检查是否存在一种方案，将额外的 extraCandies 个糖果分配给孩子们之后，此孩子</description>
+    </item>
+    
     <item>
       <title>Leetcode学习 重新排列数组</title>
       <link>https://abianji.com/posts/2020-10-28/leetcode-study-shuffle-the-array/</link>
@@ -87,15 +96,6 @@
       
       <guid>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider2/</guid>
       <description>&lt;p&gt;探秘的过程是非常有意思的,通过阅读代码我们可以更多的了解作者的思路为自己以及工作中总结经验,废话有点多.我们在之前的文章知道了看到了如下代码&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Laravel学习-服务容器(1)</title>
-      <link>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider/</link>
-      <pubDate>Thu, 26 Sep 2019 09:54:50 +0800</pubDate>
-      
-      <guid>https://abianji.com/posts/2019-09-26/laravel-study-serviceprovider/</guid>
-      <description>&lt;p&gt;之前的文章说到了&lt;code&gt;Route::get()&lt;/code&gt;其实是一个别名后的&lt;code&gt;Facade&lt;/code&gt;然后最终通过魔术方法调用了&lt;code&gt;get()&lt;/code&gt;之类的方法.但是在追踪到如下代码的时候就断层了.我们只看到了实例化了路由对象但是没看到具体的路由实现在哪.那么我们下面就来尝试揭秘&lt;/p&gt;</description>
     </item>
     
   </channel>
