@@ -6,8 +6,55 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Thu, 29 Oct 2020 13:53:16 +0800</lastBuildDate>
+		<lastBuildDate>Thu, 29 Oct 2020 15:30:42 +0800</lastBuildDate>
 		<atom:link href="https://abianji.com/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Leetcode学习 宝石与石头</title>
+			<link>https://abianji.com/posts/2020-10-29/leetcode-study-jewels-and-stones/</link>
+			<pubDate>Thu, 29 Oct 2020 15:30:42 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2020-10-29/leetcode-study-jewels-and-stones/</guid>
+			<description>给定字符串J 代表石头中宝石的类型，和字符串 S代表你拥有的石头。 S 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。</description>
+			<content type="html"><![CDATA[<p>给定字符串J 代表石头中宝石的类型，和字符串 S代表你拥有的石头。 S 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。</p>
+<p>J 中的字母不重复，J 和 S中的所有字符都是字母。字母区分大小写，因此&quot;a&quot;和&quot;A&quot;是不同类型的石头。</p>
+<p><strong>示例1</strong></p>
+<pre><code>输入: J = &quot;aA&quot;, S = &quot;aAAbbbb&quot;
+输出: 3
+</code></pre><p><strong>示例2</strong></p>
+<pre><code>输入: J = &quot;z&quot;, S = &quot;ZZ&quot;
+输出: 0
+</code></pre><p><strong>提示</strong></p>
+<ul>
+<li><code>S 和 J 最多含有50个字母。</code></li>
+<li><code>J 中的字符不重复。</code></li>
+</ul>
+<p><strong>题解(javascript)</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 暴力循环挨个去找没啥好说的..
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">numJewelsInStones</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">J</span><span class="p">,</span> <span class="nx">S</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">J</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;</span> <span class="nx">S</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">J</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="nx">S</span><span class="p">[</span><span class="nx">j</span><span class="p">])</span> <span class="p">{</span>
+                <span class="nx">num</span><span class="o">++</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">num</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div><hr>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/*
+</span><span class="cm">  1.将手中的石头(S)转成数组
+</span><span class="cm">  2.利用API来过滤当前石头(S item)是否在宝石列表(J)中
+</span><span class="cm">  3.返回过滤后数组的长度
+</span><span class="cm">*/</span>
+<span class="kd">var</span> <span class="nx">numJewelsInStones</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">J</span><span class="p">,</span> <span class="nx">S</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">sList</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">S</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">numList</span> <span class="o">=</span> <span class="nx">sList</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">value</span> <span class="p">=&gt;</span> <span class="nx">J</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">value</span><span class="p">));</span>
+    <span class="k">return</span> <span class="nx">numList</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>]]></content>
+		</item>
 		
 		<item>
 			<title>Leetcode学习 有多少小于当前数字的数字</title>

@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 29 Oct 2020 13:53:16 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Oct 2020 15:30:42 +0800</lastBuildDate><atom:link href="https://abianji.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode学习 宝石与石头</title>
+      <link>https://abianji.com/posts/2020-10-29/leetcode-study-jewels-and-stones/</link>
+      <pubDate>Thu, 29 Oct 2020 15:30:42 +0800</pubDate>
+      
+      <guid>https://abianji.com/posts/2020-10-29/leetcode-study-jewels-and-stones/</guid>
+      <description>给定字符串J 代表石头中宝石的类型，和字符串 S代表你拥有的石头。 S 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。</description>
+    </item>
+    
     <item>
       <title>Leetcode学习 有多少小于当前数字的数字</title>
       <link>https://abianji.com/posts/2020-10-29/leetcode-study-how-many-numbers-are-smaller-than-the-current-number/</link>
@@ -87,15 +96,6 @@
       
       <guid>https://abianji.com/posts/2020-10-21/leetcode-study-running-sum-of-1d-array/</guid>
       <description>给你一个数组 nums 。数组「动态和」的计算公式为：runningSum[i] = sum(nums[0]…nums[i]) 。 请返回 nums 的动态和。 示例1 输</description>
-    </item>
-    
-    <item>
-      <title>Leetcode学习 两数之和</title>
-      <link>https://abianji.com/posts/2020-10-21/leetcode-study-two-sum/</link>
-      <pubDate>Wed, 21 Oct 2020 09:26:24 +0800</pubDate>
-      
-      <guid>https://abianji.com/posts/2020-10-21/leetcode-study-two-sum/</guid>
-      <description>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。 你可以假设每种输入只会对应一个答</description>
     </item>
     
   </channel>
