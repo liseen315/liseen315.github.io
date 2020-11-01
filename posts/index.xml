@@ -6,8 +6,103 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Thu, 29 Oct 2020 15:30:42 +0800</lastBuildDate>
+		<lastBuildDate>Sun, 01 Nov 2020 23:49:43 +0800</lastBuildDate>
 		<atom:link href="https://abianji.com/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Leetcode学习 解压缩编码列表</title>
+			<link>https://abianji.com/posts/2020-11-01/leetcode-study-decompress-run-length-encoded-list/</link>
+			<pubDate>Sun, 01 Nov 2020 23:49:43 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2020-11-01/leetcode-study-decompress-run-length-encoded-list/</guid>
+			<description>给你一个以行程长度编码压缩的整数列表 nums 。 考虑每对相邻的两个元素 [freq, val] = [nums[2i], nums[2i+1]] （其中 i &amp;gt;= 0 ），每一对都表示解压后子列表中有 freq 个值为 val 的元素，你需要</description>
+			<content type="html"><![CDATA[<p>给你一个以行程长度编码压缩的整数列表 nums 。</p>
+<p>考虑每对相邻的两个元素 [freq, val] = [nums[2<em>i], nums[2</em>i+1]] （其中 i &gt;= 0 ），每一对都表示解压后子列表中有 freq 个值为 val 的元素，你需要从左到右连接所有子列表以生成解压后的列表。</p>
+<p>请你返回解压后的列表。</p>
+<p><strong>示例1</strong></p>
+<pre><code>输入：nums = [1,2,3,4]
+输出：[2,4,4,4]
+解释：第一对 [1,2] 代表着 2 的出现频次为 1，所以生成数组 [2]。
+第二对 [3,4] 代表着 4 的出现频次为 3，所以生成数组 [4,4,4]。
+最后将它们串联到一起 [2] + [4,4,4] = [2,4,4,4]。
+</code></pre><p><strong>示例2</strong></p>
+<pre><code>输入：nums = [1,1,2,3]
+输出：[1,3,3]
+</code></pre><p><strong>提示</strong></p>
+<ul>
+<li><code>2 &lt;= nums.length &lt;= 100</code></li>
+<li><code>nums.length % 2 == 0</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 100</code></li>
+</ul>
+<p><strong>题解(javascript)</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/*
+</span><span class="cm">  1. 按照%2拆分数组
+</span><span class="cm">  2. 按照拆后的初始化一个长度为targetLen的新数组并fill进去target
+</span><span class="cm">  3. 展开数组并压缩到bcList返回
+</span><span class="cm">*/</span>
+<span class="kd">var</span> <span class="nx">decompressRLElist</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">bcList</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">nums</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">((</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+            <span class="kd">let</span> <span class="nx">targetLen</span> <span class="o">=</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="nx">bcList</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">targetLen</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="nx">target</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">bcList</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>Leetcode学习 数组异或操作</title>
+			<link>https://abianji.com/posts/2020-11-01/leetcode-study-xor-operation-in-an-array/</link>
+			<pubDate>Sun, 01 Nov 2020 23:06:21 +0800</pubDate>
+			
+			<guid>https://abianji.com/posts/2020-11-01/leetcode-study-xor-operation-in-an-array/</guid>
+			<description>给你两个整数，n 和 start 。 数组 nums 定义为：nums[i] = start + 2*i（下标从 0 开始）且 n == nums.length 。 请返回 nums 中所有元素按位异或（XOR）后得到的结果。 示</description>
+			<content type="html"><![CDATA[<p>给你两个整数，n 和 start 。</p>
+<p>数组 nums 定义为：nums[i] = start + 2*i（下标从 0 开始）且 n == nums.length 。</p>
+<p>请返回 nums 中所有元素按位异或（XOR）后得到的结果。</p>
+<p><strong>示例1</strong></p>
+<pre><code>输入：n = 5, start = 0
+输出：8
+解释：数组 nums 为 [0, 2, 4, 6, 8]，其中 (0 ^ 2 ^ 4 ^ 6 ^ 8) = 8 。
+     &quot;^&quot; 为按位异或 XOR 运算符。
+</code></pre><p><strong>示例2</strong></p>
+<pre><code>输入：n = 4, start = 3
+输出：8
+解释：数组 nums 为 [3, 5, 7, 9]，其中 (3 ^ 5 ^ 7 ^ 9) = 8.
+</code></pre><p><strong>示例3</strong></p>
+<pre><code>输入：n = 1, start = 7
+输出：7
+</code></pre><p><strong>示例4</strong></p>
+<pre><code>输入：n = 10, start = 5
+输出：2
+</code></pre><p><strong>提示</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 1000</code></li>
+<li><code>0 &lt;= start &lt;= 1000</code></li>
+<li><code>n == nums.length</code></li>
+</ul>
+<p><strong>题解(javascript)</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="cm">/*
+</span><span class="cm">  暴力解法
+</span><span class="cm">  1. 按照题目规则生成对应的数组
+</span><span class="cm">  2. 使用原生API计算异或结果
+</span><span class="cm">*/</span>
+
+<span class="kd">var</span> <span class="nx">xorOperation</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span> <span class="nx">start</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">nums</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">while</span><span class="p">(</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">start</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="nx">i</span>
+        <span class="nx">i</span><span class="o">++</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">nums</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span><span class="nx">cur</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">acc</span><span class="o">^</span><span class="nx">cur</span><span class="p">)</span>
+<span class="p">};</span>
+</code></pre></div>]]></content>
+		</item>
 		
 		<item>
 			<title>Leetcode学习 宝石与石头</title>
