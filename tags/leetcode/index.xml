@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 01 Nov 2020 23:49:43 +0800</lastBuildDate><atom:link href="https://abianji.com/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Nov 2020 14:17:17 +0800</lastBuildDate><atom:link href="https://abianji.com/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode学习 按既定顺序创建目标数组</title>
+      <link>https://abianji.com/posts/2020-11-03/leetcode-study-create-target-array-in-the-given-order/</link>
+      <pubDate>Tue, 03 Nov 2020 14:17:17 +0800</pubDate>
+      
+      <guid>https://abianji.com/posts/2020-11-03/leetcode-study-create-target-array-in-the-given-order/</guid>
+      <description>给你两个整数数组 nums 和 index。你需要按照以下规则创建目标数组： 目标数组 target 最初为空。 按从左到右的顺序依次读取 nums[i] 和 index[i]，在 target 数组中</description>
+    </item>
+    
     <item>
       <title>Leetcode学习 解压缩编码列表</title>
       <link>https://abianji.com/posts/2020-11-01/leetcode-study-decompress-run-length-encoded-list/</link>
@@ -87,15 +96,6 @@
       
       <guid>https://abianji.com/posts/2020-10-26/leetcode-study-zuo-xuan-zhuan-zi-fu-chuan-lcof/</guid>
       <description>字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串&amp;quot;abc</description>
-    </item>
-    
-    <item>
-      <title>Leetcode学习 移动零</title>
-      <link>https://abianji.com/posts/2020-10-23/leetcode-study-move-zeroes/</link>
-      <pubDate>Fri, 23 Oct 2020 14:22:56 +0800</pubDate>
-      
-      <guid>https://abianji.com/posts/2020-10-23/leetcode-study-move-zeroes/</guid>
-      <description>给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。 示例 输入: [0,1,0,3,12] 输出: [1,3,12,0,0] 说明 必须在原数组上操作，不能拷贝</description>
     </item>
     
   </channel>
