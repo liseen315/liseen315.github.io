@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 03 Nov 2020 14:17:17 +0800</lastBuildDate><atom:link href="https://abianji.com/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Nov 2020 15:41:11 +0800</lastBuildDate><atom:link href="https://abianji.com/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode学习 统计位数为偶数的数字</title>
+      <link>https://abianji.com/posts/2020-11-08/leetcode-study-find-numbers-with-even-number-of-digits/</link>
+      <pubDate>Sun, 08 Nov 2020 15:41:11 +0800</pubDate>
+      
+      <guid>https://abianji.com/posts/2020-11-08/leetcode-study-find-numbers-with-even-number-of-digits/</guid>
+      <description>给你一个整数数组 nums，请你返回其中位数为 偶数 的数字的个数。 示例1 输入：nums = [12,345,2,6,7896] 输出：2 解释： 12 是 2 位数字（位数为偶数） 345 是 3 位数字（</description>
+    </item>
+    
     <item>
       <title>Leetcode学习 按既定顺序创建目标数组</title>
       <link>https://abianji.com/posts/2020-11-03/leetcode-study-create-target-array-in-the-given-order/</link>
@@ -87,15 +96,6 @@
       
       <guid>https://abianji.com/posts/2020-10-27/leetcode-study-number-of-good-pairs/</guid>
       <description>给你一个整数数组 nums 。 如果一组数字 (i,j) 满足 nums[i] == nums[j] 且 i &amp;lt; j ，就可以认为这是一组 好数对 。 返回好数对的数目。 示例1 输入：nums = [1,2,3,1,1,3] 输出：4 解释：有 4</description>
-    </item>
-    
-    <item>
-      <title>Leetcode学习 左旋转字符串</title>
-      <link>https://abianji.com/posts/2020-10-26/leetcode-study-zuo-xuan-zhuan-zi-fu-chuan-lcof/</link>
-      <pubDate>Mon, 26 Oct 2020 15:17:16 +0800</pubDate>
-      
-      <guid>https://abianji.com/posts/2020-10-26/leetcode-study-zuo-xuan-zhuan-zi-fu-chuan-lcof/</guid>
-      <description>字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串&amp;quot;abc</description>
     </item>
     
   </channel>
